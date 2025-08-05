@@ -8,7 +8,7 @@ import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:flutter/material.dart';
 
-const appName = "FlClash";
+const appName = "NeClash";
 const appHelperService = "FlClashHelperService";
 const coreName = "clash.meta";
 const browserUa =
@@ -82,10 +82,10 @@ const viewModeColumnsMap = {
 // const toolsStoreKey = PageStorageKey<String>('tools');
 // const profilesStoreKey = PageStorageKey<String>('profiles');
 
-const defaultPrimaryColor = 0XFFD8C0C3;
+const defaultPrimaryColor = 0xFF795548;//默认颜色
 
 double getWidgetHeight(num lines) {
-  return max(lines * 84 + (lines - 1) * 16, 0).ap;
+  return max(lines * 84 + (lines - 1) * 12, 0).ap;
 }
 
 const maxLength = 150;
@@ -95,12 +95,12 @@ final mainIsolate = "FlClashMainIsolate";
 final serviceIsolate = "FlClashServiceIsolate";
 
 const defaultPrimaryColors = [
-  0xFF795548,
+  defaultPrimaryColor,
   0xFF03A9F4,
   0xFFFFFF00,
   0XFFBBC9CC,
   0XFFABD397,
-  defaultPrimaryColor,
+  0XFFD8C0C3,
   0XFF665390,
 ];
 

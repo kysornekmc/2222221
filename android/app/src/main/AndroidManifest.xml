@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -28,7 +30,7 @@
         android:banner="@mipmap/ic_banner"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="FlClash">
+        android:label="NeClash">
         <activity
             android:name="com.follow.clash.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -92,8 +94,8 @@
         <service
             android:name=".services.FlClashTileService"
             android:exported="true"
-            android:icon="@drawable/ic"
-            android:label="FlClash"
+            android:icon="@drawable/ic_stat_name"
+            android:label="NeClash" 
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             tools:targetApi="n">
             <intent-filter>

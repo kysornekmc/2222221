@@ -102,7 +102,9 @@ enum LogLevel {
 
 enum TransportProtocol { udp, tcp }
 
-enum TrafficUnit { B, KB, MB, GB, TB }
+enum TrafficUnit { B, KB, MB, GB, TB, PB }
+
+enum TrafficUnitse { B, K, M, G, T, P }  //se
 
 enum NavigationItemMode { mobile, desktop, more }
 
@@ -325,44 +327,111 @@ enum FunctionTag {
 enum DashboardWidget {
   networkSpeed(
     GridItem(
-      crossAxisCellCount: 8,
+      crossAxisCellCount: 8,               // 网速信息大
       child: NetworkSpeed(),
     ),
   ),
+  subscriptionInformationdetail(
+    GridItem(
+      crossAxisCellCount: 8,               // 订阅信息详情
+      child: SubscriptionInformationdetail(),
+    ),
+  ),  
+  subscriptionInformation(
+    GridItem(
+      crossAxisCellCount: 8,               // 订阅信息矮一点
+      child: SubscriptionInformation(),
+    ),
+  ),  
   outboundModeV2(
     GridItem(
-      crossAxisCellCount: 8,
+      crossAxisCellCount: 8,               // 规则、全局、直连横条
       child: OutboundModeV2(),
     ),
-  ),
+  ),  
   outboundMode(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // 高、出站模式
       child: OutboundMode(),
     ),
-  ),
+  ),  
   trafficUsage(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // 高、流量统计
       child: TrafficUsage(),
     ),
+  ),  
+  trafficUsagePie(
+    GridItem(
+      crossAxisCellCount: 4,               // 高、流量统计饼图
+      child: TrafficUsagePie(),
+    ),
+  ),  
+  subscriptionInformationsmall(
+    GridItem(
+      crossAxisCellCount: 4,               // 高、订阅详情
+      child: SubscriptionInformationsmall(),
+    ),
   ),
+  networkSpeedSmall(
+    GridItem(
+      crossAxisCellCount: 4,               // 网速小块
+      child: NetworkSpeedSmall(),
+    ),
+  ),  
+  selectProxy(
+    GridItem(
+      crossAxisCellCount: 4,               // 代理选择
+      child: SelectProxy(),
+    ),
+  ),   
+  proxyInformation(
+    GridItem(
+      crossAxisCellCount: 4,               // 代理信息
+      child: ProxyInformation(),
+    ),
+  ), 
   networkDetection(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // 外网IP
       child: NetworkDetection(),
     ),
   ),
+  intranetIp(
+    GridItem(
+      crossAxisCellCount: 4,               // VPN内网IP
+      child: IntranetIP(),
+    ),
+  ),
+  outboundModeDropDown(
+    GridItem(
+      crossAxisCellCount: 4,               //出站模式下拉
+      child: OutboundModeDropDown(),
+    ),
+  ),  
+ 
+  trafficUsageSimple(
+    GridItem(
+      crossAxisCellCount: 4,               // 流量统计 矮
+      child: TrafficUsageSimple(),
+    ),
+  ),  
+  memoryInfo(
+    GridItem(
+      crossAxisCellCount: 4,               // 内存信息
+      child: MemoryInfo(),
+    ),
+  ),  
   tunButton(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // VPN
       child: TUNButton(),
     ),
     platforms: desktopPlatforms,
   ),
   vpnButton(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // VPN
       child: VpnButton(),
     ),
     platforms: [
@@ -371,22 +440,10 @@ enum DashboardWidget {
   ),
   systemProxyButton(
     GridItem(
-      crossAxisCellCount: 4,
+      crossAxisCellCount: 4,               // VPN系统代理
       child: SystemProxyButton(),
     ),
     platforms: desktopPlatforms,
-  ),
-  intranetIp(
-    GridItem(
-      crossAxisCellCount: 4,
-      child: IntranetIP(),
-    ),
-  ),
-  memoryInfo(
-    GridItem(
-      crossAxisCellCount: 4,
-      child: MemoryInfo(),
-    ),
   );
 
   final GridItem widget;

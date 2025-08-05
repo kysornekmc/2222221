@@ -38,6 +38,9 @@ mixin _$AppSettingProps {
   bool get minimizeOnExit => throw _privateConstructorUsedError;
   bool get hidden => throw _privateConstructorUsedError;
   bool get developerMode => throw _privateConstructorUsedError;
+  bool get isPollingQuery => throw _privateConstructorUsedError;
+  bool get autoRefreshEnabled => throw _privateConstructorUsedError;
+  bool get showFormattedText => throw _privateConstructorUsedError;
   RecoveryStrategy get recoveryStrategy => throw _privateConstructorUsedError;
 
   /// Serializes this AppSettingProps to a JSON map.
@@ -74,6 +77,9 @@ abstract class $AppSettingPropsCopyWith<$Res> {
       bool minimizeOnExit,
       bool hidden,
       bool developerMode,
+      bool isPollingQuery,
+      bool autoRefreshEnabled,
+      bool showFormattedText,
       RecoveryStrategy recoveryStrategy});
 }
 
@@ -108,6 +114,9 @@ class _$AppSettingPropsCopyWithImpl<$Res, $Val extends AppSettingProps>
     Object? minimizeOnExit = null,
     Object? hidden = null,
     Object? developerMode = null,
+    Object? isPollingQuery = null,
+    Object? autoRefreshEnabled = null,
+    Object? showFormattedText = null,
     Object? recoveryStrategy = null,
   }) {
     return _then(_value.copyWith(
@@ -175,6 +184,18 @@ class _$AppSettingPropsCopyWithImpl<$Res, $Val extends AppSettingProps>
           ? _value.developerMode
           : developerMode // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPollingQuery: null == isPollingQuery
+          ? _value.isPollingQuery
+          : isPollingQuery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoRefreshEnabled: null == autoRefreshEnabled
+          ? _value.autoRefreshEnabled
+          : autoRefreshEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFormattedText: null == showFormattedText
+          ? _value.showFormattedText
+          : showFormattedText // ignore: cast_nullable_to_non_nullable
+              as bool,
       recoveryStrategy: null == recoveryStrategy
           ? _value.recoveryStrategy
           : recoveryStrategy // ignore: cast_nullable_to_non_nullable
@@ -209,6 +230,9 @@ abstract class _$$AppSettingPropsImplCopyWith<$Res>
       bool minimizeOnExit,
       bool hidden,
       bool developerMode,
+      bool isPollingQuery,
+      bool autoRefreshEnabled,
+      bool showFormattedText,
       RecoveryStrategy recoveryStrategy});
 }
 
@@ -241,6 +265,9 @@ class __$$AppSettingPropsImplCopyWithImpl<$Res>
     Object? minimizeOnExit = null,
     Object? hidden = null,
     Object? developerMode = null,
+    Object? isPollingQuery = null,
+    Object? autoRefreshEnabled = null,
+    Object? showFormattedText = null,
     Object? recoveryStrategy = null,
   }) {
     return _then(_$AppSettingPropsImpl(
@@ -308,6 +335,18 @@ class __$$AppSettingPropsImplCopyWithImpl<$Res>
           ? _value.developerMode
           : developerMode // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPollingQuery: null == isPollingQuery
+          ? _value.isPollingQuery
+          : isPollingQuery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoRefreshEnabled: null == autoRefreshEnabled
+          ? _value.autoRefreshEnabled
+          : autoRefreshEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFormattedText: null == showFormattedText
+          ? _value.showFormattedText
+          : showFormattedText // ignore: cast_nullable_to_non_nullable
+              as bool,
       recoveryStrategy: null == recoveryStrategy
           ? _value.recoveryStrategy
           : recoveryStrategy // ignore: cast_nullable_to_non_nullable
@@ -323,21 +362,24 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
       {this.locale,
       @JsonKey(fromJson: dashboardWidgetsSafeFormJson)
       final List<DashboardWidget> dashboardWidgets = defaultDashboardWidgets,
-      this.onlyStatisticsProxy = false,
+      this.onlyStatisticsProxy = true,
       this.autoLaunch = false,
       this.silentLaunch = false,
       this.autoRun = false,
       this.openLogs = false,
       this.closeConnections = true,
       this.testUrl = defaultTestUrl,
-      this.isAnimateToPage = true,
+      this.isAnimateToPage = false,
       this.autoCheckUpdate = true,
       this.showLabel = false,
       this.disclaimerAccepted = false,
       this.minimizeOnExit = true,
       this.hidden = false,
       this.developerMode = false,
-      this.recoveryStrategy = RecoveryStrategy.compatible})
+      this.isPollingQuery = true,
+      this.autoRefreshEnabled = true,
+      this.showFormattedText = true,
+      this.recoveryStrategy = RecoveryStrategy.override})
       : _dashboardWidgets = dashboardWidgets;
 
   factory _$AppSettingPropsImpl.fromJson(Map<String, dynamic> json) =>
@@ -399,11 +441,20 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
   final bool developerMode;
   @override
   @JsonKey()
+  final bool isPollingQuery;
+  @override
+  @JsonKey()
+  final bool autoRefreshEnabled;
+  @override
+  @JsonKey()
+  final bool showFormattedText;
+  @override
+  @JsonKey()
   final RecoveryStrategy recoveryStrategy;
 
   @override
   String toString() {
-    return 'AppSettingProps(locale: $locale, dashboardWidgets: $dashboardWidgets, onlyStatisticsProxy: $onlyStatisticsProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden, developerMode: $developerMode, recoveryStrategy: $recoveryStrategy)';
+    return 'AppSettingProps(locale: $locale, dashboardWidgets: $dashboardWidgets, onlyStatisticsProxy: $onlyStatisticsProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden, developerMode: $developerMode, isPollingQuery: $isPollingQuery, autoRefreshEnabled: $autoRefreshEnabled, showFormattedText: $showFormattedText, recoveryStrategy: $recoveryStrategy)';
   }
 
   @override
@@ -439,31 +490,41 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
             (identical(other.hidden, hidden) || other.hidden == hidden) &&
             (identical(other.developerMode, developerMode) ||
                 other.developerMode == developerMode) &&
+            (identical(other.isPollingQuery, isPollingQuery) ||
+                other.isPollingQuery == isPollingQuery) &&
+            (identical(other.autoRefreshEnabled, autoRefreshEnabled) ||
+                other.autoRefreshEnabled == autoRefreshEnabled) &&
+            (identical(other.showFormattedText, showFormattedText) ||
+                other.showFormattedText == showFormattedText) &&
             (identical(other.recoveryStrategy, recoveryStrategy) ||
                 other.recoveryStrategy == recoveryStrategy));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      locale,
-      const DeepCollectionEquality().hash(_dashboardWidgets),
-      onlyStatisticsProxy,
-      autoLaunch,
-      silentLaunch,
-      autoRun,
-      openLogs,
-      closeConnections,
-      testUrl,
-      isAnimateToPage,
-      autoCheckUpdate,
-      showLabel,
-      disclaimerAccepted,
-      minimizeOnExit,
-      hidden,
-      developerMode,
-      recoveryStrategy);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        locale,
+        const DeepCollectionEquality().hash(_dashboardWidgets),
+        onlyStatisticsProxy,
+        autoLaunch,
+        silentLaunch,
+        autoRun,
+        openLogs,
+        closeConnections,
+        testUrl,
+        isAnimateToPage,
+        autoCheckUpdate,
+        showLabel,
+        disclaimerAccepted,
+        minimizeOnExit,
+        hidden,
+        developerMode,
+        isPollingQuery,
+        autoRefreshEnabled,
+        showFormattedText,
+        recoveryStrategy
+      ]);
 
   /// Create a copy of AppSettingProps
   /// with the given fields replaced by the non-null parameter values.
@@ -501,6 +562,9 @@ abstract class _AppSettingProps implements AppSettingProps {
       final bool minimizeOnExit,
       final bool hidden,
       final bool developerMode,
+      final bool isPollingQuery,
+      final bool autoRefreshEnabled,
+      final bool showFormattedText,
       final RecoveryStrategy recoveryStrategy}) = _$AppSettingPropsImpl;
 
   factory _AppSettingProps.fromJson(Map<String, dynamic> json) =
@@ -539,6 +603,12 @@ abstract class _AppSettingProps implements AppSettingProps {
   bool get hidden;
   @override
   bool get developerMode;
+  @override
+  bool get isPollingQuery;
+  @override
+  bool get autoRefreshEnabled;
+  @override
+  bool get showFormattedText;
   @override
   RecoveryStrategy get recoveryStrategy;
 
@@ -1709,10 +1779,10 @@ class __$$ProxiesStyleImplCopyWithImpl<$Res>
 class _$ProxiesStyleImpl implements _ProxiesStyle {
   const _$ProxiesStyleImpl(
       {this.type = ProxiesType.tab,
-      this.sortType = ProxiesSortType.none,
+      this.sortType = ProxiesSortType.delay,
       this.layout = ProxiesLayout.standard,
       this.iconStyle = ProxiesIconStyle.standard,
-      this.cardType = ProxyCardType.expand,
+      this.cardType = ProxyCardType.min,
       final Map<String, String> iconMap = const {}})
       : _iconMap = iconMap;
 
@@ -2158,7 +2228,7 @@ class _$ThemePropsImpl implements _ThemeProps {
   const _$ThemePropsImpl(
       {this.primaryColor,
       final List<int> primaryColors = defaultPrimaryColors,
-      this.themeMode = ThemeMode.dark,
+      this.themeMode = ThemeMode.light,
       this.schemeVariant = DynamicSchemeVariant.content,
       this.pureBlack = false,
       this.textScale = const TextScale()})

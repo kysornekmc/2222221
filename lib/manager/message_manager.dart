@@ -84,14 +84,14 @@ class MessageManagerState extends State<MessageManager> {
                 left: 12,
                 right: 12,
               ),
-              alignment: Alignment.topRight,
+            alignment: Alignment.topCenter, // 修改为顶部居中对齐
               child: messages.isEmpty
                   ? SizedBox()
                   : LayoutBuilder(
                       key: Key(messages.last.id),
                       builder: (_, constraints) {
                         return Card(
-                          shape: const RoundedRectangleBorder(
+                          shape: const RoundedSuperellipseBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(12.0),
                             ),

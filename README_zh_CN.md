@@ -94,8 +94,7 @@ on Mobile:
 
            ```bash
            dart .\setup.dart windows --arch <arm64 | amd64>
-           ```
-
+           dart .\setup.dart windows --arch amd64
     - linux
 
         1. 你需要一个linux客户端

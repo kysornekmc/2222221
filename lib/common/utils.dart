@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lpinyin/lpinyin.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   Color? getDelayColor(int? delay) {
@@ -293,13 +294,27 @@ class Utils {
     ];
   }
 
-  String getBackupFileName() {
-    return "${appName}_backup_${DateTime.now().show}.zip";
-  }
+//  String getBackupFileName() {
+//    return "${appName}_backup_${DateTime.now().show}.zip";
+//  }
+
+ String getBackupFileName() {
+  final now = DateTime.now();
+  final formatter = DateFormat('yyyyMMdd_HHmmss');
+  final formattedDateTime = formatter.format(now);
+  return "$formattedDateTime.zip";
+} 
+
+//  String get logFile {
+//   return "${appName}_${DateTime.now().show}.log";
+//  }
 
   String get logFile {
-    return "${appName}_${DateTime.now().show}.log";
-  }
+  final now = DateTime.now();
+  final formatter = DateFormat('yyyyMMdd_HHmmss'); // 使用下划线代替冒号
+  final formattedDateTime = formatter.format(now);
+  return "log$formattedDateTime.txt";
+}   
 
   Future<String?> getLocalIpAddress() async {
     List<NetworkInterface> interfaces = await NetworkInterface.list(

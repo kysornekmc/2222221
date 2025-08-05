@@ -4,6 +4,9 @@ import 'package:fl_clash/providers/config.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:fl_clash/state.dart';
+import 'package:fl_clash/models/clash_config.dart';
 
 class OverrideItem extends ConsumerWidget {
   const OverrideItem({super.key});
@@ -12,6 +15,7 @@ class OverrideItem extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final override = ref.watch(overrideDnsProvider);
     return ListItem.switchItem(
+      leading: const Icon(Icons.dns_outlined),      //覆写DNS
       title: Text(appLocalizations.overrideDns),
       subtitle: Text(appLocalizations.overrideDnsDesc),
       delegate: SwitchDelegate(
@@ -32,6 +36,7 @@ class StatusItem extends ConsumerWidget {
     final enable =
         ref.watch(patchClashConfigProvider.select((state) => state.dns.enable));
     return ListItem.switchItem(
+      leading: const Icon(Icons.tune), //状态
       title: Text(appLocalizations.status),
       subtitle: Text(appLocalizations.statusDesc),
       delegate: SwitchDelegate(
@@ -54,6 +59,7 @@ class ListenItem extends ConsumerWidget {
     final listen =
         ref.watch(patchClashConfigProvider.select((state) => state.dns.listen));
     return ListItem.input(
+      leading: const Icon(Icons.hearing), //监听
       title: Text(appLocalizations.listen),
       subtitle: Text(listen),
       delegate: InputDelegate(
@@ -86,6 +92,7 @@ class PreferH3Item extends ConsumerWidget {
     final preferH3 = ref
         .watch(patchClashConfigProvider.select((state) => state.dns.preferH3));
     return ListItem.switchItem(
+      leading: const Icon(Icons.filter_3), //PreferH3优先级
       title: const Text("PreferH3"),
       subtitle: Text(appLocalizations.preferH3Desc),
       delegate: SwitchDelegate(
@@ -109,6 +116,7 @@ class IPv6Item extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.ipv6),
     );
     return ListItem.switchItem(
+          leading: const Icon(Icons.looks_6_outlined),  //IPV6
       title: const Text("IPv6"),
       delegate: SwitchDelegate(
         value: ipv6,
@@ -131,6 +139,7 @@ class RespectRulesItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.respectRules),
     );
     return ListItem.switchItem(
+          leading: const Icon(Icons.rule),  //遵守规则
       title: Text(appLocalizations.respectRules),
       subtitle: Text(appLocalizations.respectRulesDesc),
       delegate: SwitchDelegate(
@@ -154,7 +163,8 @@ class DnsModeItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.enhancedMode),
     );
     return ListItem<DnsMode>.options(
-      title: Text(appLocalizations.dnsMode),
+          leading: const Icon(Icons.menu_open),
+          title: Text(appLocalizations.dnsMode),  //DNS模式
       subtitle: Text(enhancedMode.name),
       delegate: OptionsDelegate(
         title: appLocalizations.dnsMode,
@@ -183,6 +193,7 @@ class FakeIpRangeItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.fakeIpRange),
     );
     return ListItem.input(
+          leading: const Icon(Icons.expand_outlined),  //fake IP范围
       title: Text(appLocalizations.fakeipRange),
       subtitle: Text(fakeIpRange),
       delegate: InputDelegate(
@@ -213,6 +224,7 @@ class FakeIpFilterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.filter_alt_outlined),  //fakeIP过滤
       title: Text(appLocalizations.fakeipFilter),
       delegate: OpenDelegate(
         blur: false,
@@ -248,7 +260,8 @@ class DefaultNameserverItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      title: Text(appLocalizations.defaultNameserver),
+      leading: const Icon(Icons.laptop_chromebook_outlined),
+      title: Text(appLocalizations.defaultNameserver),  //默认域名服务器
       subtitle: Text(appLocalizations.defaultNameserverDesc),
       delegate: OpenDelegate(
         blur: false,
@@ -282,6 +295,7 @@ class NameserverItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.edit_note),// 域名服务器
       title: Text(appLocalizations.nameserver),
       subtitle: Text(appLocalizations.nameserverDesc),
       delegate: OpenDelegate(
@@ -318,7 +332,8 @@ class UseHostsItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.useHosts),
     );
     return ListItem.switchItem(
-      title: Text(appLocalizations.useHosts),
+          leading: const Icon(Icons.format_list_bulleted),
+          title: Text(appLocalizations.useHosts),  //使用Hosts
       delegate: SwitchDelegate(
         value: useHosts,
         onChanged: (bool value) async {
@@ -340,6 +355,7 @@ class UseSystemHostsItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.dns.useSystemHosts),
     );
     return ListItem.switchItem(
+          leading: const Icon(Icons.format_list_bulleted), //使用系统host
       title: Text(appLocalizations.useSystemHosts),
       delegate: SwitchDelegate(
         value: useSystemHosts,
@@ -361,8 +377,9 @@ class NameserverPolicyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.edit_note),
       title: Text(appLocalizations.nameserverPolicy),
-      subtitle: Text(appLocalizations.nameserverPolicyDesc),
+      subtitle: Text(appLocalizations.nameserverPolicyDesc),  //指定对应域名服务器策略
       delegate: OpenDelegate(
         blur: false,
         title: appLocalizations.nameserverPolicy,
@@ -396,7 +413,8 @@ class ProxyServerNameserverItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      title: Text(appLocalizations.proxyNameserver),
+      leading: const Icon(Icons.edit_note),
+      title: Text(appLocalizations.proxyNameserver),  //代理域名服务器
       subtitle: Text(appLocalizations.proxyNameserverDesc),
       delegate: OpenDelegate(
         blur: false,
@@ -432,6 +450,7 @@ class FallbackItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.u_turn_right),     //fallback 
       title: Text(appLocalizations.fallback),
       subtitle: Text(appLocalizations.fallbackDesc),
       delegate: OpenDelegate(
@@ -469,6 +488,7 @@ class GeoipItem extends ConsumerWidget {
           .select((state) => state.dns.fallbackFilter.geoip),
     );
     return ListItem.switchItem(
+         leading: const Icon(Icons.query_stats), 
       title: const Text("Geoip"),
       delegate: SwitchDelegate(
         value: geoip,
@@ -494,6 +514,7 @@ class GeoipCodeItem extends ConsumerWidget {
           .select((state) => state.dns.fallbackFilter.geoipCode),
     );
     return ListItem.input(
+          leading: const Icon(Icons.code),   //Geoip code
       title: Text(appLocalizations.geoipCode),
       subtitle: Text(geoipCode),
       delegate: InputDelegate(
@@ -526,6 +547,7 @@ class GeositeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.edit_note),   //Geosite
       title: const Text("Geosite"),
       delegate: OpenDelegate(
         blur: false,
@@ -559,7 +581,8 @@ class IpcidrItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      title: Text(appLocalizations.ipcidr),
+      leading: const Icon(Icons.edit_note),
+      title: Text(appLocalizations.ipcidr),    //IP/掩码
       delegate: OpenDelegate(
         blur: false,
         title: appLocalizations.ipcidr,
@@ -592,6 +615,7 @@ class DomainItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: const Icon(Icons.domain_verification),  //域名
       title: Text(appLocalizations.domain),
       delegate: OpenDelegate(
         blur: false,
@@ -678,8 +702,38 @@ const dnsItems = <Widget>[
 class DnsListView extends ConsumerWidget {
   const DnsListView({super.key});
 
+  _initActions(BuildContext context, WidgetRef ref) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.commonScaffoldState?.actions = [
+        IconButton(
+          onPressed: () async {
+            final res = await globalState.showMessage(
+              title: appLocalizations.reset,
+              message: TextSpan(
+                text: appLocalizations.resetTip,
+              ),
+            );
+            if (res != true) {
+              return;
+            }
+            ref.read(patchClashConfigProvider.notifier).updateState(
+                  (state) => state.copyWith(
+                    dns: defaultDns,
+                  ),
+                );
+          },
+          tooltip: appLocalizations.reset,
+          icon: const Icon(
+            Icons.replay,
+          ),
+        )
+      ];
+    });
+  }
+
   @override
   Widget build(BuildContext context, ref) {
+    _initActions(context, ref);
     return generateListView(
       dnsItems,
     );

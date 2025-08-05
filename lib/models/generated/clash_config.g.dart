@@ -194,12 +194,12 @@ _$DnsImpl _$$DnsImplFromJson(Map<String, dynamic> json) => _$DnsImpl(
       preferH3: json['prefer-h3'] as bool? ?? false,
       useHosts: json['use-hosts'] as bool? ?? true,
       useSystemHosts: json['use-system-hosts'] as bool? ?? true,
-      respectRules: json['respect-rules'] as bool? ?? false,
+      respectRules: json['respect-rules'] as bool? ?? true,
       ipv6: json['ipv6'] as bool? ?? false,
       defaultNameserver: (json['default-nameserver'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const ["223.5.5.5"],
+          const ["223.5.5.5", "119.28.28.28", "119.29.29.29", "223.6.6.6"],
       enhancedMode:
           $enumDecodeNullable(_$DnsModeEnumMap, json['enhanced-mode']) ??
               DnsMode.fakeIp,
@@ -227,7 +227,7 @@ _$DnsImpl _$$DnsImplFromJson(Map<String, dynamic> json) => _$DnsImpl(
       fallback: (json['fallback'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const ["tls://8.8.4.4", "tls://1.1.1.1"],
+          const ["tls://1.1.1.1", "tls://8.8.8.8", "tls://8.8.4.4"],
       proxyServerNameserver: (json['proxy-server-nameserver'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??

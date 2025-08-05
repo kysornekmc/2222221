@@ -41,12 +41,12 @@ class AboutView extends StatelessWidget {
       separated: false,
       title: appLocalizations.more,
       items: [
-        ListItem(
+     /*   ListItem(
           title: Text(appLocalizations.checkUpdate),
           onTap: () {
             _checkUpdate(context);
           },
-        ),
+        ), */
         ListItem(
           title: const Text("Telegram"),
           onTap: () {
@@ -170,7 +170,7 @@ class AboutView extends StatelessWidget {
       const SizedBox(
         height: 12,
       ),
-      ..._buildContributorsSection(),
+  //    ..._buildContributorsSection(),  //去掉贡献者
       ..._buildMoreSection(context),
     ];
     return Padding(

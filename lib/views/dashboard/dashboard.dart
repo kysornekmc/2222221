@@ -179,8 +179,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
                       child: SuperGrid(
                         key: key,
                         crossAxisCount: columns,
-                        crossAxisSpacing: spacing,
-                        mainAxisSpacing: spacing,
+                        crossAxisSpacing: 12.ap,
+                        mainAxisSpacing: 12.ap,
                         children: [
                           ...dashboardState.dashboardWidgets
                               .where(
@@ -204,8 +204,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
                   )
                 : Grid(
                     crossAxisCount: columns,
-                    crossAxisSpacing: spacing,
-                    mainAxisSpacing: spacing,
+                    crossAxisSpacing: 12.ap,
+                    mainAxisSpacing: 12.ap,
                     children: children,
                   );
           })),
@@ -231,8 +231,8 @@ class _AddDashboardWidgetModal extends StatelessWidget {
         ),
         child: Grid(
           crossAxisCount: 8,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+          crossAxisSpacing: 12, //
+          mainAxisSpacing: 12,  //备选添加图标的间距
           children: items
               .map(
                 (item) => item.wrap(

@@ -19,6 +19,9 @@ import 'package:path/path.dart' show dirname, join;
 import 'backup_and_recovery.dart';
 import 'developer.dart';
 import 'theme.dart';
+import 'package:fl_clash/views/config/dns.dart';
+import 'package:fl_clash/views/config/network.dart';
+import 'package:fl_clash/views/config/general.dart';
 
 class ToolsView extends ConsumerStatefulWidget {
   const ToolsView({super.key});
@@ -61,25 +64,56 @@ class _ToolboxViewState extends ConsumerState<ToolsView> {
     return generateSection(
       title: appLocalizations.other,
       items: [
-        _DisclaimerItem(),
-        if (enableDeveloperMode) _DeveloperItem(),
-        _InfoItem(),
+        _LocaleItem(),                            //语言
+        _ThemeItem(),                             //主题
+        _BackupItem(),                            //备份   	
+    //    _DisclaimerItem(),
+        if (enableDeveloperMode) _DeveloperItem(),//开发者模式
+        _InfoItem(),                              //关于
       ],
     );
   }
 
   _getSettingList() {
     return generateSection(
-      title: appLocalizations.settings,
+      title: appLocalizations.settings,           //设置
       items: [
-        _LocaleItem(),
-        _ThemeItem(),
-        _BackupItem(),
-        if (system.isDesktop) _HotkeyItem(),
-        if (Platform.isWindows) _LoopbackItem(),
-        if (Platform.isAndroid) _AccessItem(),
-        _ConfigItem(),
-        _SettingItem(),
+        ListItem.open(
+          leading: const Icon(Icons.build), //常规
+          title: Text(appLocalizations.general),
+          subtitle: Text(appLocalizations.generalDesc),
+          delegate: OpenDelegate(
+          title: appLocalizations.general,  
+          widget: generateListView(
+            generalItems,
+          ),
+          ),
+        ),      
+	ListItem.open(
+          leading: const Icon(Icons.public), //网络设置
+          title: Text(appLocalizations.network),
+          subtitle: Text(appLocalizations.networkDesc),
+          delegate: OpenDelegate(
+          title: appLocalizations.network,
+            widget: const NetworkListView(),
+          ),
+        ),
+        ListItem.open(
+          leading: const Icon(Icons.dns), //DNS设置
+          title: const Text("DNS"),
+          subtitle: Text(appLocalizations.dnsDesc),
+          delegate: OpenDelegate(
+          title: "DNS",
+            widget: const DnsListView(),
+          ),
+        ),      
+      //  _LocaleItem(),                            //语言
+      //  _ThemeItem(),                             //主题
+        if (system.isDesktop) _HotkeyItem(),      //快捷键管理
+        if (Platform.isWindows) _LoopbackItem(),  //回环解锁工具
+        if (Platform.isAndroid) _AccessItem(),    //访问控制
+       // _ConfigItem(),                            //基本配置
+        _SettingItem(),                           //应用程序
       ],
     );
   }
@@ -265,7 +299,7 @@ class _SettingItem extends StatelessWidget {
       subtitle: Text(appLocalizations.applicationDesc),
       delegate: OpenDelegate(
         title: appLocalizations.application,
-        widget: const ApplicationSettingView(),
+        widget: const ApplicationSettingFragment(),
       ),
     );
   }

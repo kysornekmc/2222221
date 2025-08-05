@@ -255,6 +255,16 @@ class TrafficValueShow {
   });
 }
 
+class TrafficValueShowse {       //se
+  final double value;
+  final TrafficUnitse unitse;        //2se
+
+  const TrafficValueShowse({         //se
+    required this.value,
+    required this.unitse,      //se
+  });
+}
+
 @freezed
 class Proxy with _$Proxy {
   const factory Proxy({
@@ -312,11 +322,22 @@ class TrafficValue {
   String get shortShow =>
       "${trafficValueShow.value.fixed(decimals: 1)} $showUnit";
 
+  String get shortShowse =>
+      "${trafficValueShow.value.fixed(decimals: 1)}$showUnitse";    
+
   String get showValue => trafficValueShow.value.fixed();
 
   String get showUnit => trafficValueShow.unit.name;
+  
+  String get showUnitse => trafficValueShowse.unitse.name;  //3se
 
   TrafficValueShow get trafficValueShow {
+    if (_value > pow(1024, 5)) {
+      return TrafficValueShow(
+        value: _value / pow(1024, 5),
+        unit: TrafficUnit.PB,
+      );
+    }
     if (_value > pow(1024, 4)) {
       return TrafficValueShow(
         value: _value / pow(1024, 4),
@@ -342,6 +363,42 @@ class TrafficValue {
     return TrafficValueShow(
       value: _value.toDouble(),
       unit: TrafficUnit.B,
+    );
+  }
+  
+   TrafficValueShowse get trafficValueShowse {        //2se
+    if (_value > pow(1024, 5)) {
+      return TrafficValueShowse(                      //se
+        value: _value / pow(1024, 5),
+        unitse: TrafficUnitse.P,                      //2se
+      );
+    }
+    if (_value > pow(1024, 4)) {
+      return TrafficValueShowse(
+        value: _value / pow(1024, 4),
+        unitse: TrafficUnitse.T,
+      );
+    }
+    if (_value > pow(1024, 3)) {
+      return TrafficValueShowse(
+        value: _value / pow(1024, 3),
+        unitse: TrafficUnitse.G,
+      );
+    }
+    if (_value > pow(1024, 2)) {
+      return TrafficValueShowse(
+          value: _value / pow(1024, 2), 
+	  unitse: TrafficUnitse.M);
+    }
+    if (_value > pow(1024, 1)) {
+      return TrafficValueShowse(
+        value: _value / pow(1024, 1),
+        unitse: TrafficUnitse.K,
+      );
+    }
+    return TrafficValueShowse(
+      value: _value.toDouble(),
+      unitse: TrafficUnitse.B,
     );
   }
 
@@ -407,8 +464,22 @@ class IpInfo {
     required this.ip,
     required this.countryCode,
   });
+  
+   static IpInfo fromIpAPIJson(Map<String, dynamic> json) {    //http://ip-api.com/json 查询次数限制为45次每分
+    return switch (json) {
+      {
+        "query": final String query,
+        "countryCode": final String countryCode,
+      } =>
+        IpInfo(
+          ip: query,
+          countryCode: countryCode,
+        ),
+      _ => throw const FormatException("invalid json"),
+    };
+  }   
 
-  static IpInfo fromIpInfoIoJson(Map<String, dynamic> json) {
+  static IpInfo fromIpInfoIoJson(Map<String, dynamic> json) {  // https://ipinfo.io/json/
     return switch (json) {
       {
         "ip": final String ip,
@@ -422,7 +493,21 @@ class IpInfo {
     };
   }
 
-  static IpInfo fromIpApiCoJson(Map<String, dynamic> json) {
+  static IpInfo fromv6IpInfoIoJson(Map<String, dynamic> json) {  // https://ipinfo.io/json/
+    return switch (json) {
+      {
+        "ip": final String ip,
+        "country": final String country,
+      } =>
+        IpInfo(
+          ip: ip,
+          countryCode: country,
+        ),
+      _ => throw const FormatException("invalid json"),
+    };
+  }
+
+  static IpInfo fromIpApiCoJson(Map<String, dynamic> json) {  //https://ipapi.co/json/
     return switch (json) {
       {
         "ip": final String ip,
@@ -436,7 +521,7 @@ class IpInfo {
     };
   }
 
-  static IpInfo fromIpSbJson(Map<String, dynamic> json) {
+  static IpInfo fromIpSbJson(Map<String, dynamic> json) {  // //https://api.ip.sb/geoip/
     return switch (json) {
       {
         "ip": final String ip,
@@ -450,7 +535,7 @@ class IpInfo {
     };
   }
 
-  static IpInfo fromIpwhoIsJson(Map<String, dynamic> json) {
+  static IpInfo fromIpwhoIsJson(Map<String, dynamic> json) { //https://ipwho.is/
     return switch (json) {
       {
         "ip": final String ip,

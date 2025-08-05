@@ -115,7 +115,7 @@ class _ThemeModeItem extends ConsumerWidget {
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        height: 56,
+        height: 48,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: themeModeItems.length,
@@ -371,8 +371,8 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                   for (final color in primaryColors)
                     Container(
                       clipBehavior: Clip.none,
-                      width: itemWidth,
-                      height: itemWidth,
+                      width: 57,
+                      height: 57,
                       child: Stack(
                         alignment: Alignment.center,
                         clipBehavior: Clip.none,
@@ -408,7 +408,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                               child: IconButton.filledTonal(
                                 onPressed: _handleDel,
                                 padding: EdgeInsets.all(12),
-                                iconSize: 30,
+                                iconSize: 20,
                                 icon: Icon(
                                   color: context.colorScheme.primary,
                                   Icons.delete,
@@ -420,8 +420,8 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                     ),
                   if (_removablePrimaryColor == null)
                     Container(
-                      width: itemWidth,
-                      height: itemWidth,
+                      width: 57,
+                      height: 57,
                       padding: EdgeInsets.all(
                         4,
                       ),

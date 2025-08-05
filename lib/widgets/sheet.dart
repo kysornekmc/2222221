@@ -54,7 +54,10 @@ Future<T?> showSheet<T>({
   return switch (isMobile) {
     true => showModalBottomSheet<T>(
         context: context,
-        isScrollControlled: props.isScrollControlled,
+        isScrollControlled: true,
+          constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.75,
+        ),
         builder: (_) {
           return SafeArea(
             child: builder(context, SheetType.bottomSheet),
@@ -65,7 +68,7 @@ Future<T?> showSheet<T>({
       ),
     false => showModalSideSheet<T>(
         useSafeArea: props.useSafeArea,
-        isScrollControlled: props.isScrollControlled,
+        isScrollControlled: true,
         context: context,
         constraints: BoxConstraints(
           maxWidth: props.maxWidth ?? 360,
@@ -148,9 +151,11 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
       final handleSize = Size(32, 4);
       return Container(
         clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(28.0)),
+        decoration: ShapeDecoration(
           color: backgroundColor,
+          shape: RoundedSuperellipseBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(28.0)),
+          ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -161,8 +166,10 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
                 alignment: Alignment.center,
                 height: handleSize.height,
                 width: handleSize.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(handleSize.height / 2),
+                decoration: ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(
+                    borderRadius: BorderRadius.circular(handleSize.height / 2),
+                  ),
                   color: context.colorScheme.onSurfaceVariant,
                 ),
               ),

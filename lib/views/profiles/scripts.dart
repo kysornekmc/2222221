@@ -12,6 +12,7 @@ import 'package:fl_clash/widgets/popup.dart';
 import 'package:fl_clash/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart'; // 导入 Clipboard 相关的库
 
 class ScriptsView extends ConsumerStatefulWidget {
   const ScriptsView({super.key});
@@ -30,6 +31,41 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
       return;
     }
     ref.read(scriptStateProvider.notifier).del(label);
+  }
+
+  _handleRenameScript(Script script) async {
+    final res = await globalState.showCommonDialog<String>(
+      child: InputDialog(
+        title: appLocalizations.rename,
+        value: script.label,
+        hintText: appLocalizations.pleaseEnterScriptName,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return appLocalizations.emptyTip(appLocalizations.name);
+          }
+          if (value != script.label) {
+            final isExits =
+                ref.read(scriptStateProvider.notifier).isExits(value);
+            if (isExits) {
+              return appLocalizations.existsTip(
+                appLocalizations.name,
+              );
+            }
+          }
+          return null;
+        },
+      ),
+    );
+    if (res == null || res.isEmpty) {
+      return;
+    }
+    final newScript = script.copyWith(label: res);
+    ref.read(scriptStateProvider.notifier).setScript(newScript);
+  }
+
+  _handleCopyScript(Script script) async {
+    await Clipboard.setData(ClipboardData(text: script.content));
+    globalState.showNotifier(appLocalizations.copySuccess);
   }
 
   Widget _buildContent() {
@@ -88,7 +124,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                   popup: CommonPopupMenu(
                     items: [
                       PopupMenuItemData(
-                        icon: Icons.edit,
+                        icon: Icons.edit_outlined,
                         label: appLocalizations.edit,
                         onPressed: () {
                           _handleToEditor(
@@ -97,7 +133,21 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                         },
                       ),
                       PopupMenuItemData(
-                        icon: Icons.delete,
+                        icon: Icons.drive_file_rename_outline,
+                        label: appLocalizations.rename,
+                        onPressed: () {
+                          _handleRenameScript(script);
+                        },
+                      ),
+		        PopupMenuItemData(
+                        icon: Icons.content_copy_outlined,
+                        label: appLocalizations.copy,
+                        onPressed: () {
+                          _handleCopyScript(script);
+                        },
+                      ),
+                      PopupMenuItemData(
+                        icon: Icons.delete_outline,
                         label: appLocalizations.delete,
                         onPressed: () {
                           _handleDelScript(

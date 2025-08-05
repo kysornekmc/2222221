@@ -2157,10 +2157,15 @@ class _$DnsImpl implements _Dns {
       @JsonKey(name: "prefer-h3") this.preferH3 = false,
       @JsonKey(name: "use-hosts") this.useHosts = true,
       @JsonKey(name: "use-system-hosts") this.useSystemHosts = true,
-      @JsonKey(name: "respect-rules") this.respectRules = false,
+      @JsonKey(name: "respect-rules") this.respectRules = true,
       this.ipv6 = false,
       @JsonKey(name: "default-nameserver")
-      final List<String> defaultNameserver = const ["223.5.5.5"],
+      final List<String> defaultNameserver = const [
+        "223.5.5.5",
+        "119.28.28.28",
+        "119.29.29.29",
+        "223.6.6.6"
+      ],
       @JsonKey(name: "enhanced-mode") this.enhancedMode = DnsMode.fakeIp,
       @JsonKey(name: "fake-ip-range") this.fakeIpRange = "198.18.0.1/16",
       @JsonKey(name: "fake-ip-filter") final List<String> fakeIpFilter = const [
@@ -2177,7 +2182,11 @@ class _$DnsImpl implements _Dns {
         "https://doh.pub/dns-query",
         "https://dns.alidns.com/dns-query"
       ],
-      final List<String> fallback = const ["tls://8.8.4.4", "tls://1.1.1.1"],
+      final List<String> fallback = const [
+        "tls://1.1.1.1",
+        "tls://8.8.8.8",
+        "tls://8.8.4.4"
+      ],
       @JsonKey(name: "proxy-server-nameserver")
       final List<String> proxyServerNameserver = const [
         "https://doh.pub/dns-query"

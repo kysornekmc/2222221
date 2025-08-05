@@ -6,6 +6,10 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:fl_clash/state.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_clash/common/request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CloseConnectionsItem extends ConsumerWidget {
   const CloseConnectionsItem({super.key});
@@ -16,6 +20,7 @@ class CloseConnectionsItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.closeConnections),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.close_outlined),
       title: Text(appLocalizations.autoCloseConnections),
       subtitle: Text(appLocalizations.autoCloseConnectionsDesc),
       delegate: SwitchDelegate(
@@ -41,6 +46,7 @@ class UsageItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.onlyStatisticsProxy),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.data_usage_outlined),
       title: Text(appLocalizations.onlyStatisticsProxy),
       subtitle: Text(appLocalizations.onlyStatisticsProxyDesc),
       delegate: SwitchDelegate(
@@ -66,6 +72,7 @@ class MinimizeItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.minimizeOnExit),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.logout), // 修改系统默认退出事件
       title: Text(appLocalizations.minimizeOnExit),
       subtitle: Text(appLocalizations.minimizeOnExitDesc),
       delegate: SwitchDelegate(
@@ -91,6 +98,7 @@ class AutoLaunchItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.autoLaunch),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.auto_awesome), //
       title: Text(appLocalizations.autoLaunch),
       subtitle: Text(appLocalizations.autoLaunchDesc),
       delegate: SwitchDelegate(
@@ -116,6 +124,7 @@ class SilentLaunchItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.silentLaunch),
     );
     return ListItem.switchItem(
+     leading: const Icon(Icons.auto_awesome_motion),
       title: Text(appLocalizations.silentLaunch),
       subtitle: Text(appLocalizations.silentLaunchDesc),
       delegate: SwitchDelegate(
@@ -141,6 +150,7 @@ class AutoRunItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.autoRun),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.motion_photos_auto_outlined), //自动运行
       title: Text(appLocalizations.autoRun),
       subtitle: Text(appLocalizations.autoRunDesc),
       delegate: SwitchDelegate(
@@ -166,6 +176,7 @@ class HiddenItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.hidden),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.dynamic_feed_outlined), // 从最近任务中隐藏hide
       title: Text(appLocalizations.exclude),
       subtitle: Text(appLocalizations.excludeDesc),
       delegate: SwitchDelegate(
@@ -191,6 +202,7 @@ class AnimateTabItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.isAnimateToPage),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.gif_box_outlined),  //选项卡动画
       title: Text(appLocalizations.tabAnimation),
       subtitle: Text(appLocalizations.tabAnimationDesc),
       delegate: SwitchDelegate(
@@ -216,6 +228,7 @@ class OpenLogsItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.openLogs),
     );
     return ListItem.switchItem(
+      leading: const Icon(Icons.adb_outlined), // 日志捕获description
       title: Text(appLocalizations.logcat),
       subtitle: Text(appLocalizations.logcatDesc),
       delegate: SwitchDelegate(
@@ -256,9 +269,107 @@ class AutoCheckUpdateItem extends ConsumerWidget {
     );
   }
 }
+class IpQueryModeSwitch extends ConsumerWidget {
+  const IpQueryModeSwitch({super.key});
 
-class ApplicationSettingView extends StatelessWidget {
-  const ApplicationSettingView({super.key});
+  Future<void> saveQueryMode(bool isPollingQuery) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isPollingQuery', isPollingQuery);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isPollingQuery = ref.watch(
+      appSettingProvider.select((state) => state.isPollingQuery),
+    );
+    
+    // 根据开关状态动态生成subtitle文本
+    final subtitleText = isPollingQuery 
+          ? Text(appLocalizations.concurrentQuery) 
+          : Text(appLocalizations.sequentialQuery);
+
+    return ListItem.switchItem(
+      leading: const Icon(Icons.query_stats_outlined),
+      title: Text(appLocalizations.ipCheckmethod),
+      subtitle: subtitleText, // 使用动态生成的文本
+      delegate: SwitchDelegate(
+        value: isPollingQuery,
+        onChanged: (bool value) async {
+          ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(
+                  isPollingQuery: value,
+                ),
+              );
+          // 调用 request.dart 中的 setQueryMode 方法
+          request.setQueryMode(value);
+          // 保存查询模式到持久化存储
+          await saveQueryMode(value);
+        },
+      ),
+    );
+  }
+}
+
+class AutoRefreshItem extends ConsumerWidget {
+  const AutoRefreshItem({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final autoRefreshEnabled = ref.watch(
+      appSettingProvider.select((state) => state.autoRefreshEnabled),
+    );
+    return ListItem.switchItem(
+      leading: const Icon(Icons.refresh_outlined),
+      title: Text(appLocalizations.autoRefresh),
+      subtitle: Text(appLocalizations.autoRefreshDesc),
+      delegate: SwitchDelegate(
+        value: autoRefreshEnabled,
+        onChanged: (bool value) {
+          ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(
+                  autoRefreshEnabled: value,
+                ),
+              );
+        },
+      ),
+    );
+  }
+}
+
+class SubscriptionTimeFormatItem extends ConsumerWidget {
+  const SubscriptionTimeFormatItem({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showFormattedText = ref.watch(
+      appSettingProvider.select((state) => state.showFormattedText),
+    );
+
+    // 根据开关状态动态生成subtitle文本
+    final subtitleText = showFormattedText 
+          ? Text(appLocalizations.detailTimeFormat) 
+          : Text(appLocalizations.defaultText);
+
+    return ListItem.switchItem(
+      leading: const Icon(Icons.calendar_today_outlined),
+      title: Text(appLocalizations.subscriptionTimeFormat),
+      subtitle: subtitleText,
+      delegate: SwitchDelegate(
+        value: showFormattedText,
+        onChanged: (bool value) {
+          ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(
+                  showFormattedText: value,
+                ),
+              );
+        },
+      ),
+    );
+  }
+}
+
+class ApplicationSettingFragment extends StatelessWidget {
+  const ApplicationSettingFragment({super.key});
 
   String getLocaleString(Locale? locale) {
     if (locale == null) return appLocalizations.defaultText;
@@ -281,7 +392,10 @@ class ApplicationSettingView extends StatelessWidget {
       OpenLogsItem(),
       CloseConnectionsItem(),
       UsageItem(),
-      AutoCheckUpdateItem(),
+   // AutoCheckUpdateItem(),//隐藏自动检查更新
+      IpQueryModeSwitch(),
+      AutoRefreshItem(), // 新增自动刷新开关项
+      SubscriptionTimeFormatItem(), // 新增订阅时间格式开关项
     ];
     return ListView.separated(
       itemBuilder: (_, index) {

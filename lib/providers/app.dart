@@ -23,6 +23,7 @@ class RealTunEnable extends _$RealTunEnable with AutoDisposeNotifierMixin {
   }
 }
 
+
 @riverpod
 class Logs extends _$Logs with AutoDisposeNotifierMixin {
   @override

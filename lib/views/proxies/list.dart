@@ -10,6 +10,7 @@ import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_clash/providers/pinned_proxies_provider.dart';
 
 import 'card.dart';
 import 'common.dart';
@@ -118,6 +119,7 @@ class _ProxiesListViewState extends State<ProxiesListView> {
   }) {
     final items = <Widget>[];
     final GroupNameProxiesMap groupNameProxiesMap = {};
+    final pinnedProxies = ref.watch(pinnedProxiesProvider);
     for (final groupName in groupNames) {
       final group = ref.read(
         groupsProvider.select(
@@ -149,8 +151,14 @@ class _ProxiesListViewState extends State<ProxiesListView> {
               .toList(),
           group.testUrl,
         );
-        groupNameProxiesMap[groupName] = sortedProxies;
-        final chunks = sortedProxies.chunks(columns);
+final sortedProxiesWithPinned = [
+  ...pinnedProxies.where((key) => key.startsWith('$groupName|') 
+      && sortedProxies.any((proxy) => proxy.name == key.split('|')[1]))
+      .map((key) => sortedProxies.firstWhere((proxy) => proxy.name == key.split('|')[1])),
+  ...sortedProxies.where((proxy) => !pinnedProxies.contains('$groupName|${proxy.name}'))
+];
+        groupNameProxiesMap[groupName] = sortedProxiesWithPinned;
+        final chunks = sortedProxiesWithPinned.chunks(columns);
         final rows = chunks.map<Widget>((proxies) {
           final children = proxies
               .map<Widget>(
@@ -418,9 +426,11 @@ class _ListHeaderState extends State<ListHeader> {
                       width: constraints.maxWidth,
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(6.ap),
-                      decoration: BoxDecoration(
+                      decoration: ShapeDecoration(
+                        shape: RoundedSuperellipseBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         color: context.colorScheme.secondaryContainer,
-                        borderRadius: BorderRadius.circular(12),
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: CommonTargetIcon(

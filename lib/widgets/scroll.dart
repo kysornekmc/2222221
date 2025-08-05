@@ -19,9 +19,9 @@ class CommonScrollBar extends StatelessWidget {
     return Scrollbar(
       controller: controller,
       thumbVisibility: true,
-      trackVisibility: true,
-      thickness: 8,
-      radius: const Radius.circular(8),
+      trackVisibility: false,
+      thickness: 5,
+      radius: const Radius.circular(2),
       interactive: true,
       child: child,
     );
@@ -42,8 +42,8 @@ class CommonAutoHiddenScrollBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
       controller: controller,
-      thickness: 8,
-      radius: const Radius.circular(8),
+      thickness: 5,
+      radius: const Radius.circular(2),
       interactive: true,
       child: child,
     );

@@ -30,6 +30,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   late TextEditingController urlController;
   late TextEditingController autoUpdateDurationController;
   late bool autoUpdate;
+  late bool neverUpdate; // 新增字段，用于标记是否永不更新
   String? rawText;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final fileInfoNotifier = ValueNotifier<FileInfo?>(null);
@@ -43,6 +44,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     labelController = TextEditingController(text: widget.profile.label);
     urlController = TextEditingController(text: widget.profile.url);
     autoUpdate = widget.profile.autoUpdate;
+    neverUpdate = widget.profile.neverUpdate; // 初始化永不更新状态
     autoUpdateDurationController = TextEditingController(
       text: widget.profile.autoUpdateDuration.inMinutes.toString(),
     );
@@ -63,6 +65,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               autoUpdateDurationController.text,
             ),
           ),
+          neverUpdate: neverUpdate, // 更新永不更新状态
         );
     final hasUpdate = widget.profile.url != profile.url;
     if (fileData != null) {
@@ -103,6 +106,16 @@ class _EditProfileViewState extends State<EditProfileView> {
     if (autoUpdate == value) return;
     setState(() {
       autoUpdate = value;
+    });
+  }
+
+  _setNeverUpdate(bool value) {
+    if (neverUpdate == value) return;
+    setState(() {
+      neverUpdate = value;
+      if (value) {
+        autoUpdate = false; // 当“永不更新”打开时，关闭“自动更新”
+      }
     });
   }
 
@@ -258,10 +271,11 @@ class _EditProfileViewState extends State<EditProfileView> {
           title: Text(appLocalizations.autoUpdate),
           delegate: SwitchDelegate<bool>(
             value: autoUpdate,
-            onChanged: _setAutoUpdate,
+            onChanged: neverUpdate ? null : _setAutoUpdate, // 当“永不更新”打开时，禁用“自动更新”开关
+            enabled: !neverUpdate, // 设置开关是否可交互
           ),
         ),
-        if (autoUpdate)
+        if (autoUpdate && !neverUpdate) // 当“永不更新”打开时，隐藏自动更新间隔输入框
           ListItem(
             title: TextFormField(
               textInputAction: TextInputAction.next,
@@ -283,6 +297,13 @@ class _EditProfileViewState extends State<EditProfileView> {
                 }
                 return null;
               },
+            ),
+          ),
+        ListItem.switchItem(
+          title: Text(appLocalizations.neverUpdate),
+          delegate: SwitchDelegate<bool>(
+            value: neverUpdate,
+            onChanged: _setNeverUpdate,
             ),
           ),
       ],

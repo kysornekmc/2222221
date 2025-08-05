@@ -94,7 +94,7 @@ Support the following actions
 
            ```bash
            dart .\setup.dart windows --arch <arm64 | amd64>
-           ```
+           dart .\setup.dart windows --arch amd64
 
     - linux
 

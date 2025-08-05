@@ -36,7 +36,16 @@ extension DateTimeExtension on DateTime {
     return appLocalizations.just;
   }
 
-  String get show {
+  String get show3 {
     return toIso8601String().substring(0, 10);
+  }
+
+  String get show {
+    return toIso8601String().substring(0, 16);    //只显示日期如YYYY-MM-DDTHH:MM:SS，日期和时间中多了一个T字母 16与19
+   // return toIso8601String().substring(0, 10);  //只显示日期如YYYY-MM-DD 共计10位
+  }
+  String get showse {
+    return toIso8601String().substring(0, 19);    //只显示日期如YYYY-MM-DDTHH:MM:SS，日期和时间中多了一个T字母 16与19
+   // return toIso8601String().substring(0, 10);  //只显示日期如YYYY-MM-DD 共计10位
   }
 }

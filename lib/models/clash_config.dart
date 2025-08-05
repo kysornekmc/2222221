@@ -200,6 +200,24 @@ class Tun with _$Tun {
   }
 }
 
+extension TunExt on Tun {
+  Tun getRealTun(RouteMode routeMode) {
+    final mRouteAddress = routeMode == RouteMode.bypassPrivate
+        ? defaultBypassPrivateRouteAddress
+        : routeAddress;
+    return switch (system.isDesktop) {
+      true => copyWith(
+          autoRoute: true,
+          routeAddress: [],
+        ),
+      false => copyWith(
+          autoRoute: mRouteAddress.isEmpty ? true : false,
+          routeAddress: mRouteAddress,
+        ),
+    };
+  }
+}
+
 @freezed
 class FallbackFilter with _$FallbackFilter {
   const factory FallbackFilter({
@@ -227,9 +245,9 @@ class Dns with _$Dns {
     @Default(false) @JsonKey(name: "prefer-h3") bool preferH3,
     @Default(true) @JsonKey(name: "use-hosts") bool useHosts,
     @Default(true) @JsonKey(name: "use-system-hosts") bool useSystemHosts,
-    @Default(false) @JsonKey(name: "respect-rules") bool respectRules,
+    @Default(true) @JsonKey(name: "respect-rules") bool respectRules,
     @Default(false) bool ipv6,
-    @Default(["223.5.5.5"])
+    @Default(["223.5.5.5","119.28.28.28","119.29.29.29","223.6.6.6",])
     @JsonKey(name: "default-nameserver")
     List<String> defaultNameserver,
     @Default(DnsMode.fakeIp)
@@ -257,8 +275,9 @@ class Dns with _$Dns {
     ])
     List<String> nameserver,
     @Default([
-      "tls://8.8.4.4",
       "tls://1.1.1.1",
+      "tls://8.8.8.8",
+      "tls://8.8.4.4",
     ])
     List<String> fallback,
     @Default([

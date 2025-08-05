@@ -51,6 +51,7 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       overrideData: json['overrideData'] == null
           ? const OverrideData()
           : OverrideData.fromJson(json['overrideData'] as Map<String, dynamic>),
+      neverUpdate: json['neverUpdate'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
       'selectedMap': instance.selectedMap,
       'unfoldSet': instance.unfoldSet.toList(),
       'overrideData': instance.overrideData,
+      'neverUpdate': instance.neverUpdate,
     };
 
 _$OverrideDataImpl _$$OverrideDataImplFromJson(Map<String, dynamic> json) =>

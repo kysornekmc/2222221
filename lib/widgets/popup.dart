@@ -211,8 +211,8 @@ class CommonPopupMenu extends StatelessWidget {
   const CommonPopupMenu({
     super.key,
     required this.items,
-    this.minWidth = 200,
-    this.minItemVerticalPadding = 16,
+    this.minWidth = 150, 
+    this.minItemVerticalPadding = 12,  //菜单项垂直方向上的内边距，决定菜单高度的因素之一
     this.fontSize = 15,
   });
 
@@ -239,7 +239,7 @@ class CommonPopupMenu extends StatelessWidget {
         ),
         padding: EdgeInsets.only(
           left: 16,
-          right: 64,
+          right: 16,  //决定了菜单宽度，菜单内容距离右边界的空白长度
           top: minItemVerticalPadding,
           bottom: minItemVerticalPadding,
         ),
@@ -279,7 +279,7 @@ class CommonPopupMenu extends StatelessWidget {
           elevation: 12,
           color: context.colorScheme.surfaceContainer,
           clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
+          shape: RoundedSuperellipseBorder(
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(

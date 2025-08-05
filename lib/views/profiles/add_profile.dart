@@ -3,6 +3,7 @@ import 'package:fl_clash/pages/scan.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // 导入Clipboard所在的包
 
 class AddProfileView extends StatelessWidget {
   final BuildContext context;
@@ -58,6 +59,16 @@ class AddProfileView extends StatelessWidget {
       _handleAddProfileFormURL(url);
     }
   }
+  // 新增方法：从剪贴板导入订阅链接
+  _handleAddProfileFromClipboard() async {
+    final clipboardData = await Clipboard.getData('text/plain');
+    if (clipboardData != null && clipboardData.text != null) {
+      final url = clipboardData.text!;
+      if (url.isNotEmpty) {
+        _handleAddProfileFormURL(url);
+      }
+    }
+  }
 
   @override
   Widget build(context) {
@@ -80,6 +91,13 @@ class AddProfileView extends StatelessWidget {
           title: Text(appLocalizations.url),
           subtitle: Text(appLocalizations.urlDesc),
           onTap: _toAdd,
+        ),
+        // 新增菜单项：从剪贴板导入
+        ListItem(
+          leading: const Icon(Icons.content_paste_sharp),
+          title: Text(appLocalizations.clipboardcode),      //剪贴板导入
+          subtitle: Text(appLocalizations.clipboardDesc),   //从剪贴板导入订阅链接
+          onTap: _handleAddProfileFromClipboard,
         )
       ],
     );

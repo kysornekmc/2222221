@@ -554,14 +554,14 @@ class AppController {
       _ref.read(appSettingProvider).autoLaunch,
     );
     autoUpdateProfiles();
-    autoCheckUpdate();
+ //   autoCheckUpdate();
     if (!_ref.read(appSettingProvider).silentLaunch) {
       window?.show();
     } else {
       window?.hide();
     }
     await _handlePreference();
-    await _handlerDisclaimer();
+ //   await _handlerDisclaimer();
     _ref.read(initProvider.notifier).value = true;
   }
 
@@ -652,7 +652,7 @@ class AppController {
         false;
   }
 
-  _handlerDisclaimer() async {
+ /* _handlerDisclaimer() async {
     if (_ref.read(appSettingProvider).disclaimerAccepted) {
       return;
     }
@@ -661,7 +661,7 @@ class AppController {
       await handleExit();
     }
     return;
-  }
+  } */
 
   addProfileFormURL(String url) async {
     if (globalState.navigatorKey.currentState?.canPop() ?? false) {

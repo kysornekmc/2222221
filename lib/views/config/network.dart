@@ -9,6 +9,7 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:fl_clash/widgets/scroll.dart'; // 引入 scroll.dart 文件
 
 class VPNItem extends ConsumerWidget {
   const VPNItem({super.key});
@@ -18,6 +19,7 @@ class VPNItem extends ConsumerWidget {
     final enable =
         ref.watch(vpnSettingProvider.select((state) => state.enable));
     return ListItem.switchItem(
+          leading: const Icon(Icons.vpn_key_outlined),  //VPN
       title: const Text("VPN"),
       subtitle: Text(appLocalizations.vpnEnableDesc),
       delegate: SwitchDelegate(
@@ -67,6 +69,7 @@ class AllowBypassItem extends ConsumerWidget {
     final allowBypass =
         ref.watch(vpnSettingProvider.select((state) => state.allowBypass));
     return ListItem.switchItem(
+          leading: const Icon(Icons.line_axis),
       title: Text(appLocalizations.allowBypass),
       subtitle: Text(appLocalizations.allowBypassDesc),
       delegate: SwitchDelegate(
@@ -91,6 +94,7 @@ class VpnSystemProxyItem extends ConsumerWidget {
     final systemProxy =
         ref.watch(vpnSettingProvider.select((state) => state.systemProxy));
     return ListItem.switchItem(
+      leading: const Icon(Icons.airline_stops), //系统代理
       title: Text(appLocalizations.systemProxy),
       subtitle: Text(appLocalizations.systemProxyDesc),
       delegate: SwitchDelegate(
@@ -116,7 +120,8 @@ class SystemProxyItem extends ConsumerWidget {
         ref.watch(networkSettingProvider.select((state) => state.systemProxy));
 
     return ListItem.switchItem(
-      title: Text(appLocalizations.systemProxy),
+          leading: const Icon(Icons.airline_stops),
+          title: Text(appLocalizations.systemProxy),    //系统代理
       subtitle: Text(appLocalizations.systemProxyDesc),
       delegate: SwitchDelegate(
         value: systemProxy,
@@ -139,6 +144,7 @@ class Ipv6Item extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final ipv6 = ref.watch(vpnSettingProvider.select((state) => state.ipv6));
     return ListItem.switchItem(
+          leading: const Icon(Icons.looks_6_outlined),   //IPV6
       title: const Text("IPv6"),
       subtitle: Text(appLocalizations.ipv6InboundDesc),
       delegate: SwitchDelegate(
@@ -187,7 +193,8 @@ class TunStackItem extends ConsumerWidget {
         ref.watch(patchClashConfigProvider.select((state) => state.tun.stack));
 
     return ListItem.options(
-      title: Text(appLocalizations.stackMode),
+          leading: const Icon(Icons.menu_open),
+          title: Text(appLocalizations.stackMode),   //stackMode
       subtitle: Text(stack.name),
       delegate: OptionsDelegate<TunStack>(
         value: stack,
@@ -244,6 +251,7 @@ class BypassDomainItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
+      leading: Icon(Icons.playlist_remove),
       title: Text(appLocalizations.bypassDomain),
       subtitle: Text(appLocalizations.bypassDomainDesc),
       delegate: OpenDelegate(
@@ -254,17 +262,21 @@ class BypassDomainItem extends StatelessWidget {
             _initActions(context, ref);
             final bypassDomain = ref.watch(
                 networkSettingProvider.select((state) => state.bypassDomain));
-            return ListInputPage(
-              title: appLocalizations.bypassDomain,
-              items: bypassDomain,
-              titleBuilder: (item) => Text(item),
-              onChange: (items) {
-                ref.read(networkSettingProvider.notifier).updateState(
-                      (state) => state.copyWith(
-                        bypassDomain: List.from(items),
-                      ),
-                    );
-              },
+            final scrollController = ScrollController(); // 创建 ScrollController
+            return CommonScrollBar(
+              controller: scrollController, // 传入 ScrollController
+              child: ListInputPage(
+                title: appLocalizations.bypassDomain,
+                items: bypassDomain,
+                titleBuilder: (item) => Text(item),
+                onChange: (items) {
+                  ref.read(networkSettingProvider.notifier).updateState(
+                        (state) => state.copyWith(
+                          bypassDomain: List.from(items),
+                        ),
+                      );
+                },
+              ),
             );
           },
         ),
@@ -272,6 +284,7 @@ class BypassDomainItem extends StatelessWidget {
     );
   }
 }
+
 
 class RouteModeItem extends ConsumerWidget {
   const RouteModeItem({super.key});
@@ -281,7 +294,8 @@ class RouteModeItem extends ConsumerWidget {
     final routeMode =
         ref.watch(networkSettingProvider.select((state) => state.routeMode));
     return ListItem<RouteMode>.options(
-      title: Text(appLocalizations.routeMode),
+          leading: const Icon(Icons.router),
+          title: Text(appLocalizations.routeMode),       //routeMode路由模式
       subtitle: Text(Intl.message("routeMode_${routeMode.name}")),
       delegate: OptionsDelegate<RouteMode>(
         title: appLocalizations.routeMode,
@@ -316,7 +330,8 @@ class RouteAddressItem extends ConsumerWidget {
       return Container();
     }
     return ListItem.open(
-      title: Text(appLocalizations.routeAddress),
+        leading: const Icon(Icons.edit_note),
+        title: Text(appLocalizations.routeAddress),  //路由地址
       subtitle: Text(appLocalizations.routeAddressDesc),
       delegate: OpenDelegate(
         blur: false,

@@ -7,6 +7,7 @@ import 'package:fl_clash/views/proxies/common.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_clash/providers/pinned_proxies_provider.dart';
 
 class ProxyCard extends StatelessWidget {
   final String groupName;
@@ -120,88 +121,127 @@ class ProxyCard extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final measure = globalState.measure;
-    final delayText = _buildDelayText();
-    final proxyNameText = _buildProxyNameText(context);
-    return Stack(
-      children: [
-        Consumer(
-          builder: (_, ref, child) {
-            final selectedProxyName =
-                ref.watch(getSelectedProxyNameProvider(groupName));
-            return CommonCard(
+_pinProxy(WidgetRef ref) {
+  final pinnedProxies = ref.read(pinnedProxiesProvider.notifier);
+  if (pinnedProxies.isPinned(groupName, proxy.name)) {
+    pinnedProxies.removePinnedProxy(groupName, proxy.name);
+  } else {
+    pinnedProxies.addPinnedProxy(groupName, proxy.name);
+  }
+}
+
+
+
+@override
+Widget build(BuildContext context) {
+  final measure = globalState.measure;
+  final delayText = _buildDelayText();
+  final proxyNameText = _buildProxyNameText(context);
+  return Stack(
+    children: [
+      Consumer(
+        builder: (_, ref, child) {
+          final selectedProxyName =
+              ref.watch(getSelectedProxyNameProvider(groupName));
+          return GestureDetector(
+            onLongPress: () {
+              // 现在可以访问 Consumer 中的 ref 对象
+              _pinProxy(ref);
+            },
+            child: CommonCard(
               key: key,
               onPressed: () {
                 _changeProxy(ref);
               },
               isSelected: selectedProxyName == proxy.name,
               child: child!,
-            );
-          },
-          child: Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                proxyNameText,
-                const SizedBox(
-                  height: 8,
+            ),
+          );
+        },
+        child: Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                Row(
+                crossAxisAlignment: CrossAxisAlignment.start, // 修改为居中对齐
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Expanded(child: proxyNameText),
+Consumer(
+  builder: (_, ref, __) {
+    final pinnedProxies = ref.watch(pinnedProxiesProvider);
+    if (pinnedProxies.contains('$groupName|${proxy.name}')) { // 使用复合标识
+      return Padding(
+                        padding: EdgeInsets.only(top: 2.70), 
+        child: Icon(
+          Icons.star,
+          size: globalState.measure.labelSmallHeight,
+          color: Theme.of(context).colorScheme.primary
+        ),
+      );
+    }
+    return SizedBox();
+  },
+),
+                  ],
                 ),
-                if (type == ProxyCardType.expand) ...[
-                  SizedBox(
-                    height: measure.bodySmallHeight,
-                    child: _ProxyDesc(
-                      proxy: proxy,
-                    ),
+              const SizedBox(
+                height: 8,
+              ),
+              if (type == ProxyCardType.expand) ...[
+                SizedBox(
+                  height: measure.bodySmallHeight,
+                  child: _ProxyDesc(
+                    proxy: proxy,
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  delayText,
-                ] else
-                  SizedBox(
-                    height: measure.bodySmallHeight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: TooltipText(
-                            text: Text(
-                              proxy.type,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                overflow: TextOverflow.ellipsis,
-                                color: context
-                                    .textTheme.bodySmall?.color?.opacity80,
-                              ),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                delayText,
+              ] else
+                SizedBox(
+                  height: measure.bodySmallHeight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: TooltipText(
+                          text: Text(
+                            proxy.type,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              overflow: TextOverflow.ellipsis,
+                              color: context
+                                  .textTheme.bodySmall?.color?.opacity80,
                             ),
                           ),
                         ),
-                        delayText,
-                      ],
-                    ),
+                      ),
+                      delayText,
+                    ],
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
-        if (groupType.isComputedSelected)
-          Positioned(
-            top: 0,
-            right: 0,
-            child: _ProxyComputedMark(
-              groupName: groupName,
-              proxy: proxy,
+      ),
+      if (groupType.isComputedSelected)
+        Positioned(
+          top: 0,
+          right: 0,
+          child: _ProxyComputedMark(
+            groupName: groupName,
+            proxy: proxy,
             ),
-          )
-      ],
-    );
-  }
+          ),
+    ],
+  );
+}
 }
 
 class _ProxyDesc extends ConsumerWidget {

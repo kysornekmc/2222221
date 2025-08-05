@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
@@ -11,6 +12,11 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:convert';
+import 'package:file_picker/file_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http; // 引入 http 包
 
 class AccessView extends ConsumerStatefulWidget {
   const AccessView({super.key});
@@ -198,6 +204,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
+        // 1. 应用访问控制开关
         Flexible(
           flex: 0,
           child: ListItem.switchItem(
@@ -318,24 +325,34 @@ class _AccessViewState extends ConsumerState<AccessView> {
                       builder: (_, snapshot) {
                         if (snapshot.connectionState != ConnectionState.done) {
                           return Center(
-                            child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(),
                           );
                         }
                         return packages.isEmpty
                             ? NullStatus(
                                 label: appLocalizations.noData,
-                              )
-                            : CommonScrollBar(
-                                controller: _controller,
-                                child: ListView.builder(
-                                  controller: _controller,
-                                  itemCount: packages.length,
-                                  itemExtent: 72,
-                                  itemBuilder: (_, index) {
-                                    final package = packages[index];
-                                    return PackageListItem(
-                                      key: Key(package.packageName),
-                                      package: package,
+                        )
+                      : CommonScrollBar(
+                          controller: _controller,
+                          child: ListView.separated(
+                            controller: _controller,
+                    padding: EdgeInsets.only(
+                     // top: 8,
+                    //  left: 16,
+                    //  right: 16,
+                      bottom: 16, // 增加底部内边距，确保最后一项不被遮挡,安全距离
+                    ),
+                            itemCount: packages.length,
+                            separatorBuilder: (context, index) => const Divider(
+                              height: 1,
+                              thickness: 1,
+                            //  color: Colors.grey,
+                            ),
+                            itemBuilder: (_, index) {
+                              final package = packages[index];
+                              return PackageListItem(
+                                key: Key(package.packageName),
+                                package: package,
                                       value: valueList
                                           .contains(package.packageName),
                                       isActive: accessControl.enable,
@@ -510,8 +527,13 @@ class AccessControlSearchDelegate extends SearchDelegate {
         final valueList = currentList.intersection(packageNameList);
         return DisabledMask(
           status: !isAccessControl,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: queryPackages.length,
+            separatorBuilder: (context, index) => const Divider(
+              height: 1,
+              thickness: 1,
+             // color: Colors.grey,
+            ),
             itemBuilder: (_, index) {
               final package = queryPackages[index];
               return PackageListItem(
@@ -747,6 +769,114 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
     Navigator.of(context).pop();
   }
 
+Future<void> _importFromFile() async {
+  final filePickerResult = await FilePicker.platform.pickFiles(
+    withData: true,
+    allowMultiple: false,
+    type: FileType.custom,
+    allowedExtensions: ['json'], // 假设文件格式为 JSON
+  );
+
+  if (filePickerResult != null && filePickerResult.files.isNotEmpty) {
+    final file = filePickerResult.files.first;
+    final bytes = file.bytes;
+    if (bytes != null) {
+      try {
+        final String content = utf8.decode(bytes);
+        final data = json.decode(content);
+        final accessControl = AccessControl.fromJson(data);
+
+        ref.read(vpnSettingProvider.notifier).updateState(
+              (state) => state.copyWith.accessControl(
+                acceptList: accessControl.acceptList,
+                rejectList: accessControl.rejectList,
+              ),
+            );
+
+        if (!mounted) return;
+        // 显示导入成功的提示信息
+        globalState.showNotifier(appLocalizations.importSuccess); 
+        Navigator.of(context).pop();
+      } catch (e) {
+        // 处理解析错误
+        print('Failed to parse file: $e');
+      }
+    }
+  }
+}
+
+Future<void> _exportToFile() async {
+  final accessControl = globalState.config.vpnProps.accessControl;
+  final data = accessControl.toJson();
+  final jsonString = json.encode(data);
+
+  final now = DateTime.now();
+  final formattedDate = DateFormat('yyyy-MM-dd_HH-mm-ss').format(now);
+  final fileName = '$formattedDate.json';
+
+  try {
+    // 让用户选择保存路径
+    String? selectedDirectory = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: appLocalizations.selectSaveLocation,  
+    );
+
+    if (selectedDirectory == null) {
+      // 用户取消了选择
+      if (!mounted) return;
+      globalState.showNotifier(appLocalizations.exportCanceled); 
+      return;
+    }
+
+    // 拼接完整路径
+    final filePath = '$selectedDirectory/$fileName';
+    final file = File(filePath);
+
+    // 写入文件
+    await file.writeAsString(jsonString);
+    print('Exported to $filePath');
+
+    if (!mounted) return;
+    globalState.showNotifier(appLocalizations.exportSuccess);
+    Navigator.of(context).pop();
+  } catch (e) {
+    print('Failed to export file: $e');
+    if (!mounted) return;
+    globalState.showNotifier('${appLocalizations.exportFailed}: $e');
+  }
+}
+
+  // 新增通过链接导入的方法
+  Future<void> _importFromUrl() async {
+    const url = 'https://raw.githubusercontent.com/kysornekmc/Access_settings_list/refs/heads/main/Access_settings_list.json';
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final accessControl = AccessControl.fromJson(data);
+
+        ref.read(vpnSettingProvider.notifier).updateState(
+              (state) => state.copyWith.accessControl(
+                acceptList: accessControl.acceptList,
+                rejectList: accessControl.rejectList,
+              ),
+            );
+
+        if (!mounted) return;
+        // 显示导入成功的提示信息
+        globalState.showNotifier(appLocalizations.importSuccess);
+        Navigator.of(context).pop();
+      } else {
+        print('Failed to fetch data from URL: ${response.statusCode}');
+        if (!mounted) return;
+        globalState.showNotifier('${appLocalizations.importFailed}: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching data from URL: $e');
+      if (!mounted) return;
+      globalState.showNotifier('${appLocalizations.importFailed}: $e');
+    }
+  }
+
   List<Widget> _buildActionSetting() {
     return generateSection(
       title: appLocalizations.action,
@@ -775,7 +905,25 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
                 avatar: const Icon(Icons.content_copy),
                 label: appLocalizations.clipboardExport,
                 onPressed: _copyToClipboard,
-              )
+            ),
+            // 新增从本地文件导入按钮
+            CommonChip(
+              avatar: const Icon(Icons.file_download),
+              label: appLocalizations.importFile,
+              onPressed: _importFromFile,
+            ),
+              // 新增导出到文件按钮
+              CommonChip(
+                avatar: const Icon(Icons.file_upload),
+                label: appLocalizations.exportFile,
+                onPressed: _exportToFile,
+              ),
+              // 新增通过链接导入按钮
+              CommonChip(
+                avatar: const Icon(Icons.link),
+                label: appLocalizations.importFromURL,
+                onPressed: _importFromUrl,
+              ),
             ],
           ),
         )

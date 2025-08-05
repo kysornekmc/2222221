@@ -29,10 +29,12 @@ class RadioDelegate<T> extends Delegate {
 class SwitchDelegate<T> extends Delegate {
   final bool value;
   final ValueChanged<bool>? onChanged;
+  final bool enabled; // 添加 enabled 属性
 
   const SwitchDelegate({
     required this.value,
     this.onChanged,
+    this.enabled = true, // 默认值为 true，表示可交互
   });
 }
 
@@ -260,7 +262,7 @@ class ListItem<T> extends StatelessWidget {
       leading: leading ?? this.leading,
       horizontalTitleGap: horizontalTitleGap,
       title: title,
-      minVerticalPadding: 12,
+      minTileHeight: 60,//list列表最小高度
       subtitle: subtitle,
       titleAlignment: tileTitleAlignment,
       onTap: onTap,

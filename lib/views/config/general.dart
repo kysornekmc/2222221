@@ -54,7 +54,9 @@ class UaItem extends ConsumerWidget {
         options: [
           null,
           "clash-verge/v1.6.6",
+          "mihomo.party/v1.8.0 (clash.meta)",	  
           "ClashforWindows/0.19.23",
+          "ClashMetaForAndroid/2.11.14",
         ],
         value: globalUa,
         onChanged: (value) {
@@ -120,7 +122,7 @@ class TestUrlItem extends ConsumerWidget {
     final testUrl =
         ref.watch(appSettingProvider.select((state) => state.testUrl));
     return ListItem.input(
-      leading: const Icon(Icons.timeline),
+          leading: const Icon(Icons.speed_outlined),  //测速链接
       title: Text(appLocalizations.testUrl),
       subtitle: Text(testUrl),
       delegate: InputDelegate(
@@ -166,7 +168,7 @@ class PortItem extends ConsumerWidget {
     final mixedPort =
         ref.watch(patchClashConfigProvider.select((state) => state.mixedPort));
     return ListItem(
-      leading: const Icon(Icons.adjust_outlined),
+          leading: const Icon(Icons.directions_boat_filled_outlined),//端口
       title: Text(appLocalizations.port),
       subtitle: Text("$mixedPort"),
       onTap: () {
@@ -249,7 +251,7 @@ class Ipv6Item extends ConsumerWidget {
     final ipv6 =
         ref.watch(patchClashConfigProvider.select((state) => state.ipv6));
     return ListItem.switchItem(
-      leading: const Icon(Icons.water_outlined),
+          leading: const Icon(Icons.looks_6_outlined),
       title: const Text("IPv6"),
       subtitle: Text(appLocalizations.ipv6Desc),
       delegate: SwitchDelegate(
@@ -326,7 +328,7 @@ class FindProcessItem extends ConsumerWidget {
         .select((state) => state.findProcessMode == FindProcessMode.always));
 
     return ListItem.switchItem(
-      leading: const Icon(Icons.polymer_outlined),
+          leading: const Icon(Icons.troubleshoot_outlined),   //查找进程
       title: Text(appLocalizations.findProcessMode),
       subtitle: Text(appLocalizations.findProcessModeDesc),
       delegate: SwitchDelegate(

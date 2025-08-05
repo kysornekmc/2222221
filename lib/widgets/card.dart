@@ -105,7 +105,7 @@ class CommonCard extends StatelessWidget {
   final CommonCardType type;
   final double radius;
 
-  // final WidgetStateProperty<Color?>? backgroundColor;
+ //  final WidgetStateProperty<Color?>? backgroundColor;
   // final WidgetStateProperty<BorderSide?>? borderSide;
 
   BorderSide getBorderSide(BuildContext context, Set<WidgetState> states) {
@@ -185,7 +185,7 @@ class CommonCard extends StatelessWidget {
       style: ButtonStyle(
         padding: const WidgetStatePropertyAll(EdgeInsets.zero),
         shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
+          RoundedSuperellipseBorder(
             borderRadius: BorderRadius.circular(radius),
           ),
         ),

@@ -5,6 +5,8 @@ import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkDetection extends ConsumerStatefulWidget {
   const NetworkDetection({super.key});
@@ -14,7 +16,28 @@ class NetworkDetection extends ConsumerStatefulWidget {
 }
 
 class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
-  _countryCodeToEmoji(String countryCode) {
+  bool _isIpHidden = false;
+  static const String _ipVisibilityKey = 'ipVisibility';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadIpVisibility();
+  }
+
+  Future<void> _loadIpVisibility() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isIpHidden = prefs.getBool(_ipVisibilityKey) ?? false;
+    });
+  }
+
+  Future<void> _saveIpVisibility() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_ipVisibilityKey, _isIpHidden);
+  }
+
+  String _countryCodeToEmoji(String countryCode) {
     final String code = countryCode.toUpperCase();
     if (code.length != 2) {
       return countryCode;
@@ -22,6 +45,18 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
     final int firstLetter = code.codeUnitAt(0) - 0x41 + 0x1F1E6;
     final int secondLetter = code.codeUnitAt(1) - 0x41 + 0x1F1E6;
     return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+  }
+
+  void _toggleIpVisibility() {
+    setState(() {
+      _isIpHidden = !_isIpHidden;
+    });
+    _saveIpVisibility();
+  }
+
+  void _copyIpToClipboard(String ip) {
+    Clipboard.setData(ClipboardData(text: ip));
+    globalState.showNotifier(appLocalizations.ipCopied);
   }
 
   @override
@@ -72,7 +107,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                         flex: 1,
                         child: TooltipText(
                           text: Text(
-                            appLocalizations.networkDetection,
+                            appLocalizations.publicIP,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
@@ -84,27 +119,6 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 2),
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            globalState.showMessage(
-                              title: appLocalizations.tip,
-                              message: TextSpan(
-                                text: appLocalizations.detectionTip,
-                              ),
-                              cancelable: false,
-                            );
-                          },
-                          icon: Icon(
-                            size: 16.ap,
-                            Icons.info_outline,
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -116,13 +130,19 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                     height: globalState.measure.bodyMediumHeight + 2,
                     child: FadeThroughBox(
                       child: ipInfo != null
-                          ? TooltipText(
-                              text: Text(
-                                ipInfo.ip,
-                                style: context.textTheme.bodyMedium?.toLight
-                                    .adjustSize(1),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                          ? GestureDetector(
+                              onTap: _toggleIpVisibility,
+                              onLongPress: () => _copyIpToClipboard(ipInfo.ip),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  _isIpHidden
+                                      ? '**** **** ****'
+                                      : ipInfo.ip,
+                                  style: context.textTheme.bodyMedium?.toLight.adjustSize(1),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             )
                           : FadeThroughBox(
@@ -147,7 +167,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                             ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           );

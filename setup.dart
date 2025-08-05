@@ -187,10 +187,10 @@ class Build {
       runInShell: runInShell,
     );
     process.stdout.listen((data) {
-      print(utf8.decode(data));
+      print(utf8.decode(data, allowMalformed: true));
     });
     process.stderr.listen((data) {
-      print(utf8.decode(data));
+      print(utf8.decode(data, allowMalformed: true));
     });
     final exitCode = await process.exitCode;
     if (exitCode != 0 && name != null) throw "$name error";
@@ -478,7 +478,7 @@ class BuildCommand extends Command {
     final mode = target == Target.android ? Mode.lib : Mode.core;
     final String out = argResults?["out"] ?? (target.same ? "app" : "core");
     final archName = argResults?["arch"];
-    final env = argResults?["env"] ?? "pre";
+    final env = argResults?["env"] ?? "stable";
     final currentArches =
         arches.where((element) => element.name == archName).toList();
     final arch = currentArches.isEmpty ? null : currentArches.first;

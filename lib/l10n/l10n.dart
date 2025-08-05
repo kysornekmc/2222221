@@ -240,15 +240,6 @@ class AppLocalizations {
     return Intl.message('English', name: 'en', desc: '', args: []);
   }
 
-  /// `Japanese`
-  String get ja {
-    return Intl.message('Japanese', name: 'ja', desc: '', args: []);
-  }
-
-  /// `Russian`
-  String get ru {
-    return Intl.message('Russian', name: 'ru', desc: '', args: []);
-  }
 
   /// `Simplified Chinese`
   String get zh_CN {
@@ -3139,16 +3130,326 @@ class AppLocalizations {
       args: [],
     );
   }
-}
+  /// `Modese`
+  String get modese {
+    return Intl.message('Modese', name: 'modese', desc: '', args: []);
+  }
+  /// `subscriptionInformation`
+  String get subscriptionInformation {
+    return Intl.message(
+      'subscriptionInformation',
+      name: 'subscriptionInformation',
+      desc: '',
+      args: [],
+    );
+  }   
+ 
+  /// `QR code share`
+  String get shareQrCode {
+    return Intl.message(
+      'QR code share',
+      name: 'shareQrCode',
+      desc: '',
+      args: [],
+    );
+  }  
+  
+  /// `Webdav filename`
+  String get davfileName {
+    return Intl.message(
+      'Webdav filename',
+      name: 'davfileName',
+      desc: '',
+      args: [],
+    );
+  }   
 
+  /// `Outbound mode selecte`
+  String get outboundModeSelecte {
+    return Intl.message(
+      'Outbound mode selecte',
+      name: 'outboundModeSelecte',
+      desc: '',
+      args: [],
+    );
+  }
+
+    /// `Script`
+  String get Script {
+    return Intl.message(
+      'Script',
+      name: 'Script',
+      desc: '',
+      args: [],
+    );
+  }
+
+    /// `Space`
+  String get Space {
+    return Intl.message(
+      'Space',
+      name: 'Space',
+      desc: '',
+      args: [],
+    );
+  }
+    /// `ipCopied`
+  String get ipCopied {
+    return Intl.message(
+      'ipCopied',
+      name: 'ipCopied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clipboard`
+  String get clipboardcode {
+    return Intl.message(
+      'Clipboard',
+      name: 'clipboardcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import subscription links from clipboard`
+  String get clipboardDesc {
+    return Intl.message(
+      'Import subscription links from clipboard',
+      name: 'clipboardDesc',
+      desc: '',
+      args: [],
+    );
+  }  
+    /// `Public IP`
+  String get publicIP {
+    return Intl.message(
+      'Public IP',
+      name: 'publicIP',
+      desc: '',
+      args: [],
+    );
+  }
+
+    /// `Concurrent Query`
+  String get concurrentQuery {
+    return Intl.message(
+      'Concurrent Query',
+      name: 'concurrentQuery',
+      desc: '',
+      args: [],
+    );
+  }  
+  
+    /// `Sequential Query`
+  String get sequentialQuery {
+    return Intl.message(
+      'Sequential Query',
+      name: 'sequentialQuery',
+      desc: '',
+      args: [],
+    );
+  }   
+ 
+    /// `IP Check Method`
+  String get ipCheckmethod {
+    return Intl.message(
+      'IP Check Method',
+      name: 'ipCheckmethod',
+      desc: '',
+      args: [],
+    );
+  }   
+ 
+  /// `Last backup time`
+  String get lastbackuptime {
+    return Intl.message(
+      'Last backup time',
+      name: 'lastbackuptime',
+      desc: '',
+      args: [],
+    );
+  } 
+  
+  /// `proxyInformation`
+  String get proxyInformation {
+    return Intl.message(
+      'proxyInformation',
+      name: 'proxyInformation',
+      desc: '',
+      args: [],
+    );
+  } 
+  /// `noProxySelected`
+  String get noProxySelected {
+    return Intl.message(
+      'noProxySelected',
+      name: 'noProxySelected',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Select Proxy`
+  String get selectproxy {
+    return Intl.message(
+      'selectproxy',
+      name: 'selectproxy',
+      desc: '',
+      args: [],
+    );
+  }  
+  /// `Webdav backup`
+  String get webdavbackup {
+    return Intl.message(
+      'Webdav backup',
+      name: 'webdavbackup',
+      desc: '',
+      args: [],
+    );
+  }    
+    /// `Webdav recovery`
+  String get webdavrecovery {
+    return Intl.message(
+      'Webdav recovery',
+      name: 'webdavrecovery',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Export Canceled`
+  String get exportCanceled {
+    return Intl.message(
+      'Export Canceled',
+      name: 'exportCanceled',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Export Failed`
+  String get exportFailed {
+    return Intl.message(
+      'Export Failed',
+      name: 'exportFailed',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Select Save Location,  `
+  String get selectSaveLocation {
+    return Intl.message(
+      'Export Failed',
+      name: 'selectSaveLocation',
+      desc: '',
+      args: [],
+    );
+  } 
+  /// `Import Success,  `
+  String get importSuccess {
+    return Intl.message(
+      'Import Success',
+      name: 'importSuccess',
+      desc: '',
+      args: [],
+    );
+  }      
+  /// `Import Failed,  `  
+  String get importFailed {
+    return Intl.message(
+      'Import Failed',
+      name: 'importFailed',
+      desc: '',
+      args: [],
+    );
+  }  
+  /// `Traffic usagese`
+  String get trafficUsageSe {
+    return Intl.message(
+      'Traffic usagese',
+      name: 'trafficUsageSe',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Expire date`
+  String get expire {
+    return Intl.message(
+      'Expire date',
+      name: 'expire',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Never Update`
+  String get neverUpdate {
+    return Intl.message(
+      'Never Update',
+      name: 'neverUpdate',
+      desc: '',
+      args: [],
+    );
+  }  
+  /// `Auto Refresh`
+  String get autoRefresh {
+    return Intl.message(
+      'Auto Refresh',
+      name: 'autoRefresh',
+      desc: '',
+      args: [],
+    );
+  }    
+  /// `Auto Refresh Desc`
+  String get autoRefreshDesc {
+    return Intl.message(
+      'Auto Refresh Desc',
+      name: 'autoRefreshDesc',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Detail Time Format`
+  String get detailTimeFormat {
+    return Intl.message(
+      'Detail Time Format',
+      name: 'detailTimeFormat',
+      desc: '',
+      args: [],
+    );
+  }  
+  /// `Subscription Time Format`
+  String get subscriptionTimeFormat {
+    return Intl.message(
+      'Subscription Time Format',
+      name: 'subscriptionTimeFormat',
+      desc: '',
+      args: [],
+    );
+  }       
+  /// `Show Hide Profiles`
+  String get showhideProfiles {
+    return Intl.message(
+      'Show Hide Profiles',
+      name: 'showhideProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Proxy`
+  String get proxy {
+    return Intl.message(
+      'Proxy',
+      name: 'proxy',
+      desc: '',
+      args: [],
+    );
+  }
+}
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'ja'),
-      Locale.fromSubtags(languageCode: 'ru'),
       Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
     ];
   }

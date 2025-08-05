@@ -13,23 +13,26 @@ _$AppSettingPropsImpl _$$AppSettingPropsImplFromJson(
       dashboardWidgets: json['dashboardWidgets'] == null
           ? defaultDashboardWidgets
           : dashboardWidgetsSafeFormJson(json['dashboardWidgets'] as List?),
-      onlyStatisticsProxy: json['onlyStatisticsProxy'] as bool? ?? false,
+      onlyStatisticsProxy: json['onlyStatisticsProxy'] as bool? ?? true,
       autoLaunch: json['autoLaunch'] as bool? ?? false,
       silentLaunch: json['silentLaunch'] as bool? ?? false,
       autoRun: json['autoRun'] as bool? ?? false,
       openLogs: json['openLogs'] as bool? ?? false,
       closeConnections: json['closeConnections'] as bool? ?? true,
       testUrl: json['testUrl'] as String? ?? defaultTestUrl,
-      isAnimateToPage: json['isAnimateToPage'] as bool? ?? true,
+      isAnimateToPage: json['isAnimateToPage'] as bool? ?? false,
       autoCheckUpdate: json['autoCheckUpdate'] as bool? ?? true,
       showLabel: json['showLabel'] as bool? ?? false,
       disclaimerAccepted: json['disclaimerAccepted'] as bool? ?? false,
       minimizeOnExit: json['minimizeOnExit'] as bool? ?? true,
       hidden: json['hidden'] as bool? ?? false,
       developerMode: json['developerMode'] as bool? ?? false,
+      isPollingQuery: json['isPollingQuery'] as bool? ?? true,
+      autoRefreshEnabled: json['autoRefreshEnabled'] as bool? ?? true,
+      showFormattedText: json['showFormattedText'] as bool? ?? true,
       recoveryStrategy: $enumDecodeNullable(
               _$RecoveryStrategyEnumMap, json['recoveryStrategy']) ??
-          RecoveryStrategy.compatible,
+          RecoveryStrategy.override,
     );
 
 Map<String, dynamic> _$$AppSettingPropsImplToJson(
@@ -53,6 +56,9 @@ Map<String, dynamic> _$$AppSettingPropsImplToJson(
       'minimizeOnExit': instance.minimizeOnExit,
       'hidden': instance.hidden,
       'developerMode': instance.developerMode,
+      'isPollingQuery': instance.isPollingQuery,
+      'autoRefreshEnabled': instance.autoRefreshEnabled,
+      'showFormattedText': instance.showFormattedText,
       'recoveryStrategy': _$RecoveryStrategyEnumMap[instance.recoveryStrategy]!,
     };
 
@@ -63,15 +69,25 @@ const _$RecoveryStrategyEnumMap = {
 
 const _$DashboardWidgetEnumMap = {
   DashboardWidget.networkSpeed: 'networkSpeed',
+  DashboardWidget.subscriptionInformationdetail:
+      'subscriptionInformationdetail',
+  DashboardWidget.subscriptionInformation: 'subscriptionInformation',
   DashboardWidget.outboundModeV2: 'outboundModeV2',
   DashboardWidget.outboundMode: 'outboundMode',
   DashboardWidget.trafficUsage: 'trafficUsage',
+  DashboardWidget.trafficUsagePie: 'trafficUsagePie',
+  DashboardWidget.subscriptionInformationsmall: 'subscriptionInformationsmall',
+  DashboardWidget.networkSpeedSmall: 'networkSpeedSmall',
+  DashboardWidget.selectProxy: 'selectProxy',
+  DashboardWidget.proxyInformation: 'proxyInformation',
   DashboardWidget.networkDetection: 'networkDetection',
+  DashboardWidget.intranetIp: 'intranetIp',
+  DashboardWidget.outboundModeDropDown: 'outboundModeDropDown',
+  DashboardWidget.trafficUsageSimple: 'trafficUsageSimple',
+  DashboardWidget.memoryInfo: 'memoryInfo',
   DashboardWidget.tunButton: 'tunButton',
   DashboardWidget.vpnButton: 'vpnButton',
   DashboardWidget.systemProxyButton: 'systemProxyButton',
-  DashboardWidget.intranetIp: 'intranetIp',
-  DashboardWidget.memoryInfo: 'memoryInfo',
 };
 
 _$AccessControlImpl _$$AccessControlImplFromJson(Map<String, dynamic> json) =>
@@ -183,14 +199,14 @@ _$ProxiesStyleImpl _$$ProxiesStyleImplFromJson(Map<String, dynamic> json) =>
           ProxiesType.tab,
       sortType:
           $enumDecodeNullable(_$ProxiesSortTypeEnumMap, json['sortType']) ??
-              ProxiesSortType.none,
+              ProxiesSortType.delay,
       layout: $enumDecodeNullable(_$ProxiesLayoutEnumMap, json['layout']) ??
           ProxiesLayout.standard,
       iconStyle:
           $enumDecodeNullable(_$ProxiesIconStyleEnumMap, json['iconStyle']) ??
               ProxiesIconStyle.standard,
       cardType: $enumDecodeNullable(_$ProxyCardTypeEnumMap, json['cardType']) ??
-          ProxyCardType.expand,
+          ProxyCardType.min,
       iconMap: (json['iconMap'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(k, e as String),
           ) ??
@@ -256,7 +272,7 @@ _$ThemePropsImpl _$$ThemePropsImplFromJson(Map<String, dynamic> json) =>
               .toList() ??
           defaultPrimaryColors,
       themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
-          ThemeMode.dark,
+          ThemeMode.light,
       schemeVariant: $enumDecodeNullable(
               _$DynamicSchemeVariantEnumMap, json['schemeVariant']) ??
           DynamicSchemeVariant.content,

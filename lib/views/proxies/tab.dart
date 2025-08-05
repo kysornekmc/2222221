@@ -6,6 +6,7 @@ import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_clash/providers/pinned_proxies_provider.dart';
 
 import '../../models/common.dart';
 import 'card.dart';
@@ -322,11 +323,18 @@ class ProxyGroupViewState extends ConsumerState<ProxyGroupView> {
     final proxies = state.proxies;
     final columns = state.columns;
     final proxyCardType = state.proxyCardType;
+    final pinnedProxies = ref.watch(pinnedProxiesProvider);
     final sortedProxies = globalState.appController.getSortProxies(
       proxies,
       state.testUrl,
     );
-    this.proxies = sortedProxies;
+final sortedProxiesWithPinned = [
+  ...pinnedProxies.where((key) => key.startsWith('$groupName|') 
+      && sortedProxies.any((proxy) => proxy.name == key.split('|')[1]))
+      .map((key) => sortedProxies.firstWhere((proxy) => proxy.name == key.split('|')[1])),
+  ...sortedProxies.where((proxy) => !pinnedProxies.contains('$groupName|${proxy.name}'))
+];
+    this.proxies = sortedProxiesWithPinned;
     testUrl = state.testUrl;
 
     return Align(
@@ -347,9 +355,9 @@ class ProxyGroupViewState extends ConsumerState<ProxyGroupView> {
             crossAxisSpacing: 8,
             mainAxisExtent: getItemHeight(proxyCardType),
           ),
-          itemCount: sortedProxies.length,
+          itemCount: sortedProxiesWithPinned.length,
           itemBuilder: (_, index) {
-            final proxy = sortedProxies[index];
+            final proxy = sortedProxiesWithPinned[index];
             return ProxyCard(
               testUrl: state.testUrl,
               groupType: state.groupType,
