@@ -1,0 +1,8 @@
+# ninja log v5
+4	29	7716971154311685	CMakeFiles/core.dir/core.cpp.o	f95c7ef29b24b443
+0	77	7716971154791638	CMakeFiles/core.dir/jni_helper.cpp.o	601f439d0ce69a9b
+77	134	7716971155371611	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/Debug/3p5x6r5v/obj/x86/libcore.so	28e871b7a36fe497
+2	81	7717841759343082	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/Debug/3p5x6r5v/obj/x86/libcore.so	28e871b7a36fe497
+2	67	7729031381187433	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/Debug/3p5x6r5v/obj/x86/libcore.so	28e871b7a36fe497
+2	65	7730815302394621	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/Debug/3p5x6r5v/obj/x86/libcore.so	28e871b7a36fe497
+2	64	7756786318740919	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/Debug/3p5x6r5v/obj/x86/libcore.so	28e871b7a36fe497

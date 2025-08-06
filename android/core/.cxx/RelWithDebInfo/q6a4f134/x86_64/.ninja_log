@@ -1,0 +1,12 @@
+# ninja log v5
+5	53	7714497103268143	CMakeFiles/core.dir/core.cpp.o	afaed3052042db90
+1	58	7714497103338141	CMakeFiles/core.dir/jni_helper.cpp.o	7547aa6795acb263
+58	144	7714497104177242	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+2	49	7714504729901031	CMakeFiles/core.dir/core.cpp.o	afaed3052042db90
+49	125	7714504730631029	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+1	98	7715364212735183	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+2	79	7715378529610909	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+1	89	7715963224617247	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+1	77	7715967856499814	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+1	115	7716643306803585	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72
+1	78	7716874510809816	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/RelWithDebInfo/q6a4f134/obj/x86_64/libcore.so	4702011ae8e3cc72

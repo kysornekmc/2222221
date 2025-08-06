@@ -1,0 +1,10 @@
+# ninja log v5
+6	30	7714514243910671	CMakeFiles/core.dir/core.cpp.o	236bee2019acc627
+0	64	7714514244240664	CMakeFiles/core.dir/jni_helper.cpp.o	ef04a5eeca6d555d
+65	121	7714514244790666	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+2	317	7715296627465519	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+3	122	7715320277916825	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+2	291	7715376881781937	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+2	287	7715955701354438	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+2	221	7715965017286988	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8
+2	193	7716167494418227	E:/FlClash/Github0.8.85detail/build/core/intermediates/cxx/Debug/6m2h444f/obj/x86/libcore.so	3dfd5cc4e45f84f8

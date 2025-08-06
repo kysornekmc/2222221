@@ -1,0 +1,12 @@
+[
+{
+  "directory": "E:/FlClash/Github0.8.86/android/core/.cxx/Debug/3p5x6r5v/armeabi-v7a",
+  "command": "E:\\AndroidSdk\\ndk\\28.0.13004108\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi21 --sysroot=E:/AndroidSdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DLIBCLASH -Dcore_EXPORTS -IE:/FlClash/Github0.8.86/android/core/src/main/cpp/../jniLibs/armeabi-v7a -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -o CMakeFiles\\core.dir\\jni_helper.cpp.o -c E:\\FlClash\\Github0.8.86\\android\\core\\src\\main\\cpp\\jni_helper.cpp",
+  "file": "E:\\FlClash\\Github0.8.86\\android\\core\\src\\main\\cpp\\jni_helper.cpp"
+},
+{
+  "directory": "E:/FlClash/Github0.8.86/android/core/.cxx/Debug/3p5x6r5v/armeabi-v7a",
+  "command": "E:\\AndroidSdk\\ndk\\28.0.13004108\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi21 --sysroot=E:/AndroidSdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DLIBCLASH -Dcore_EXPORTS -IE:/FlClash/Github0.8.86/android/core/src/main/cpp/../jniLibs/armeabi-v7a -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -o CMakeFiles\\core.dir\\core.cpp.o -c E:\\FlClash\\Github0.8.86\\android\\core\\src\\main\\cpp\\core.cpp",
+  "file": "E:\\FlClash\\Github0.8.86\\android\\core\\src\\main\\cpp\\core.cpp"
+}
+]

@@ -1,0 +1,11 @@
+# ninja log v5
+4	52	7716972385434129	CMakeFiles/core.dir/core.cpp.o	acde248e576d8e3d
+0	53	7716972385474128	CMakeFiles/core.dir/jni_helper.cpp.o	4680f36f89bbdadc
+53	128	7716972386192122	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145
+1	79	7717843070397056	CMakeFiles/core.dir/core.cpp.o	acde248e576d8e3d
+79	245	7717843072034851	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145
+1	152	7729107145137743	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145
+1	120	7730826056288771	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145
+1	240	7742201600114602	CMakeFiles/core.dir/core.cpp.o	acde248e576d8e3d
+240	471	7742201602410510	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145
+1	176	7756811646867988	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/arm64-v8a/libcore.so	e498bbfaa0c21145

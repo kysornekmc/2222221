@@ -1,0 +1,2 @@
+E:/FlClash/Github0.8.85detail/android/app/.cxx/Debug/6b5l5y6y/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/FlClash/Github0.8.85detail/android/app/.cxx/Debug/6b5l5y6y/armeabi-v7a/CMakeFiles/rebuild_cache.dir

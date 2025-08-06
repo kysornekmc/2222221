@@ -1,0 +1,11 @@
+# ninja log v5
+4	47	7716972393599243	CMakeFiles/core.dir/core.cpp.o	4fd7c2c8d5bd483b
+0	55	7716972393669244	CMakeFiles/core.dir/jni_helper.cpp.o	9bb906a5cb857405
+55	125	7716972394349661	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e
+1	51	7717843073003083	CMakeFiles/core.dir/core.cpp.o	4fd7c2c8d5bd483b
+51	133	7717843073822925	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e
+1	74	7729107146084415	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e
+1	86	7730826057446797	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e
+1	52	7742201603196027	CMakeFiles/core.dir/core.cpp.o	4fd7c2c8d5bd483b
+52	143	7742201604085249	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e
+1	91	7756811648088529	E:/FlClash/Github0.8.86/build/core/intermediates/cxx/RelWithDebInfo/3q1v61u6/obj/armeabi-v7a/libcore.so	dce78787de969c5e

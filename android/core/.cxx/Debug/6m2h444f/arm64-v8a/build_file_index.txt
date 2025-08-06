@@ -1,0 +1,1 @@
+E:\FlClash\Github0.8.85detail\android\core\src\main\cpp\CMakeLists.txt

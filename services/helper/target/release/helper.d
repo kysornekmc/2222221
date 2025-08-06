@@ -1,0 +1,1 @@
+E:\FlClash\Github0.8.86\services\helper\target\release\helper.exe: E:\FlClash\Github0.8.86\services\helper\build.rs E:\FlClash\Github0.8.86\services\helper\src\main.rs E:\FlClash\Github0.8.86\services\helper\src\service\hub.rs E:\FlClash\Github0.8.86\services\helper\src\service\mod.rs E:\FlClash\Github0.8.86\services\helper\src\service\windows.rs
