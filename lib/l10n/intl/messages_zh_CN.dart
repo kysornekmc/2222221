@@ -520,5 +520,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "detailTimeFormat": MessageLookupByLibrary.simpleMessage("详细时间格式"),
     "subscriptionTimeFormat": MessageLookupByLibrary.simpleMessage("订阅时间格式"),
     "proxy": MessageLookupByLibrary.simpleMessage("代理"),
+    "showIp": MessageLookupByLibrary.simpleMessage("显示IP"),
+    "hideIp": MessageLookupByLibrary.simpleMessage("隐藏IP"),
+    "noProfileSelected": MessageLookupByLibrary.simpleMessage("无配置文件"),  
+    "selectProfile": MessageLookupByLibrary.simpleMessage("选择配置"),          
   };
 }

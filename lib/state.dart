@@ -537,12 +537,11 @@ class DetectionState {
     return _instance!;
   }
 
-  startCheck() {
-    debouncer.call(
-      FunctionTag.checkIp,
-      _checkIp,
-    );
-  }
+startCheck() {
+  // 直接调用目标函数，无需防抖
+  _checkIp();
+}
+
 
   _checkIp() async {
     final appState = globalState.appState;

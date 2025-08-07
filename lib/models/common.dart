@@ -477,7 +477,20 @@ class IpInfo {
         ),
       _ => throw const FormatException("invalid json"),
     };
-  }   
+  }    
+   static IpInfo fromIPcloudflareAPIJson(Map<String, dynamic> json) {    //https://1.1.1.1/cdn-cgi/trace
+    return switch (json) {
+      {
+        "clientIp": final String clientIp,
+        "country": final String country,
+      } =>
+        IpInfo(
+          ip: clientIp,
+          countryCode: country,
+        ),
+      _ => throw const FormatException("invalid json"),
+    };
+  }    
 
   static IpInfo fromIpInfoIoJson(Map<String, dynamic> json) {  // https://ipinfo.io/json/
     return switch (json) {

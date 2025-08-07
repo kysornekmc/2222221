@@ -439,4 +439,8 @@
   "detailTimeFormat": "Detail time format",
   "subscriptionTimeFormat": "Subscription time format",
   "proxy": "Proxy",
+  "showIp": "Show IP",
+  "hideIp": "Hide IP",
+  "noProfileSelected": "No profile",
+  "selectProfile": Select profile),
 }

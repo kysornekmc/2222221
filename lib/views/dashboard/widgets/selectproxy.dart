@@ -181,7 +181,7 @@ showSheet(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Divider(),
+              //    const Divider(),
                       // 直接使用ListView.builder，不包裹Expanded
                       ListView.builder(
                         shrinkWrap: true, // 关键：让列表高度适应内容

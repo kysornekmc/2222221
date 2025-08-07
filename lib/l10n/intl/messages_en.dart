@@ -751,5 +751,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "detailTimeFormat": MessageLookupByLibrary.simpleMessage("Detail time format"),
     "subscriptionTimeFormat": MessageLookupByLibrary.simpleMessage("Subscription time format"),
     "proxy": MessageLookupByLibrary.simpleMessage("Proxy"),
+    "showIp": MessageLookupByLibrary.simpleMessage("Show IP"),
+    "hideIp": MessageLookupByLibrary.simpleMessage("Hide IP"),
+    "noProfileSelected": MessageLookupByLibrary.simpleMessage("No profile"),   
+    "selectProfile": MessageLookupByLibrary.simpleMessage("Select profile"),     
   };
 }

@@ -103,6 +103,7 @@ class Request {
   }
 
   final Map<String, IpInfo Function(Map<String, dynamic>)> _ipInfoSources = {
+    "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
     "https://v6.ipinfo.io/json?token=74c2217e68fac9": IpInfo.fromv6IpInfoIoJson,  //50000每月
     "http://ip-api.com/json/": IpInfo.fromIpAPIJson,                              //每分钟查询次数限制为45次
     "https://ipwho.is/": IpInfo.fromIpwhoIsJson,                                  //每月最多可以免费使用我们的 API 10,000 个请求（通过 IP 地址和 Referer 标头识别）

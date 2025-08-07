@@ -440,4 +440,8 @@
   "detailTimeFormat": "详细时间格式",
   "subscriptionTimeFormat": "订阅时间格式",
   "proxy": "代理",
+  "showIp": "显示IP",
+  "hideIp": "隐藏IP",
+  "noProfileSelected": "无配置文件",
+  "selectProfile": "选择配置",        
 }

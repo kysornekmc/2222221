@@ -311,7 +311,7 @@ enum FunctionTag {
   applyProfile,
   savePreferences,
   changeProxy,
-  checkIp,
+//  checkIp,
   handleWill,
   updateDelay,
   vpnTip,
@@ -379,6 +379,12 @@ enum DashboardWidget {
       child: NetworkSpeedSmall(),
     ),
   ),  
+  profileSelecte(
+    GridItem(
+      crossAxisCellCount: 4,               // 选择配置
+      child: ProfileSelecte(),
+    ),
+  ),    
   selectProxy(
     GridItem(
       crossAxisCellCount: 4,               // 代理选择

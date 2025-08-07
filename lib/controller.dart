@@ -63,16 +63,21 @@ class AppController {
     debouncer.call(FunctionTag.savePreferences, savePreferences);
   }
 
-  changeProxyDebounce(String groupName, String proxyName) {
-    debouncer.call(FunctionTag.changeProxy,
-        (String groupName, String proxyName) async {
+changeProxyDebounce(String groupName, String proxyName) {  
+  debouncer.call(
+    FunctionTag.changeProxy,
+    (String groupName, String proxyName) async {
       await changeProxy(
         groupName: groupName,
         proxyName: proxyName,
       );
       await updateGroups();
-    }, args: [groupName, proxyName]);
-  }
+    },
+    args: [groupName, proxyName],
+    duration: const Duration(milliseconds: 200), // 单独设置为200ms
+  );
+}
+
 
   restartCore() async {
     commonPrint.log("restart core");

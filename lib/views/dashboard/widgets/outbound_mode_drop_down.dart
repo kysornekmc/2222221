@@ -72,7 +72,7 @@ class OutboundModeDropDown extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Divider(),
+                              //    const Divider(),
                                   // 添加SingleChildScrollView包裹ListView
                                   SingleChildScrollView(
                                     child: ListView.builder(

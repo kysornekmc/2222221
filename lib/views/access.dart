@@ -350,20 +350,35 @@ class _AccessViewState extends ConsumerState<AccessView> {
                             ),
                             itemBuilder: (_, index) {
                               final package = packages[index];
-                              return PackageListItem(
+                              final listItem = PackageListItem(
                                 key: Key(package.packageName),
                                 package: package,
-                                      value: valueList
-                                          .contains(package.packageName),
-                                      isActive: accessControl.enable,
-                                      onChanged: (value) {
-                                        _handleSelected(
-                                            valueList, package, value);
-                                      },
-                                    );
-                                  },
-                                ),
-                              );
+                                    value: valueList
+                                        .contains(package.packageName),
+                                    isActive: accessControl.enable,
+                                    onChanged: (value) {
+                                      _handleSelected(
+                                          valueList, package, value);
+                                    },
+                                  );
+                                  
+                              // 最后一项添加底部分隔线
+                              if (index == packages.length - 1) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    listItem,
+                                    const Divider(
+                                      height: 1,
+                                      thickness: 1,
+                                    ),
+                                  ],
+                                );
+                              }
+                              return listItem;
+                            },
+                          ),
+                        );
                       }),
                 )
               ],
@@ -536,7 +551,7 @@ class AccessControlSearchDelegate extends SearchDelegate {
             ),
             itemBuilder: (_, index) {
               final package = queryPackages[index];
-              return PackageListItem(
+              final listItem = PackageListItem(
                 key: Key(package.packageName),
                 package: package,
                 value: valueList.contains(package.packageName),
@@ -550,6 +565,21 @@ class AccessControlSearchDelegate extends SearchDelegate {
                   );
                 },
               );
+              
+              // 最后一项添加底部分隔线
+              if (index == queryPackages.length - 1) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    listItem,
+                    const Divider(
+                      height: 1,
+                      thickness: 1,
+                    ),
+                  ],
+                );
+              }
+              return listItem;
             },
           ),
         );

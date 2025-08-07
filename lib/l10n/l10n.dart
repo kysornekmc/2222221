@@ -3443,6 +3443,43 @@ class AppLocalizations {
       args: [],
     );
   }
+  /// `ShowIp`
+  String get showIp {
+    return Intl.message(
+      'ShowIp',
+      name: 'showIp',
+      desc: '',
+      args: [],
+    );
+  } 
+  /// `HideIp`
+  String get hideIp {
+    return Intl.message(
+      'HideIp',
+      name: 'hideIp',
+      desc: '',
+      args: [],
+    );
+  }  
+  /// `No Profile Selected`
+  String get noProfileSelected {
+    return Intl.message(
+      'No Profile Selected',
+      name: 'noProfileSelected',
+      desc: '',
+      args: [],
+    );
+  }   
+  /// `Select Profile`
+  String get selectProfile {
+    return Intl.message(
+      'Select Profile',
+      name: 'selectProfile',
+      desc: '',
+      args: [],
+    );
+  }   
+    
 }
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationDelegate();
