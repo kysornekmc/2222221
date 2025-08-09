@@ -134,7 +134,7 @@ _showProfileSelectionDialog() {
               // 添加底部 padding 以避免被虚拟导航栏遮挡
               padding: EdgeInsets.only(bottom: bottomPadding),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),  //（左、上、右、下）
                 // 移除外层Column的Expanded和SingleChildScrollView嵌套
                 child: ListView.builder(
                   shrinkWrap: true, // 关键：让列表视图适应内容高度
