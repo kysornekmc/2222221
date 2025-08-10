@@ -171,6 +171,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
       child: SingleChildScrollView(
           padding: const EdgeInsets.all(16).copyWith(
             bottom: 88,
+	    top: 12,
           ),
           child: _buildIsEdit((isEdit) {
             return isEdit
@@ -226,9 +227,12 @@ class _AddDashboardWidgetModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return DeferredPointerHandler(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          16,
-        ),
+     //   padding: EdgeInsets.all(
+     //     12,
+     //   ),
+	padding: EdgeInsets.all(16).copyWith(
+	    top: 12,
+          ),
         child: Grid(
           crossAxisCount: 8,
           crossAxisSpacing: 12, //

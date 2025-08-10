@@ -765,7 +765,10 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
         )
       ],
       body: Padding(
-        padding: EdgeInsets.only(bottom: 16),
+     //   padding: EdgeInsets.only(bottom: 16),
+	padding: const EdgeInsets.all(16).copyWith(
+            top: 12,
+          ),
         child: SingleChildScrollView(
           // 允许内容自适应高度
             child: ReorderableListView.builder(

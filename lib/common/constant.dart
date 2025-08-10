@@ -85,7 +85,7 @@ const viewModeColumnsMap = {
 const defaultPrimaryColor = 0xFF795548;//默认颜色
 
 double getWidgetHeight(num lines) {
-  return max(lines * 84 + (lines - 1) * 12, 0).ap;
+   return max(lines * 84 + (lines - 1) * 12, 0).ap;  
 }
 
 const maxLength = 150;

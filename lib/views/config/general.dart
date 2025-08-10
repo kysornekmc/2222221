@@ -120,8 +120,8 @@ class TestUrlItem extends ConsumerWidget {
   // 定义可选的测速链接列表，添加"自定义"选项
   static const List<String> testUrlOptions = [
     "https://www.gstatic.com/generate_204",
-    "https://www.google.com/generate_204",
     "https://cp.cloudflare.com/generate_204",
+    "https://www.google.com/generate_204",
     "custom", // 自定义选项标识
   ];
 
