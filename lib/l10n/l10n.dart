@@ -3479,6 +3479,38 @@ class AppLocalizations {
       args: [],
     );
   }   
+  /// `Custom`
+  String get custom {
+    return Intl.message(
+    'Custom', 
+    name: 'custom', 
+    desc: '', 
+    args: []);
+}
+  /// `Please Input`
+  String get pleaseInput {
+    return Intl.message(
+    'Please Input', 
+    name: 'pleaseInput', 
+    desc: '', 
+    args: []);
+}
+  /// `Network Speed Test`
+  String get networkSpeedtest {
+    return Intl.message(
+    'Network Speed Test', 
+    name: 'networkSpeedtest', 
+    desc: '', 
+    args: []);
+}
+  /// `Click Speed Test`
+  String get clickSpeedtest {
+    return Intl.message(
+    'Click Speed Test', 
+    name: 'clickSpeedtest', 
+    desc: '', 
+    args: []);
+}
     
 }
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

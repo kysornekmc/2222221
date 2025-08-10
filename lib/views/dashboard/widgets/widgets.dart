@@ -15,3 +15,4 @@ export 'selectproxy.dart';
 export 'subscription_informationsmall.dart';
 export 'subscription_informationdetail.dart';
 export 'profile_selecte.dart';
+export 'network_speedtest.dart';

@@ -754,6 +754,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "showIp": MessageLookupByLibrary.simpleMessage("Show IP"),
     "hideIp": MessageLookupByLibrary.simpleMessage("Hide IP"),
     "noProfileSelected": MessageLookupByLibrary.simpleMessage("No profile"),   
-    "selectProfile": MessageLookupByLibrary.simpleMessage("Select profile"),     
+    "selectProfile": MessageLookupByLibrary.simpleMessage("Select profile"), 
+    "custom": MessageLookupByLibrary.simpleMessage("Custom"), 
+    "pleaseInput": MessageLookupByLibrary.simpleMessage("Please input"),   
+    "networkSpeedtest": MessageLookupByLibrary.simpleMessage("Netspeed test"),
+    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("Click speed test"),      
   };
 }

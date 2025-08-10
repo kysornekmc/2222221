@@ -442,5 +442,9 @@
   "showIp": "Show IP",
   "hideIp": "Hide IP",
   "noProfileSelected": "No profile",
-  "selectProfile": Select profile),
+  "selectProfile": Select profile",
+  "custom": "Custom",
+  "pleaseInput": "Please input",  
+  "networkSpeedtest": "Netspeed test",
+  "clickSpeedtest": "Click speed test",   
 }

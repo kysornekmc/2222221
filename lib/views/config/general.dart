@@ -117,36 +117,105 @@ class KeepAliveIntervalItem extends ConsumerWidget {
 class TestUrlItem extends ConsumerWidget {
   const TestUrlItem({super.key});
 
+  // 定义可选的测速链接列表，添加"自定义"选项
+  static const List<String> testUrlOptions = [
+    "https://www.gstatic.com/generate_204",
+    "https://www.google.com/generate_204",
+    "https://cp.cloudflare.com/generate_204",
+    "custom", // 自定义选项标识
+  ];
+
   @override
   Widget build(BuildContext context, ref) {
-    final testUrl =
-        ref.watch(appSettingProvider.select((state) => state.testUrl));
-    return ListItem.input(
-          leading: const Icon(Icons.speed_outlined),  //测速链接
+    final testUrl = ref.watch(appSettingProvider.select((state) => state.testUrl));
+    
+    // 显示文本处理：将"custom"标识转换为显示文本
+    String _getDisplayText(String value) {
+      if (value == "custom") {
+        return appLocalizations.custom;
+      }
+      // 如果是自定义值且不在选项中，显示实际值
+      if (!testUrlOptions.contains(value) && testUrlOptions.contains(testUrl)) {
+        return value;
+      }
+      return value;
+    }
+
+    return ListItem.options(
+      leading: const Icon(Icons.speed_outlined),
       title: Text(appLocalizations.testUrl),
-      subtitle: Text(testUrl),
-      delegate: InputDelegate(
-        resetValue: defaultTestUrl,
+      subtitle: Text(_getDisplayText(testUrl)),
+      delegate: OptionsDelegate<String>(
         title: appLocalizations.testUrl,
-        value: testUrl,
-        validator: (String? value) {
-          if (value == null || value.isEmpty) {
-            return appLocalizations.emptyTip(appLocalizations.testUrl);
-          }
-          if (!value.isUrl) {
-            return appLocalizations.urlTip(appLocalizations.testUrl);
-          }
-          return null;
-        },
-        onChanged: (String? value) {
-          if (value == null) {
-            return;
-          }
-          ref.read(appSettingProvider.notifier).updateState(
-                (state) => state.copyWith(
-                  testUrl: value,
+        options: testUrlOptions,
+        value: testUrlOptions.contains(testUrl) ? testUrl : "custom",
+        textBuilder: (url) => url == "custom" ? appLocalizations.custom : url,
+        onChanged: (String? value) async {
+          if (value == null) return;
+
+          // 如果选择了自定义选项，弹出输入框
+          if (value == "custom") {
+            final TextEditingController controller = TextEditingController(
+              text: !testUrlOptions.contains(testUrl) ? testUrl : ""
+            );
+            
+            // 显示对话框让用户输入自定义URL
+            final result = await showDialog<String>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(appLocalizations.testUrl),
+                content: TextField(
+                  controller: controller,
+                  keyboardType: TextInputType.url,
+                  decoration: InputDecoration(
+                    hintText: appLocalizations.url,
+                    border: const OutlineInputBorder(),
+                  ),
+                  autofocus: true,
                 ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(appLocalizations.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      final input = controller.text.trim();
+                      // 空值校验
+                      if (input.isEmpty) {
+                        // 使用全局通知替代SnackBar
+                        globalState.showNotifier(
+                          appLocalizations.emptyTip(appLocalizations.testUrl)
+                        );
+                        return;
+                      }
+                      // URL格式校验（复用项目中的isUrl方法）
+                      if (!input.isUrl) {
+                        globalState.showNotifier(
+                          appLocalizations.urlTip(appLocalizations.testUrl)
+                        );
+                        return;
+                      }
+                      Navigator.pop(context, input);
+                    },
+                    child: Text(appLocalizations.confirm),
+                  ),
+                ],
+              ),
+            );
+
+            // 如果用户输入了内容且不为空，保存自定义URL
+            if (result != null && result.isNotEmpty) {
+              ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(testUrl: result),
               );
+            }
+          } else {
+            // 选择预设选项，直接保存
+            ref.read(appSettingProvider.notifier).updateState(
+              (state) => state.copyWith(testUrl: value),
+            );
+          }
         },
       ),
     );

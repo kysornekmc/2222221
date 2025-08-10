@@ -78,17 +78,18 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.trafficUsagePie: 'trafficUsagePie',
   DashboardWidget.subscriptionInformationsmall: 'subscriptionInformationsmall',
   DashboardWidget.networkSpeedSmall: 'networkSpeedSmall',
+  DashboardWidget.profileSelecte: 'profileSelecte',
   DashboardWidget.selectProxy: 'selectProxy',
   DashboardWidget.proxyInformation: 'proxyInformation',
   DashboardWidget.networkDetection: 'networkDetection',
   DashboardWidget.intranetIp: 'intranetIp',
   DashboardWidget.outboundModeDropDown: 'outboundModeDropDown',
+  DashboardWidget.networkSpeedTest: 'networkSpeedTest',
   DashboardWidget.trafficUsageSimple: 'trafficUsageSimple',
   DashboardWidget.memoryInfo: 'memoryInfo',
   DashboardWidget.tunButton: 'tunButton',
   DashboardWidget.vpnButton: 'vpnButton',
   DashboardWidget.systemProxyButton: 'systemProxyButton',
-  DashboardWidget.profileSelecte: 'profileSelecte',
 };
 
 _$AccessControlImpl _$$AccessControlImplFromJson(Map<String, dynamic> json) =>

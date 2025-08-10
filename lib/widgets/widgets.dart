@@ -36,3 +36,4 @@ export 'notification.dart';
 export 'subscription_info_viewlong.dart';
 export 'subscription_info_viewsmall.dart';
 export 'subscription_info_viewdetail.dart';
+export 'speed_test_page.dart';

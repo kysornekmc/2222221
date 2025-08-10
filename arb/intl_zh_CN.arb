@@ -443,5 +443,9 @@
   "showIp": "显示IP",
   "hideIp": "隐藏IP",
   "noProfileSelected": "无配置文件",
-  "selectProfile": "选择配置",        
+  "selectProfile": "选择配置",   
+  "custom": "自定义",  
+  "pleaseInput": "请输入",   
+  "networkSpeedtest": "网速测试",
+  "clickSpeedtest": "点击测速",  
 }

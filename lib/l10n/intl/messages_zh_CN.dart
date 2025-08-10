@@ -523,6 +523,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "showIp": MessageLookupByLibrary.simpleMessage("显示IP"),
     "hideIp": MessageLookupByLibrary.simpleMessage("隐藏IP"),
     "noProfileSelected": MessageLookupByLibrary.simpleMessage("无配置文件"),  
-    "selectProfile": MessageLookupByLibrary.simpleMessage("选择配置"),          
+    "selectProfile": MessageLookupByLibrary.simpleMessage("选择配置"),  
+    "custom": MessageLookupByLibrary.simpleMessage("自定义"),
+    "pleaseInput": MessageLookupByLibrary.simpleMessage("请输入"),   
+    "networkSpeedtest": MessageLookupByLibrary.simpleMessage("网速测试"),
+    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("点击测速"),         
   };
 }

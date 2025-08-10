@@ -415,7 +415,12 @@ enum DashboardWidget {
       child: OutboundModeDropDown(),
     ),
   ),  
- 
+  networkSpeedTest(
+    GridItem(
+      crossAxisCellCount: 4,               //网速测速
+      child: NetworkSpeedTest(),
+    ),
+  ),  
   trafficUsageSimple(
     GridItem(
       crossAxisCellCount: 4,               // 流量统计 矮
