@@ -758,6 +758,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "custom": MessageLookupByLibrary.simpleMessage("Custom"), 
     "pleaseInput": MessageLookupByLibrary.simpleMessage("Please input"),   
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("Netspeed test"),
-    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("Click speed test"),      
+    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("Click speed test"), 
+    "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("Select speed test website"),      
   };
 }

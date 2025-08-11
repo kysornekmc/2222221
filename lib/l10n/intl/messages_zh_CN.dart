@@ -527,6 +527,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "custom": MessageLookupByLibrary.simpleMessage("自定义"),
     "pleaseInput": MessageLookupByLibrary.simpleMessage("请输入"),   
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("网速测试"),
-    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("点击测速"),         
+    "clickSpeedtest": MessageLookupByLibrary.simpleMessage("点击测速"),
+    "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("选择测速网站"),       
   };
 }

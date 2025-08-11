@@ -3511,6 +3511,14 @@ class AppLocalizations {
     desc: '', 
     args: []);
 }
+  /// `Select Speed Test Site`
+  String get selectSpeedTestSite {
+    return Intl.message(
+    'Select Speed Test Site', 
+    name: 'selectSpeedTestSite', 
+    desc: '', 
+    args: []);
+}
     
 }
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
