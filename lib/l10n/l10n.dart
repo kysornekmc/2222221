@@ -3519,6 +3519,30 @@ class AppLocalizations {
     desc: '', 
     args: []);
 }
+  /// `Ip Version `
+  String get ipVersion  {
+    return Intl.message(
+    'Ip Version', 
+    name: 'ipVersion ', 
+    desc: '', 
+    args: []);
+}
+  /// `Ip v4 `
+  String get ipv4  {
+    return Intl.message(
+    'Ip v4', 
+    name: 'ipv4 ', 
+    desc: '', 
+    args: []);
+}
+  /// `Ip v6`
+  String get ipv6 {
+    return Intl.message(
+    'Ip v6', 
+    name: 'ipv6', 
+    desc: '', 
+    args: []);
+}
     
 }
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

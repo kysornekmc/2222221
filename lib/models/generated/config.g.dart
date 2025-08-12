@@ -30,6 +30,7 @@ _$AppSettingPropsImpl _$$AppSettingPropsImplFromJson(
       isPollingQuery: json['isPollingQuery'] as bool? ?? true,
       autoRefreshEnabled: json['autoRefreshEnabled'] as bool? ?? true,
       showFormattedText: json['showFormattedText'] as bool? ?? true,
+      useIpv6: json['useIpv6'] as bool? ?? false,
       recoveryStrategy: $enumDecodeNullable(
               _$RecoveryStrategyEnumMap, json['recoveryStrategy']) ??
           RecoveryStrategy.override,
@@ -59,6 +60,7 @@ Map<String, dynamic> _$$AppSettingPropsImplToJson(
       'isPollingQuery': instance.isPollingQuery,
       'autoRefreshEnabled': instance.autoRefreshEnabled,
       'showFormattedText': instance.showFormattedText,
+      'useIpv6': instance.useIpv6,
       'recoveryStrategy': _$RecoveryStrategyEnumMap[instance.recoveryStrategy]!,
     };
 

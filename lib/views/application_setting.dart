@@ -309,6 +309,38 @@ class IpQueryModeSwitch extends ConsumerWidget {
     );
   }
 }
+class IpVersionSwitch extends ConsumerWidget {
+  const IpVersionSwitch({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final useIpv6 = ref.watch(
+      appSettingProvider.select((state) => state.useIpv6),
+    );
+
+    // 根据开关状态动态生成subtitle文本
+    final subtitleText = useIpv6 
+          ? Text(appLocalizations.ipv6) 
+          : Text(appLocalizations.ipv4);
+
+    return ListItem.switchItem(
+      leading: const Icon(Icons.refresh_outlined),
+      title: Text(appLocalizations.ipVersion),
+      subtitle: subtitleText,
+      delegate: SwitchDelegate(
+        value: useIpv6,
+        onChanged: (bool value) {
+          ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(
+                  useIpv6: value,
+                ),
+              );
+        },
+      ),
+    );
+  }
+}
+
 
 class AutoRefreshItem extends ConsumerWidget {
   const AutoRefreshItem({super.key});
@@ -396,6 +428,7 @@ class ApplicationSettingFragment extends StatelessWidget {
       IpQueryModeSwitch(),
       AutoRefreshItem(), // 新增自动刷新开关项
       SubscriptionTimeFormatItem(), // 新增订阅时间格式开关项
+      IpVersionSwitch(),
     ];
     return ListView.separated(
       itemBuilder: (_, index) {

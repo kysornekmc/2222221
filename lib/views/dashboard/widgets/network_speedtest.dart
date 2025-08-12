@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class NetworkSpeedTest extends StatelessWidget {
   const NetworkSpeedTest({super.key});
 
-  // 跳转到测速页面 
+  // 跳转到测速页面
   void _navigateToSpeedTest(BuildContext context) {
     Navigator.push(
       context,

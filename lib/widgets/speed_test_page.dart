@@ -16,10 +16,10 @@ const List<Map<String, String>> speedTestSites = [
     'name': 'Speedis',
     'url': 'https://speed.is/'
   },
-  {
-    'name': 'CFSpeed',
-    'url': 'https://www.cfspeed.com/'
-  },
+ // {
+ //   'name': 'CFSpeed',
+ //   'url': 'https://www.cfspeed.com/'
+ // },
 ];
 
 class SpeedTestPage extends StatefulWidget {
@@ -74,9 +74,8 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
           selectedSiteIndex = savedIndex;
         });
       }
-    } catch (e) {
-      debugPrint("加载保存的网站失败: $e");
-      // 保持默认值，不影响功能
+    } catch (_) {
+      // 保持默认值，不影响功能，移除调试打印
     }
   }
 
@@ -85,9 +84,8 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt('selected_speed_test_site', index);
-    } catch (e) {
-      debugPrint("保存选中的网站失败: $e");
-      // 保存失败不影响主要功能，仅下次启动不会记住选择
+    } catch (_) {
+      // 保存失败不影响主要功能，仅下次启动不会记住选择，移除调试打印
     }
   }
 
@@ -104,8 +102,8 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
         urlRequest: URLRequest(
           url: WebUri(speedTestSites[selectedSiteIndex]['url']!),
         ),
-      ).catchError((error) {
-        debugPrint("加载网站失败: $error");
+      ).catchError((_) {
+        // 移除调试打印
       });
     }
   }
@@ -195,10 +193,7 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
                 });
               },
               onLoadError: (controller, url, code, message) {
-                debugPrint("加载错误: $message (代码: $code)");
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("加载失败: $message")),
-                );
+                // 移除调试打印
               },
             ),
           ),

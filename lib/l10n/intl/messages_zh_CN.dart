@@ -528,6 +528,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseInput": MessageLookupByLibrary.simpleMessage("请输入"),   
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("网速测试"),
     "clickSpeedtest": MessageLookupByLibrary.simpleMessage("点击测速"),
-    "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("选择测速网站"),       
+    "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("选择测速网站"), 
+    "ipVersion": MessageLookupByLibrary.simpleMessage("仪表盘IP查询版本"), 
+    "ipv4": MessageLookupByLibrary.simpleMessage("IPv4查询"), 
+    "ipv6": MessageLookupByLibrary.simpleMessage("IPv6查询"), 
   };
 }

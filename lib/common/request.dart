@@ -14,7 +14,8 @@ class Request {
   late final Dio _dio;
   late final Dio _clashDio;
   String? userAgent;
-  bool _isPollingQuery = true; // 新增属性，用于存储查询模式
+  bool _isPollingQuery = true; // 查询模式
+  bool _useIpv6 = true; // 新增：IP版本控制字段
 
   Request() {
     _dio = Dio(
@@ -34,8 +35,9 @@ class Request {
       return client;
     });
 
-    // 从持久化存储中读取查询模式
+    // 加载查询模式和IP版本设置
     _loadQueryMode();
+    _loadIpVersion(); // 新增：加载IP版本设置
   }
 
   Future<void> _loadQueryMode() async {
@@ -43,12 +45,25 @@ class Request {
     _isPollingQuery = prefs.getBool('isPollingQuery') ?? true;
   }
 
-  // 更新查询模式并保存到持久化存储
+  // 新增：加载IP版本设置
+  Future<void> _loadIpVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+    _useIpv6 = prefs.getBool('useIpv6') ?? true;
+  }
+
   void setQueryMode(bool isPollingQuery) {
     _isPollingQuery = isPollingQuery;
     // 保存到持久化存储（无错误捕获和日志）
     SharedPreferences.getInstance().then((prefs) {
       prefs.setBool('isPollingQuery', isPollingQuery);
+    });
+  }
+
+  // 新增：设置IP版本并保存
+  void setIpVersion(bool useIpv6) {
+    _useIpv6 = useIpv6;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setBool('useIpv6', useIpv6);
     });
   }
 
@@ -102,16 +117,27 @@ class Request {
     return data;
   }
 
-  final Map<String, IpInfo Function(Map<String, dynamic>)> _ipInfoSources = {
-    "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
-  //  "https://v6.ipinfo.io/json?token=74c2217e68fac9": IpInfo.fromv6IpInfoIoJson,  //50000每月
-    "http://ip-api.com/json/": IpInfo.fromIpAPIJson,                              //每分钟查询次数限制为45次
-    "https://ipwho.is/": IpInfo.fromIpwhoIsJson,                                  //每月最多可以免费使用我们的 API 10,000 个请求（通过 IP 地址和 Referer 标头识别）
-    "https://ipinfo.io/json/": IpInfo.fromIpInfoIoJson,                           //50000每月
-    "https://ipapi.co/json/": IpInfo.fromIpApiCoJson,                             //30000每月
-    "https://api.ip.sb/geoip/": IpInfo.fromIpSbJson,
-  };
-//并发查询
+  // 修改：将固定数据源改为动态获取
+  Map<String, IpInfo Function(Map<String, dynamic>)> get _ipInfoSources {
+    if (_useIpv6) {
+      // IPv6模式：只使用IPv6专用数据源
+      return {
+    //    "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
+        "https://v6.ipinfo.io/json?token=74c2217e68fac9": IpInfo.fromv6IpInfoIoJson,
+      };
+    } else {
+      // IPv4模式：使用原有的IPv4数据源
+      return {
+        "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
+        "http://ip-api.com/json/": IpInfo.fromIpAPIJson,
+        "https://ipwho.is/": IpInfo.fromIpwhoIsJson,
+        "https://ipinfo.io/json/": IpInfo.fromIpInfoIoJson,
+        "https://ipapi.co/json/": IpInfo.fromIpApiCoJson,
+        "https://api.ip.sb/geoip/": IpInfo.fromIpSbJson,
+      };
+    }
+  }
+
   // 合并后的 checkIp 方法，根据查询模式选择不同的查询方式
   Future<IpInfo?> checkIp({CancelToken? cancelToken}) async {
     if (_isPollingQuery) {
@@ -170,9 +196,6 @@ class Request {
                 ),
               );
           if (response.statusCode != 200 || response.data == null) {
-            continue;
-          }
-          if (response.data == null) {
             continue;
           }
           return source.value(response.data!);

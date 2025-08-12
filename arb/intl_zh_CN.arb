@@ -449,4 +449,7 @@
   "networkSpeedtest": "网速测试",
   "clickSpeedtest": "点击测速",  
   "selectSpeedTestSite": "选择测速网站",
+  "ipVersion": "仪表盘IP查询版本", 
+  "ipv4": "IPv4查询", 
+  "ipv6": "IPv6查询",   
 }
