@@ -96,7 +96,6 @@ class AppSettingProps with _$AppSettingProps {
     @Default(true) bool isPollingQuery,
     @Default(true) bool autoRefreshEnabled,
     @Default(true) bool showFormattedText,
-    @Default(false) bool useIpv6,
     @Default(RecoveryStrategy.override) RecoveryStrategy recoveryStrategy,
   }) = _AppSettingProps;
 

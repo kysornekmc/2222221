@@ -448,7 +448,4 @@
   "networkSpeedtest": "Netspeed test",
   "clickSpeedtest": "Click speed test",   
   "selectSpeedTestSite": "Select speed test website",
-  "ipVersion": "Dashboard IP query version", 
-  "ipv4": "IPv4 query", 
-  "ipv6": "IPv6 query",   
 }

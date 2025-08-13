@@ -760,8 +760,5 @@ class MessageLookup extends MessageLookupByLibrary {
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("Netspeed test"),
     "clickSpeedtest": MessageLookupByLibrary.simpleMessage("Click speed test"),      
     "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("Select speed test website"),
-    "ipVersion": MessageLookupByLibrary.simpleMessage("Dashboard IP query version"), 
-    "ipv4": MessageLookupByLibrary.simpleMessage("IPv4 query"), 
-    "ipv6": MessageLookupByLibrary.simpleMessage("IPv6 query"),     
   };
 }

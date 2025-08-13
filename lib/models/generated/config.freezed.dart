@@ -41,7 +41,6 @@ mixin _$AppSettingProps {
   bool get isPollingQuery => throw _privateConstructorUsedError;
   bool get autoRefreshEnabled => throw _privateConstructorUsedError;
   bool get showFormattedText => throw _privateConstructorUsedError;
-  bool get useIpv6 => throw _privateConstructorUsedError;
   RecoveryStrategy get recoveryStrategy => throw _privateConstructorUsedError;
 
   /// Serializes this AppSettingProps to a JSON map.
@@ -81,7 +80,6 @@ abstract class $AppSettingPropsCopyWith<$Res> {
       bool isPollingQuery,
       bool autoRefreshEnabled,
       bool showFormattedText,
-      bool useIpv6,
       RecoveryStrategy recoveryStrategy});
 }
 
@@ -119,7 +117,6 @@ class _$AppSettingPropsCopyWithImpl<$Res, $Val extends AppSettingProps>
     Object? isPollingQuery = null,
     Object? autoRefreshEnabled = null,
     Object? showFormattedText = null,
-    Object? useIpv6 = null,
     Object? recoveryStrategy = null,
   }) {
     return _then(_value.copyWith(
@@ -199,10 +196,6 @@ class _$AppSettingPropsCopyWithImpl<$Res, $Val extends AppSettingProps>
           ? _value.showFormattedText
           : showFormattedText // ignore: cast_nullable_to_non_nullable
               as bool,
-      useIpv6: null == useIpv6
-          ? _value.useIpv6
-          : useIpv6 // ignore: cast_nullable_to_non_nullable
-              as bool,
       recoveryStrategy: null == recoveryStrategy
           ? _value.recoveryStrategy
           : recoveryStrategy // ignore: cast_nullable_to_non_nullable
@@ -240,7 +233,6 @@ abstract class _$$AppSettingPropsImplCopyWith<$Res>
       bool isPollingQuery,
       bool autoRefreshEnabled,
       bool showFormattedText,
-      bool useIpv6,
       RecoveryStrategy recoveryStrategy});
 }
 
@@ -276,7 +268,6 @@ class __$$AppSettingPropsImplCopyWithImpl<$Res>
     Object? isPollingQuery = null,
     Object? autoRefreshEnabled = null,
     Object? showFormattedText = null,
-    Object? useIpv6 = null,
     Object? recoveryStrategy = null,
   }) {
     return _then(_$AppSettingPropsImpl(
@@ -356,10 +347,6 @@ class __$$AppSettingPropsImplCopyWithImpl<$Res>
           ? _value.showFormattedText
           : showFormattedText // ignore: cast_nullable_to_non_nullable
               as bool,
-      useIpv6: null == useIpv6
-          ? _value.useIpv6
-          : useIpv6 // ignore: cast_nullable_to_non_nullable
-              as bool,
       recoveryStrategy: null == recoveryStrategy
           ? _value.recoveryStrategy
           : recoveryStrategy // ignore: cast_nullable_to_non_nullable
@@ -392,7 +379,6 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
       this.isPollingQuery = true,
       this.autoRefreshEnabled = true,
       this.showFormattedText = true,
-      this.useIpv6 = false,
       this.recoveryStrategy = RecoveryStrategy.override})
       : _dashboardWidgets = dashboardWidgets;
 
@@ -464,14 +450,11 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
   final bool showFormattedText;
   @override
   @JsonKey()
-  final bool useIpv6;
-  @override
-  @JsonKey()
   final RecoveryStrategy recoveryStrategy;
 
   @override
   String toString() {
-    return 'AppSettingProps(locale: $locale, dashboardWidgets: $dashboardWidgets, onlyStatisticsProxy: $onlyStatisticsProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden, developerMode: $developerMode, isPollingQuery: $isPollingQuery, autoRefreshEnabled: $autoRefreshEnabled, showFormattedText: $showFormattedText, useIpv6: $useIpv6, recoveryStrategy: $recoveryStrategy)';
+    return 'AppSettingProps(locale: $locale, dashboardWidgets: $dashboardWidgets, onlyStatisticsProxy: $onlyStatisticsProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden, developerMode: $developerMode, isPollingQuery: $isPollingQuery, autoRefreshEnabled: $autoRefreshEnabled, showFormattedText: $showFormattedText, recoveryStrategy: $recoveryStrategy)';
   }
 
   @override
@@ -513,7 +496,6 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
                 other.autoRefreshEnabled == autoRefreshEnabled) &&
             (identical(other.showFormattedText, showFormattedText) ||
                 other.showFormattedText == showFormattedText) &&
-            (identical(other.useIpv6, useIpv6) || other.useIpv6 == useIpv6) &&
             (identical(other.recoveryStrategy, recoveryStrategy) ||
                 other.recoveryStrategy == recoveryStrategy));
   }
@@ -541,7 +523,6 @@ class _$AppSettingPropsImpl implements _AppSettingProps {
         isPollingQuery,
         autoRefreshEnabled,
         showFormattedText,
-        useIpv6,
         recoveryStrategy
       ]);
 
@@ -584,7 +565,6 @@ abstract class _AppSettingProps implements AppSettingProps {
       final bool isPollingQuery,
       final bool autoRefreshEnabled,
       final bool showFormattedText,
-      final bool useIpv6,
       final RecoveryStrategy recoveryStrategy}) = _$AppSettingPropsImpl;
 
   factory _AppSettingProps.fromJson(Map<String, dynamic> json) =
@@ -629,8 +609,6 @@ abstract class _AppSettingProps implements AppSettingProps {
   bool get autoRefreshEnabled;
   @override
   bool get showFormattedText;
-  @override
-  bool get useIpv6;
   @override
   RecoveryStrategy get recoveryStrategy;
 
