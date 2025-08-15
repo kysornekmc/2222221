@@ -75,7 +75,7 @@ class _NetworkSpeedState extends State<NetworkSpeed> {
                   child: Transform.translate(
                     offset: Offset(
                       -16,
-                      -20,
+                      -18,
                     ),
                     child: Text(
                       "${_getLastTraffic(traffics).up}↑   ${_getLastTraffic(traffics).down}↓",

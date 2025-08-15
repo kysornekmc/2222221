@@ -331,6 +331,12 @@ enum DashboardWidget {
       child: NetworkSpeed(),
     ),
   ),
+  networkSpeedMultiLine(
+    GridItem(
+      crossAxisCellCount: 8,               // 网速双曲线
+      child: NetworkSpeedMultiLine(),
+    ),
+  ),  
   subscriptionInformationdetail(
     GridItem(
       crossAxisCellCount: 8,               // 订阅信息详情
@@ -403,6 +409,12 @@ enum DashboardWidget {
       child: NetworkDetection(),
     ),
   ),
+  networkDetectioneye(
+    GridItem(
+      crossAxisCellCount: 4,               // 外网IP EYE
+      child: NetworkDetectioneye(),
+    ),
+  ),  
   intranetIp(
     GridItem(
       crossAxisCellCount: 4,               // VPN内网IP
