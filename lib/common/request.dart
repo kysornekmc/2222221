@@ -103,13 +103,14 @@ class Request {
   }
 
   final Map<String, IpInfo Function(Map<String, dynamic>)> _ipInfoSources = {
-    "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
+   "https://speed.cloudflare.com/meta": IpInfo.fromIPcloudflareAPIJson,
+      "https://api.ipdata.co/?api-key=e5d69cc165d3ad9e2c68f1fe3587827d6290f3e1eef7f19731635c5e": IpInfo.fromIPdataAPIJson,  //每日1500次
   //  "https://v6.ipinfo.io/json?token=74c2217e68fac9": IpInfo.fromv6IpInfoIoJson,  //50000每月
     "http://ip-api.com/json/": IpInfo.fromIpAPIJson,                              //每分钟查询次数限制为45次
     "https://ipwho.is/": IpInfo.fromIpwhoIsJson,                                  //每月最多可以免费使用我们的 API 10,000 个请求（通过 IP 地址和 Referer 标头识别）
     "https://ipinfo.io/json/": IpInfo.fromIpInfoIoJson,                           //50000每月
-    "https://ipapi.co/json/": IpInfo.fromIpApiCoJson,                             //30000每月
     "https://api.ip.sb/geoip/": IpInfo.fromIpSbJson,
+    "https://ipapi.co/json/": IpInfo.fromIpApiCoJson,                             //30000每月    
   };
 //并发查询
   // 合并后的 checkIp 方法，根据查询模式选择不同的查询方式

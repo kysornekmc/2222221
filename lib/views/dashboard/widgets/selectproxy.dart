@@ -208,7 +208,7 @@ showSheet(
                                     leading: Icon(
                                       isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                                       size: 18,
-                                      color: Theme.of(context).primaryColor,
+                                   color: Theme.of(context).colorScheme.primary,
                                     ),
                                     // 关键：设置图标与文字的间距为4
                                     horizontalTitleGap: 3,

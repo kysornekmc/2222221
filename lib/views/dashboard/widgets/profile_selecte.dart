@@ -86,7 +86,8 @@ class ProfileSelecte extends ConsumerWidget {
                                           ? Icons.radio_button_checked 
                                           : Icons.radio_button_unchecked,
                                       size: 18,
-                                      color: Theme.of(context).primaryColor,
+                                      // 使用主题主色
+                                      color: Theme.of(context).colorScheme.primary,
                                     ),
                                     horizontalTitleGap: 3,
                                     contentPadding: const EdgeInsets.symmetric(
@@ -99,9 +100,14 @@ class ProfileSelecte extends ConsumerWidget {
                                         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                                       ),
                                     ),
-                                    trailing: profile.type == ProfileType.url
-                                        ? const Icon(Icons.cloud_outlined, size: 18)
-                                        : const Icon(Icons.file_copy_outlined, size: 18),
+                                    trailing: Icon(
+                                      profile.type == ProfileType.url
+                                          ? Icons.cloud_outlined
+                                          : Icons.file_copy_outlined,
+                                      size: 18,
+                                      // 统一使用主题主色，与leading图标保持一致
+                                      color: Theme.of(context).colorScheme.primary,
+                                    ),
                                     onTap: () {
                                       // 切换选中的订阅
                                       ref.read(currentProfileIdProvider.notifier).state = profile.id;

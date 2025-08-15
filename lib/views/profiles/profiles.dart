@@ -768,6 +768,8 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
      //   padding: EdgeInsets.only(bottom: 16),
 	padding: const EdgeInsets.all(16).copyWith(
             top: 12,
+	    left: 12,
+	    right: 12,
           ),
         child: SingleChildScrollView(
           // 允许内容自适应高度
@@ -804,7 +806,10 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
                   title: Text(profile.label ?? profile.id),
                   trailing: ReorderableDragStartListener(
                     index: index,
-                    child: const Icon(Icons.drag_handle),
+                    child: Icon(
+                    Icons.drag_handle,
+                    color: Theme.of(context).colorScheme.primary, // 使用主题主色
+                    ),
                   ),
                 ),
               ),

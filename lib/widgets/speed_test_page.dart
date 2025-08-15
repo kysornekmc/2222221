@@ -16,6 +16,14 @@ const List<Map<String, String>> speedTestSites = [
     'name': 'Speedis',
     'url': 'https://speed.is/'
   },
+  {
+    'name': 'Ustcspeed',
+    'url': 'https://test.ustc.edu.cn/'
+  },
+ // {
+  //  'name': 'Librespeed',
+   // 'url': 'https://librespeed.org/'
+//  },    
  // {
  //   'name': 'CFSpeed',
  //   'url': 'https://www.cfspeed.com/'

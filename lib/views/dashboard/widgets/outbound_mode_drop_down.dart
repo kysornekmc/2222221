@@ -92,7 +92,7 @@ class OutboundModeDropDown extends StatelessWidget {
                                               leading: Icon(
                                                 isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
                                                 size: 18,
-                                                color: Theme.of(context).primaryColor,
+                                                color: Theme.of(context).colorScheme.primary,
                                               ),
                                               horizontalTitleGap: 3,
                                               contentPadding: const EdgeInsets.symmetric(

@@ -223,9 +223,12 @@ class CommonPopupMenu extends StatelessWidget {
   }) {
     final onPressed = item.onPressed;
     final disabled = onPressed == null;
-    final color = disabled
-        ? context.colorScheme.onSurface.opacity30
-        : context.colorScheme.onSurface;
+    final textColor = disabled
+      ? context.colorScheme.onSurface.opacity30
+      : context.colorScheme.onSurface;
+    final iconColor = item.usePrimaryIconColor && !disabled
+      ? Theme.of(context).colorScheme.primary
+      : textColor; // 未标记时和文字颜色保持一致	
     return InkWell(
       onTap: onPressed != null
           ? () {
@@ -250,7 +253,7 @@ class CommonPopupMenu extends StatelessWidget {
               Icon(
                 item.icon,
                 size: fontSize + 4,
-                color: color,
+                color: iconColor,
               ),
               SizedBox(
                 width: 16,
@@ -260,7 +263,7 @@ class CommonPopupMenu extends StatelessWidget {
               child: Text(
                 item.label,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  color: color,
+                  color: textColor,
                   fontSize: fontSize,
                 ),
               ),

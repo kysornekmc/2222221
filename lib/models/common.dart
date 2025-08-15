@@ -478,7 +478,20 @@ class IpInfo {
       _ => throw const FormatException("invalid json"),
     };
   }    
-   static IpInfo fromIPcloudflareAPIJson(Map<String, dynamic> json) {    //https://1.1.1.1/cdn-cgi/trace
+   static IpInfo fromIPdataAPIJson(Map<String, dynamic> json) {    //https://api.ipdata.co
+    return switch (json) {
+      {
+        "ip": final String ip,
+        "country_code": final String country_code,
+      } =>
+        IpInfo(
+          ip: ip,
+          countryCode: country_code,
+        ),
+      _ => throw const FormatException("invalid json"),
+    };
+  }  
+   static IpInfo fromIPcloudflareAPIJson(Map<String, dynamic> json) {    //https://speed.cloudflare.com/meta
     return switch (json) {
       {
         "clientIp": final String clientIp,
@@ -601,11 +614,13 @@ class PopupMenuItemData {
     this.icon,
     required this.label,
     required this.onPressed,
+    this.usePrimaryIconColor = true, // 新增：仅控制图标是否使用主题色,如某个弹出菜单不像用主题色图标，可以在那里添加usePrimaryIconColor = false
   });
 
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
+  final bool usePrimaryIconColor; // 新增属性
 }
 
 @freezed
