@@ -84,7 +84,6 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.networkDetection: 'networkDetection',
   DashboardWidget.intranetIp: 'intranetIp',
   DashboardWidget.networkSpeedMultiLine: 'networkSpeedMultiLine',
-  DashboardWidget.networkDetectioneye: 'networkDetectioneye',  
   DashboardWidget.outboundModeDropDown: 'outboundModeDropDown',
   DashboardWidget.networkSpeedTest: 'networkSpeedTest',
   DashboardWidget.trafficUsageSimple: 'trafficUsageSimple',

@@ -409,12 +409,6 @@ enum DashboardWidget {
       child: NetworkDetection(),
     ),
   ),
-  networkDetectioneye(
-    GridItem(
-      crossAxisCellCount: 4,               // 外网IP EYE
-      child: NetworkDetectioneye(),
-    ),
-  ),  
   intranetIp(
     GridItem(
       crossAxisCellCount: 4,               // VPN内网IP
