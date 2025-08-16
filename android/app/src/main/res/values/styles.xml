@@ -13,6 +13,7 @@
          This Theme is only used starting with V2 of Flutter's Android embedding. -->
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
+		<item name="colorPrimary">@color/ic_launcher_background</item> <!-- 可自定义或引用动态色 -->
     </style>
     <style name="TransparentTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>

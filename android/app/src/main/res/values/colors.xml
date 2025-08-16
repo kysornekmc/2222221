@@ -1,0 +1,3 @@
+<resources>
+    <color name="notification_icon_color">?attr/colorPrimary</color> <!-- 关联主题的primary色 -->
+</resources>

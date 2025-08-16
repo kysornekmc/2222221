@@ -770,9 +770,11 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
   _copyToClipboard() async {
     await globalState.safeRun(() {
       final data = globalState.config.vpnProps.accessControl.toJson();
+      // 修复：使用JsonEncoder.withIndent替代indent参数
+      final jsonString = JsonEncoder.withIndent('  ').convert(data);
       Clipboard.setData(
         ClipboardData(
-          text: json.encode(data),
+          text: jsonString,
         ),
       );
     });
@@ -838,7 +840,8 @@ Future<void> _importFromFile() async {
 Future<void> _exportToFile() async {
   final accessControl = globalState.config.vpnProps.accessControl;
   final data = accessControl.toJson();
-  final jsonString = json.encode(data);
+    // 修复：使用JsonEncoder.withIndent替代indent参数
+    final jsonString = JsonEncoder.withIndent('  ').convert(data);
 
   final now = DateTime.now();
   final formattedDate = DateFormat('yyyy-MM-dd_HH-mm-ss').format(now);
