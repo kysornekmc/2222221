@@ -74,7 +74,7 @@ dev_dependencies:
   freezed: ^2.5.1
   riverpod_generator: ^2.6.3
   riverpod_lint: ^2.6.3
-  qr_flutter: ^4.0.0
+  qr_flutter: ^4.1.0
   custom_lint: ^0.7.0
   dropdown_button2: ^2.3.9 # 版本号可根据实际情况调整
   analyzer: 7.3.0

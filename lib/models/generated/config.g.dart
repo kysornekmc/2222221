@@ -67,10 +67,10 @@ const _$RecoveryStrategyEnumMap = {
   RecoveryStrategy.override: 'override',
 };
 
-const _$DashboardWidgetEnumMap = {
+const _$DashboardWidgetEnumMap = {  //这里序列化后实际上就是待选卡片的顺序
   DashboardWidget.networkSpeed: 'networkSpeed',
-  DashboardWidget.subscriptionInformationdetail:
-      'subscriptionInformationdetail',
+  DashboardWidget.networkSpeedMultiLine: 'networkSpeedMultiLine',
+  DashboardWidget.subscriptionInformationdetail: 'subscriptionInformationdetail',
   DashboardWidget.subscriptionInformation: 'subscriptionInformation',
   DashboardWidget.outboundModeV2: 'outboundModeV2',
   DashboardWidget.outboundMode: 'outboundMode',
@@ -83,7 +83,6 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.proxyInformation: 'proxyInformation',
   DashboardWidget.networkDetection: 'networkDetection',
   DashboardWidget.intranetIp: 'intranetIp',
-  DashboardWidget.networkSpeedMultiLine: 'networkSpeedMultiLine',
   DashboardWidget.outboundModeDropDown: 'outboundModeDropDown',
   DashboardWidget.networkSpeedTest: 'networkSpeedTest',
   DashboardWidget.trafficUsageSimple: 'trafficUsageSimple',
