@@ -1,5 +1,4 @@
-</div>
-<div style="color: red; font-size: 40px;">
+<div style="color: #ff0000 !important; font-size: 20px !important; font-size: 1.25rem !important;">
 【自用，请勿fork，如您能看到，为忘记设置私有化，因为需要经常设置公开与私有，以便让AI访问到，谢谢。】
 [**简体中文**](README_zh_CN.md)
 </div>
