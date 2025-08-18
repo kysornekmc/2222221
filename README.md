@@ -1,11 +1,8 @@
-<html><head></head><body><div align="left">
-  <span style="color: #ff0000; font-size: 1.25rem;">【自用，请勿fork，如您能看到，为忘记设置私有化，因为需要经常设置公开与私有，以便让AI访问到，谢谢。】</span>
-  <br>
-  <span style="color: #ff0000; font-size: 1.25rem;">
-    <a href="README_zh_CN.md">**简体中文**</a>
-  </span>
+<div>
+【自用，请勿fork，如您能看到，为忘记设置私有化，因为需要经常设置公开与私有，以便让AI访问到，谢谢。】
+[**简体中文**](README_zh_CN.md)
+
 </div>
-</body></html>
 ## FlClash
 
 [![Downloads](https://img.shields.io/github/downloads/chen08209/FlClash/total?style=flat-square&logo=github)](https://github.com/chen08209/FlClash/releases/)[![Last Version](https://img.shields.io/github/release/chen08209/FlClash/all.svg?style=flat-square)](https://github.com/chen08209/FlClash/releases/)[![License](https://img.shields.io/github/license/chen08209/FlClash?style=flat-square)](LICENSE)
