@@ -92,6 +92,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.close),
+              color: Theme.of(context).colorScheme.primary, // 添加颜色属性
             ),
             actions: [
               ValueListenableBuilder<MobileScannerState>(

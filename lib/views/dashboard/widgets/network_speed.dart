@@ -42,6 +42,8 @@ class _NetworkSpeedState extends State<NetworkSpeed> {
   @override
   Widget build(BuildContext context) {
     final color = context.colorScheme.onSurfaceVariant.opacity80;
+    // 获取主题色
+    final primaryColor = Theme.of(context).colorScheme.primary;
     return SizedBox(
       height: getWidgetHeight(2),
       child: CommonCard(
@@ -64,7 +66,7 @@ class _NetworkSpeedState extends State<NetworkSpeed> {
                     ),
                     child: LineChart(
                       gradient: true,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: primaryColor,
                       points: _getPoints(traffics),
                     ),
                   ),
@@ -73,15 +75,39 @@ class _NetworkSpeedState extends State<NetworkSpeed> {
                   top: 0,
                   right: 0,
                   child: Transform.translate(
-                    offset: Offset(
+                    offset: const Offset(
                       -16,
                       -18,
                     ),
-                    child: Text(
-                      "${_getLastTraffic(traffics).up}↑   ${_getLastTraffic(traffics).down}↓",
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: color,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // 上传速度 + 向上箭头
+                        Text(
+                          "${_getLastTraffic(traffics).up}",
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: color,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_upward,
+                          color: primaryColor, // 设置为主题主色
+                          size: 14,
+                        ),
+                        const SizedBox(width: 8),
+                        // 下载速度 + 向下箭头
+                        Text(
+                          "${_getLastTraffic(traffics).down}",
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: color,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_downward,
+                          color: primaryColor, // 设置为主题主色
+                          size: 14,
+                        ),
+                      ],
                     ),
                   ),
                 ),

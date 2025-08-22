@@ -72,7 +72,7 @@ class _ProfilesViewState extends State<ProfilesView> with PageMixin {
           body: AddProfileView(
             context: globalState.navigatorKey.currentState!.context,
           ),
-          title: "${appLocalizations.add}${appLocalizations.profile}",
+          title: "${appLocalizations.add}${appLocalizations.profile}",//添加配置
         );
       },
     );
@@ -219,6 +219,7 @@ _showProfileSelectionDialog() {
           _handleShowAddExtendPage();  //添加
         },
         icon: const Icon(Icons.add),
+	      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
       ),
       Consumer(
         builder: (context, ref, __) {
@@ -234,6 +235,7 @@ _showProfileSelectionDialog() {
                 },
                 icon: Icon(
                   Icons.more_vert,
+		              color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                 ),
               );
             },
@@ -301,8 +303,9 @@ _showProfileSelectionDialog() {
   Widget? get floatingActionButton => FloatingActionButton(
         heroTag: null,
         onPressed: _updateProfiles,  //add
-        child: const Icon(
+        child:  Icon(
           Icons.sync,
+        //  Icons.sync,color: Theme.of(context).colorScheme.primary,颜色同主题色
         ),
       );
 
@@ -637,6 +640,7 @@ class ProfileItem extends StatelessWidget {
                           open();
                         },
                         icon: Icon(Icons.more_vert),
+			color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                       );
                     },
                   ),
@@ -761,6 +765,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
           },
           icon: Icon(
             Icons.save,
+	    color: Theme.of(context).colorScheme.primary, // 添加颜色属性
           ),
         )
       ],

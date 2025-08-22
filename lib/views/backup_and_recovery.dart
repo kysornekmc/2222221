@@ -237,7 +237,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
         ListHeader(title: appLocalizations.remote),
         if (dav == null)
           ListItem(
-            leading: const Icon(Icons.account_box),
+                  leading: Icon(
+        Icons.account_box,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
             title: Text(appLocalizations.noInfo),
             subtitle: Text(appLocalizations.pleaseBindWebDAV),
             trailing: FilledButton.tonal(
@@ -251,7 +254,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
           )
         else ...[
           ListItem(
-            leading: const Icon(Icons.account_box),
+                  leading: Icon(
+        Icons.account_box,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
             title: TooltipText(
               text: Text(
                 dav.user,
@@ -310,7 +316,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
           ),
           const Divider(height: 0,), 
           ListItem.input(
-            leading: const Icon(Icons.drive_file_move), // 远程备份文件名
+                  leading: Icon(
+        Icons.drive_file_move,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
             title: Text(appLocalizations.davfileName),
             subtitle: Text(dav.fileName),
             delegate: InputDelegate(
@@ -327,7 +336,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
             onTap: () {
               _backupOnWebDAV(context, client); 
             },
-            leading: const Icon(Icons.cloud_upload), // 远程备份图标
+                  leading: Icon(
+        Icons.cloud_upload,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
             title: Text(appLocalizations.backup),
             subtitle: Text(_lastBackupTime != null
               ? '${appLocalizations.lastbackuptime} ${DateFormat('yyyy-MM-dd HH:mm:ss').format(_lastBackupTime!)}'
@@ -338,7 +350,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
             onTap: () {
               _handleRecoveryOnWebDAV(context, client);
             },
-	   leading: const Icon(Icons.cloud_download),
+	         leading: Icon(
+        Icons.cloud_download,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
             title: Text(appLocalizations.recovery),
             subtitle: Text(appLocalizations.remoteRecoveryDesc),
           ),
@@ -348,7 +363,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
           onTap: () {
             _backupOnLocal(context);
           },
-          leading: const Icon(Icons.save), // 本地备份图标
+                leading: Icon(
+        Icons.save,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
           title: Text(appLocalizations.backup),
           subtitle: Text(_lastLocalBackupTime != null
             ? '${appLocalizations.lastbackuptime} ${DateFormat('yyyy-MM-dd HH:mm:ss').format(_lastLocalBackupTime!)}'
@@ -359,7 +377,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
           onTap: () {
             _handleRecoveryOnLocal(context);
           },
-	  leading: const Icon(Icons.settings_backup_restore),  //本地恢复图标
+	        leading: Icon(
+        Icons.settings_backup_restore,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
           title: Text(appLocalizations.recovery),
           subtitle: Text(appLocalizations.localRecoveryDesc),
         ),
@@ -369,7 +390,10 @@ class _BackupAndRecoveryState extends ConsumerState<BackupAndRecovery> {
             (state) => state.recoveryStrategy,
           ));
           return ListItem(
-	    leading: Icon(Icons.info), // 添加图标
+	   leading: Icon(
+        Icons.info,
+        color: Theme.of(context).colorScheme.primary, 
+      ),// 添加图标
             onTap: () {
               _handleUpdateRecoveryStrategy(ref);
             },
@@ -540,6 +564,7 @@ void initState() {
                     suffixIcon: IconButton(
                       icon: Icon(
                         obscure ? Icons.visibility : Icons.visibility_off,
+		        color: Theme.of(context).colorScheme.primary, // 后缀图标颜色
                       ),
                       onPressed: () {
                         _obscureController.value = !obscure;

@@ -130,6 +130,9 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
     final backgroundColor = context.colorScheme.surface;
     final bottomSheet = widget.type == SheetType.bottomSheet;
     final sideSheet = widget.type == SheetType.sideSheet;
+    // 获取主题色（此处使用primary作为示例，可根据需求替换为其他主题色）
+    final themeColor = context.colorScheme.primary;
+
     final appBar = AppBar(
       forceMaterialTransparency: bottomSheet ? true : false,
       automaticallyImplyLeading: bottomSheet
@@ -139,15 +142,23 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
               : true,
       centerTitle: bottomSheet,
       backgroundColor: backgroundColor,
-      title: Text(
-        widget.title,
+      title: Text(widget.title),
+      // 显式设置图标主题，使用主题色
+      iconTheme: IconThemeData(
+        color: themeColor, // 强制使用主题色
+      ),
+      // 若有右侧操作图标，同步设置
+      actionsIconTheme: IconThemeData(
+        color: themeColor,
       ),
       actions: genActions([
         if (widget.actions.isEmpty && sideSheet) CloseButton(),
         ...widget.actions,
       ]),
     );
+
     if (bottomSheet) {
+      // 底部弹窗布局（保持不变）
       final handleSize = Size(32, 4);
       return Container(
         clipBehavior: Clip.hardEdge,
@@ -170,19 +181,18 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(handleSize.height / 2),
                   ),
-                  color: context.colorScheme.onSurfaceVariant,
+                  //color: context.colorScheme.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
             appBar,
-            Flexible(
-              flex: 1,
-              child: widget.body,
-            )
+            Flexible(flex: 1, child: widget.body),
           ],
         ),
       );
     }
+
     return CommonScaffold(
       appBar: appBar,
       backgroundColor: backgroundColor,

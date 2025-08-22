@@ -195,7 +195,8 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                             );
                           }
                         : null,
-                    icon: const Icon(Icons.save_sharp),
+                    icon: Icon(Icons.save_sharp),
+	            color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -204,6 +205,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                 onPressed: _handleImport,
                 icon: Icon(
                   Icons.arrow_downward,
+		   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             _wrapController(
@@ -215,7 +217,8 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                         offset: Offset(-20, 20),
                       );
                     },
-                    icon: const Icon(Icons.more_vert),
+                    icon: Icon(Icons.more_vert),
+		    color: Theme.of(context).colorScheme.primary, 
                   );
                 },
                 popup: CommonPopupMenu(
@@ -388,6 +391,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                         controller.previousMatch();
                       },
                 icon: Icons.arrow_upward,
+		color: Theme.of(context).colorScheme.primary, // 添加颜色
               ),
               _buildIconButton(
                 onPressed: value.result == null
@@ -396,6 +400,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                         controller.nextMatch();
                       },
                 icon: Icons.arrow_downward,
+		color: Theme.of(context).colorScheme.primary, // 添加颜色
               ),
               SizedBox(
                 width: 2,
@@ -407,6 +412,9 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                   padding: WidgetStatePropertyAll(
                     EdgeInsets.all(0),
                   ),
+                  iconColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.primary,
+                ),
                 ),
                 icon: Icon(
                   Icons.close,
@@ -530,20 +538,24 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildIconButton({
-    required IconData icon,
-    VoidCallback? onPressed,
-  }) {
-    return IconButton(
-      visualDensity: VisualDensity.compact,
-      onPressed: onPressed,
-      style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),
-      icon: Icon(
-        icon,
-        size: 16,
-      ),
-    );
-  }
+Widget _buildIconButton({
+  required IconData icon,
+  VoidCallback? onPressed,
+  required Color color, // 添加参数
+}) {
+  return IconButton(
+    visualDensity: VisualDensity.compact,
+    onPressed: onPressed,
+    style: ButtonStyle(
+      padding: WidgetStatePropertyAll(EdgeInsets.all(0)),
+      iconColor: WidgetStatePropertyAll(color), // 应用颜色
+    ),
+    icon: Icon(
+      icon,
+      size: 16,
+    ),
+  );
+}
 }
 
 class ContextMenuControllerImpl implements SelectionToolbarController {

@@ -175,8 +175,9 @@ Widget build(BuildContext context) {
                         ),
                         Icon(
                           Icons.arrow_upward,
+                          color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                           size: 14, // 图标大小与文本匹配
-                          color: color,
+                        //  color: color,
                         ),
                         const SizedBox(width: 8), // 两个部分之间的间距
                         // 下载速度 + 向下箭头
@@ -188,8 +189,9 @@ Widget build(BuildContext context) {
                         ),
                         Icon(
                           Icons.arrow_downward,
+                          color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                           size: 14, // 图标大小与文本匹配
-                          color: color,
+                        //  color: color,
                         ),
                       ],
                     ),

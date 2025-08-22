@@ -260,6 +260,7 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                           },
                           icon: Icon(
                             Icons.save,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       );
@@ -285,6 +286,7 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                     },
                     icon: Icon(
                       Icons.edit,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 if (editCount > 0)
@@ -294,6 +296,8 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                     },
                     icon: Icon(
                       Icons.delete,
+                      color: Theme.of(context).colorScheme.primary,
+
                     ),
                   )
               ],
@@ -418,6 +422,7 @@ class RuleTitle extends ConsumerWidget {
               IconButton.filledTonal(
                 icon: Icon(
                   isOverrideRule ? Icons.edit_document : Icons.note_add,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 onPressed: () {
                   _handleChangeType(

@@ -351,6 +351,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                 visualDensity: VisualDensity.compact,
                 onPressed: _handleReset,
                 icon: Icon(Icons.replay),
+		color: Theme.of(context).colorScheme.primary,
               )
           ],
           space: 8,
@@ -457,10 +458,11 @@ class _PrueBlackItem extends ConsumerWidget {
     return ListItem.switchItem(
       leading: Icon(
         Icons.contrast,
+	color: Theme.of(context).colorScheme.primary,
       ),
       horizontalTitleGap: 12,
       title: Text(
-        appLocalizations.pureBlackMode,
+        appLocalizations.pureBlackMode, 
         style: Theme.of(context).textTheme.titleSmall?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -498,6 +500,7 @@ class _TextScaleFactorItem extends ConsumerWidget {
           child: ListItem.switchItem(
             leading: Icon(
               Icons.text_fields,
+	      color: Theme.of(context).colorScheme.primary,
             ),
             horizontalTitleGap: 12,
             title: Text(

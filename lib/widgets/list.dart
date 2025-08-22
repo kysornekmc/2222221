@@ -314,6 +314,7 @@ class ListItem<T> extends StatelessWidget {
             key: Key(openDelegate.title),
             onBack: action,
             title: openDelegate.title,
+            context: context,  // 添加这一行
             body: child,
             actions: [
               if (openDelegate.action != null) openDelegate.action!,

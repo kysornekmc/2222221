@@ -19,7 +19,10 @@ class VPNItem extends ConsumerWidget {
     final enable =
         ref.watch(vpnSettingProvider.select((state) => state.enable));
     return ListItem.switchItem(
-          leading: const Icon(Icons.vpn_key_outlined),  //VPN
+                leading: Icon(
+        Icons.vpn_key_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ), //VPN
       title: const Text("VPN"),
       subtitle: Text(appLocalizations.vpnEnableDesc),
       delegate: SwitchDelegate(
@@ -69,7 +72,10 @@ class AllowBypassItem extends ConsumerWidget {
     final allowBypass =
         ref.watch(vpnSettingProvider.select((state) => state.allowBypass));
     return ListItem.switchItem(
-          leading: const Icon(Icons.line_axis),
+              leading: Icon(
+        Icons.line_axis,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.allowBypass),
       subtitle: Text(appLocalizations.allowBypassDesc),
       delegate: SwitchDelegate(
@@ -94,7 +100,10 @@ class VpnSystemProxyItem extends ConsumerWidget {
     final systemProxy =
         ref.watch(vpnSettingProvider.select((state) => state.systemProxy));
     return ListItem.switchItem(
-      leading: const Icon(Icons.airline_stops), //系统代理
+            leading: Icon(
+        Icons.airline_stops,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),//系统代理
       title: Text(appLocalizations.systemProxy),
       subtitle: Text(appLocalizations.systemProxyDesc),
       delegate: SwitchDelegate(
@@ -120,7 +129,10 @@ class SystemProxyItem extends ConsumerWidget {
         ref.watch(networkSettingProvider.select((state) => state.systemProxy));
 
     return ListItem.switchItem(
-          leading: const Icon(Icons.airline_stops),
+               leading: Icon(
+        Icons.airline_stops,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
           title: Text(appLocalizations.systemProxy),    //系统代理
       subtitle: Text(appLocalizations.systemProxyDesc),
       delegate: SwitchDelegate(
@@ -144,7 +156,10 @@ class Ipv6Item extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final ipv6 = ref.watch(vpnSettingProvider.select((state) => state.ipv6));
     return ListItem.switchItem(
-          leading: const Icon(Icons.looks_6_outlined),   //IPV6
+                leading: Icon(
+        Icons.looks_6_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ), //IPV6
       title: const Text("IPv6"),
       subtitle: Text(appLocalizations.ipv6InboundDesc),
       delegate: SwitchDelegate(
@@ -193,7 +208,10 @@ class TunStackItem extends ConsumerWidget {
         ref.watch(patchClashConfigProvider.select((state) => state.tun.stack));
 
     return ListItem.options(
-          leading: const Icon(Icons.menu_open),
+               leading: Icon(
+        Icons.menu_open,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
           title: Text(appLocalizations.stackMode),   //stackMode
       subtitle: Text(stack.name),
       delegate: OptionsDelegate<TunStack>(
@@ -240,8 +258,9 @@ class BypassDomainItem extends StatelessWidget {
                 );
           },
           tooltip: appLocalizations.reset,
-          icon: const Icon(
+          icon:  Icon(
             Icons.replay,
+            color: Theme.of(context).colorScheme.primary,
           ),
         )
       ];
@@ -251,7 +270,10 @@ class BypassDomainItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: Icon(Icons.playlist_remove),
+leading: Icon(
+        Icons.playlist_remove,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.bypassDomain),
       subtitle: Text(appLocalizations.bypassDomainDesc),
       delegate: OpenDelegate(
@@ -294,7 +316,10 @@ class RouteModeItem extends ConsumerWidget {
     final routeMode =
         ref.watch(networkSettingProvider.select((state) => state.routeMode));
     return ListItem<RouteMode>.options(
-          leading: const Icon(Icons.router),
+             leading: Icon(
+        Icons.router,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
           title: Text(appLocalizations.routeMode),       //routeMode路由模式
       subtitle: Text(Intl.message("routeMode_${routeMode.name}")),
       delegate: OptionsDelegate<RouteMode>(
@@ -330,7 +355,10 @@ class RouteAddressItem extends ConsumerWidget {
       return Container();
     }
     return ListItem.open(
-        leading: const Icon(Icons.edit_note),
+            leading: Icon(
+        Icons.edit_note,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
         title: Text(appLocalizations.routeAddress),  //路由地址
       subtitle: Text(appLocalizations.routeAddressDesc),
       delegate: OpenDelegate(
@@ -426,8 +454,9 @@ class NetworkListView extends ConsumerWidget {
                 );
           },
           tooltip: appLocalizations.reset,
-          icon: const Icon(
+          icon:  Icon(
             Icons.replay,
+            color: Theme.of(context).colorScheme.primary,
           ),
         )
       ];

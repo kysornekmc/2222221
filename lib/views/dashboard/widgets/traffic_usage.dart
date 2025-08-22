@@ -195,7 +195,7 @@ class TrafficUsage extends StatelessWidget {
                     context,
                     Icon(
                       Icons.arrow_upward,
-                      color: primaryColor,
+                      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                       size: 14,
                     ),
                     upTotalTrafficValue,
@@ -207,7 +207,7 @@ class TrafficUsage extends StatelessWidget {
                     context,
                     Icon(
                       Icons.arrow_downward,
-                      color: secondaryColor,
+                      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                       size: 14,
                     ),
                     downTotalTrafficValue,

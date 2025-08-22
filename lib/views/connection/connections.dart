@@ -40,6 +40,7 @@ class _ConnectionsViewState extends ConsumerState<ConnectionsView>
             );
           },
           icon: const Icon(Icons.delete_sweep_outlined),
+	        color: Theme.of(context).colorScheme.primary,
         ),
       ];
 
@@ -131,6 +132,7 @@ class _ConnectionsViewState extends ConsumerState<ConnectionsView>
                 },
                 trailing: IconButton(
                   icon: const Icon(Icons.block),
+		  color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     _handleBlockConnection(connection.id);
                   },

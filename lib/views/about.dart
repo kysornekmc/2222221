@@ -54,7 +54,10 @@ class AboutView extends StatelessWidget {
               "https://t.me/FlClash",
             );
           },
-          trailing: const Icon(Icons.launch),
+           trailing: Icon(
+        Icons.launch,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
         ),
         ListItem(
           title: Text(appLocalizations.project),
@@ -63,7 +66,10 @@ class AboutView extends StatelessWidget {
               "https://github.com/$repository",
             );
           },
-          trailing: const Icon(Icons.launch),
+           trailing: Icon(
+        Icons.launch,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
         ),
         ListItem(
           title: Text(appLocalizations.core),
@@ -72,7 +78,10 @@ class AboutView extends StatelessWidget {
               "https://github.com/chen08209/Clash.Meta/tree/FlClash",
             );
           },
-          trailing: const Icon(Icons.launch),
+           trailing: Icon(
+        Icons.launch,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
         ),
       ],
     );

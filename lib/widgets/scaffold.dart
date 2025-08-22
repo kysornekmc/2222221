@@ -45,6 +45,7 @@ class CommonScaffold extends StatefulWidget {
     required String title,
     required Function onBack,
     required List<Widget> actions,
+    required BuildContext context, // 添加context参数
   }) : this(
           key: key,
           body: body,
@@ -56,6 +57,9 @@ class CommonScaffold extends StatefulWidget {
             onPressed: () {
               onBack();
             },
+            style: IconButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
         );
 
@@ -136,7 +140,8 @@ class CommonScaffoldState extends State<CommonScaffold> {
           backgroundColor: colorScheme.brightness == Brightness.dark
               ? Colors.grey[900]
               : Colors.white,
-          iconTheme: theme.primaryIconTheme.copyWith(color: Colors.grey),
+          // 移除图标颜色强制设置，避免覆盖
+          iconTheme: theme.primaryIconTheme,
           titleTextStyle: theme.textTheme.titleLarge,
           toolbarTextStyle: theme.textTheme.bodyMedium,
         ),
@@ -239,16 +244,22 @@ class CommonScaffoldState extends State<CommonScaffold> {
   }
 
   Widget? _buildLeading() {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    
     if (_isEdit) {
       return IconButton(
         onPressed: _appBarState.value.editState?.onExit,
-        icon: Icon(Icons.close),
+        icon: const Icon(Icons.close),
+        // 使用styleFrom强制设置前景色（图标颜色）
+        style: IconButton.styleFrom(foregroundColor: primaryColor),
       );
     }
     return _isSearch
         ? IconButton(
             onPressed: _handleExitSearching,
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
+            // 使用styleFrom强制设置前景色（图标颜色）
+            style: IconButton.styleFrom(foregroundColor: primaryColor),
           )
         : widget.leading;
   }
@@ -281,11 +292,14 @@ class CommonScaffoldState extends State<CommonScaffold> {
     bool hasSearch,
     List<Widget> actions,
   ) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    
     if (_isSearch) {
       return genActions([
         IconButton(
           onPressed: _handleClear,
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
+          style: IconButton.styleFrom(foregroundColor: primaryColor),
         ),
       ]);
     }
@@ -300,7 +314,8 @@ class CommonScaffoldState extends State<CommonScaffold> {
                 ),
               );
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
+            style: IconButton.styleFrom(foregroundColor: primaryColor),
           ),
         ...actions
       ],

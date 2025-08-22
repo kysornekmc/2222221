@@ -74,6 +74,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
                     },
                     icon: Icon(
                       Icons.add_circle,
+		      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                     ),
                   ),
                 )
@@ -82,9 +83,13 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
         IconButton(
           icon: _buildIsEdit((isEdit) {
             return isEdit
-                ? Icon(Icons.save)
+                ? Icon(
+                    Icons.save,
+                    color: Theme.of(context).colorScheme.primary, // 保存图标颜色
+                  )
                 : Icon(
                     Icons.edit,
+                    color: Theme.of(context).colorScheme.primary, // 编辑图标颜色
                   );
           }),
           onPressed: _handleUpdateIsEdit,

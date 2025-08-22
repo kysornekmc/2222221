@@ -165,14 +165,35 @@ class CommonNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    // 获取主题主色
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    // 获取主题次要色（用于未选中状态）
+    final onSurfaceVariant = Theme.of(context).colorScheme.onSurfaceVariant;
+
     if (viewMode == ViewMode.mobile) {
       return NavigationBarTheme(
-        data: _NavigationBarDefaultsM3(context),
+        data: _NavigationBarDefaultsM3(context).copyWith(
+          // 移动端导航图标主题：关联主题主色
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            return IconThemeData(
+              size: 24.0,
+              color: states.contains(WidgetState.disabled)
+                  ? onSurfaceVariant.withOpacity(0.38)
+                  : states.contains(WidgetState.selected)
+                      ? primaryColor // 选中状态用主色
+                      : primaryColor.withOpacity(0.7), // 未选中状态用半透明主色
+            );
+          }),
+        ),
         child: NavigationBar(
           destinations: navigationItems
               .map(
                 (e) => NavigationDestination(
-                  icon: e.icon,
+                  // 在这里设置图标颜色（使用当前上下文的主题）
+                  icon: Icon(
+                    e.icon.icon, // 获取原始图标
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   label: Intl.message(e.label.name),
                 ),
               )
@@ -184,6 +205,8 @@ class CommonNavigationBar extends ConsumerWidget {
         ),
       );
     }
+
+    // 桌面端侧边导航
     final showLabel = ref.watch(appSettingProvider).showLabel;
     return Material(
       color: context.colorScheme.surfaceContainer,
@@ -196,33 +219,26 @@ class CommonNavigationBar extends ConsumerWidget {
                 child: IntrinsicHeight(
                   child: NavigationRail(
                     backgroundColor: context.colorScheme.surfaceContainer,
-                    selectedIconTheme: IconThemeData(
-                      color: context.colorScheme.onSurfaceVariant,
+                    // 侧边栏选中图标用主题主色
+                    selectedIconTheme: IconThemeData(color: primaryColor),
+                    // 侧边栏未选中图标用半透明主色
+                    unselectedIconTheme: IconThemeData(color: primaryColor.withOpacity(0.7)),
+                    selectedLabelTextStyle: context.textTheme.labelLarge!.copyWith(
+                      color: primaryColor, // 选中文字也关联主色
                     ),
-                    unselectedIconTheme: IconThemeData(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
-                    selectedLabelTextStyle:
-                        context.textTheme.labelLarge!.copyWith(
-                      color: context.colorScheme.onSurface,
-                    ),
-                    unselectedLabelTextStyle:
-                        context.textTheme.labelLarge!.copyWith(
-                      color: context.colorScheme.onSurface,
+                    unselectedLabelTextStyle: context.textTheme.labelLarge!.copyWith(
+                      color: onSurfaceVariant,
                     ),
                     destinations: navigationItems
                         .map(
                           (e) => NavigationRailDestination(
-                            icon: e.icon,
-                            label: Text(
-                              Intl.message(e.label.name),
-                            ),
+                            icon: e.icon, // 直接使用原始图标，由主题控制颜色
+                            label: Text(Intl.message(e.label.name)),
                           ),
                         )
                         .toList(),
                     onDestinationSelected: (index) {
-                      globalState.appController
-                          .toPage(navigationItems[index].label);
+                      globalState.appController.toPage(navigationItems[index].label);
                     },
                     extended: false,
                     selectedIndex: currentIndex,
@@ -234,22 +250,16 @@ class CommonNavigationBar extends ConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           IconButton(
             onPressed: () {
               ref.read(appSettingProvider.notifier).updateState(
-                    (state) => state.copyWith(
-                      showLabel: !state.showLabel,
-                    ),
+                    (state) => state.copyWith(showLabel: !state.showLabel),
                   );
             },
-            icon: const Icon(Icons.menu),
+            icon: Icon(Icons.menu, color: primaryColor), // 菜单按钮也用主色
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
         ],
       ),
     );

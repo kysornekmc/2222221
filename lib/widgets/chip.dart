@@ -18,6 +18,9 @@ class CommonChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 获取主题色
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     if (type == ChipType.delete) {
       return Chip(
         avatar: avatar,
@@ -28,10 +31,15 @@ class CommonChip extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         onDeleted: onPressed ?? () {},
-        side:
-            BorderSide(color: Theme.of(context).dividerColor.opacity15),
+        side: BorderSide(color: Theme.of(context).dividerColor.opacity15),
         labelStyle: Theme.of(context).textTheme.bodyMedium,
         label: Text(label),
+        // 自定义删除图标并设置颜色为主题色
+        deleteIcon: Icon(
+          Icons.cancel,
+          color: primaryColor,
+         // size: 18, // 可选：调整图标大小
+        ),
       );
     }
     return ActionChip(

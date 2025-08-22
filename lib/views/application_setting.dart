@@ -20,7 +20,10 @@ class CloseConnectionsItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.closeConnections),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.close_outlined),
+            leading: Icon(
+        Icons.close_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.autoCloseConnections),
       subtitle: Text(appLocalizations.autoCloseConnectionsDesc),
       delegate: SwitchDelegate(
@@ -46,7 +49,10 @@ class UsageItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.onlyStatisticsProxy),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.data_usage_outlined),
+            leading: Icon(
+        Icons.data_usage_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.onlyStatisticsProxy),
       subtitle: Text(appLocalizations.onlyStatisticsProxyDesc),
       delegate: SwitchDelegate(
@@ -72,7 +78,10 @@ class MinimizeItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.minimizeOnExit),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.logout), // 修改系统默认退出事件
+            leading: Icon(
+        Icons.logout,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.minimizeOnExit),
       subtitle: Text(appLocalizations.minimizeOnExitDesc),
       delegate: SwitchDelegate(
@@ -98,7 +107,10 @@ class AutoLaunchItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.autoLaunch),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.auto_awesome), //
+            leading: Icon(
+        Icons.auto_awesome,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.autoLaunch),
       subtitle: Text(appLocalizations.autoLaunchDesc),
       delegate: SwitchDelegate(
@@ -124,7 +136,10 @@ class SilentLaunchItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.silentLaunch),
     );
     return ListItem.switchItem(
-     leading: const Icon(Icons.auto_awesome_motion),
+           leading: Icon(
+        Icons.auto_awesome_motion,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.silentLaunch),
       subtitle: Text(appLocalizations.silentLaunchDesc),
       delegate: SwitchDelegate(
@@ -150,7 +165,10 @@ class AutoRunItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.autoRun),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.motion_photos_auto_outlined), //自动运行
+            leading: Icon(
+        Icons.motion_photos_auto_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.autoRun),
       subtitle: Text(appLocalizations.autoRunDesc),
       delegate: SwitchDelegate(
@@ -176,7 +194,10 @@ class HiddenItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.hidden),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.dynamic_feed_outlined), // 从最近任务中隐藏hide
+            leading: Icon(
+        Icons.dynamic_feed_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.exclude),
       subtitle: Text(appLocalizations.excludeDesc),
       delegate: SwitchDelegate(
@@ -202,7 +223,10 @@ class AnimateTabItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.isAnimateToPage),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.gif_box_outlined),  //选项卡动画
+            leading: Icon(
+        Icons.gif_box_outlined,
+        color: Theme.of(context).colorScheme.primary, // 选项卡动画
+      ),
       title: Text(appLocalizations.tabAnimation),
       subtitle: Text(appLocalizations.tabAnimationDesc),
       delegate: SwitchDelegate(
@@ -228,7 +252,10 @@ class OpenLogsItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.openLogs),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.adb_outlined), // 日志捕获description
+            leading: Icon(
+        Icons.adb_outlined,
+        color: Theme.of(context).colorScheme.primary, // 日志捕获description
+      ),
       title: Text(appLocalizations.logcat),
       subtitle: Text(appLocalizations.logcatDesc),
       delegate: SwitchDelegate(
@@ -289,7 +316,10 @@ class IpQueryModeSwitch extends ConsumerWidget {
           : Text(appLocalizations.sequentialQuery);
 
     return ListItem.switchItem(
-      leading: const Icon(Icons.query_stats_outlined),
+            leading: Icon(
+        Icons.query_stats_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.ipCheckmethod),
       subtitle: subtitleText, // 使用动态生成的文本
       delegate: SwitchDelegate(
@@ -319,7 +349,10 @@ class AutoRefreshItem extends ConsumerWidget {
       appSettingProvider.select((state) => state.autoRefreshEnabled),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.refresh_outlined),
+            leading: Icon(
+        Icons.refresh_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.autoRefresh),
       subtitle: Text(appLocalizations.autoRefreshDesc),
       delegate: SwitchDelegate(
@@ -351,7 +384,10 @@ class SubscriptionTimeFormatItem extends ConsumerWidget {
           : Text(appLocalizations.defaultText);
 
     return ListItem.switchItem(
-      leading: const Icon(Icons.calendar_today_outlined),
+            leading: Icon(
+        Icons.calendar_today_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.subscriptionTimeFormat),
       subtitle: subtitleText,
       delegate: SwitchDelegate(

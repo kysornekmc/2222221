@@ -43,7 +43,8 @@ class InfoHeader extends StatelessWidget {
                 if (info.iconData != null) ...[
                   Icon(
                     info.iconData,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                 //   color: Theme.of(context).colorScheme.onSurfaceVariant,
+		    color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(
                     width: 8,
@@ -93,8 +94,8 @@ class CommonCard extends StatelessWidget {
     this.padding,
     this.enterAnimated = false,
     this.info,
+    this.actions,
   }) : isSelected = isSelected ?? false;
-
   final bool enterAnimated;
   final bool isSelected;
   final void Function()? onPressed;
@@ -104,9 +105,8 @@ class CommonCard extends StatelessWidget {
   final Info? info;
   final CommonCardType type;
   final double radius;
-
- //  final WidgetStateProperty<Color?>? backgroundColor;
-  // final WidgetStateProperty<BorderSide?>? borderSide;
+  // 新增：用于存储右上角操作按钮列表
+  final List<Widget>? actions;
 
   BorderSide getBorderSide(BuildContext context, Set<WidgetState> states) {
     final colorScheme = context.colorScheme;
@@ -155,8 +155,10 @@ class CommonCard extends StatelessWidget {
           InfoHeader(
             padding: baseInfoEdgeInsets.copyWith(
               bottom: 0,
-            ),
-            info: info!,
+        ),
+        info: info!,
+            // 将actions传递给InfoHeader
+            actions: actions ?? const [],
           ),
           Flexible(
             flex: 1,
@@ -221,7 +223,7 @@ class SelectIcon extends StatelessWidget {
       shape: const CircleBorder(),
       child: Container(
         padding: const EdgeInsets.all(4),
-        child: const Icon(
+        child: const Icon( 
           Icons.check,
           size: 16,
         ),

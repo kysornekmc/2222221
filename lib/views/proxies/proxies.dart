@@ -32,6 +32,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> with PageMixin {
             },
             icon: Icon(
               Icons.adjust,
+	      color: Theme.of(context).colorScheme.primary,
               weight: 1,
             ),
           ),
@@ -45,6 +46,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> with PageMixin {
               },
               icon: Icon(
                 Icons.more_vert,
+		color: Theme.of(context).colorScheme.primary,
               ),
             );
           },
@@ -147,7 +149,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> with PageMixin {
           },
           icon: const Icon(
             Icons.poll_outlined,
-          ),
+	              ),
         ),
       _isTab
           ? IconButton(

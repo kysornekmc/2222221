@@ -117,7 +117,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                         open();
                       },
                       icon: Icon(
-                        Icons.more_vert,
+                        Icons.more_vert,color: Theme.of(context).colorScheme.primary,
                       ),
                     );
                   },
@@ -285,15 +285,19 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return CommonScaffold(
+      // 配置顶栏图标主题色
+      appBar: AppBar(
+        title: Text(appLocalizations.script),
+        iconTheme: IconThemeData(color: theme.colorScheme.primary), // 左侧图标主题色
+        actionsIconTheme: IconThemeData(color: theme.colorScheme.primary), // 右侧图标主题色
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _handleToEditor();
-        },
+        onPressed: () => _handleToEditor(),
         child: Icon(Icons.add),
       ),
       body: _buildContent(),
-      title: appLocalizations.script,
     );
   }
 }

@@ -97,7 +97,7 @@ class _SubscriptionInfoViewdetailState extends State<SubscriptionInfoViewdetail>
             ),
           ],
         ),
-        const SizedBox(height: 12), 
+        const SizedBox(height: spacingHeight-2),  
         Row(
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
@@ -145,7 +145,7 @@ class _SubscriptionInfoViewdetailState extends State<SubscriptionInfoViewdetail>
             ),
           ],
         ),
-        const SizedBox(height: spacingHeight),
+        const SizedBox(height: spacingHeight+1), 
         // 移除 LinearProgressIndicator 可能的外边距
         Container(
           margin: EdgeInsets.zero,

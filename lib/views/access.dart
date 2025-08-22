@@ -69,6 +69,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
         );
       },
       icon: const Icon(Icons.search),
+      color: Theme.of(context).colorScheme.primary,
     );
   }
 
@@ -107,9 +108,15 @@ class _AccessViewState extends ConsumerState<AccessView> {
         });
       },
       icon: isSelectedAll
-          ? const Icon(Icons.deselect)
-          : const Icon(Icons.select_all),
-    );
+          ? Icon(
+              Icons.deselect,
+              color: Theme.of(context).colorScheme.primary,
+            )
+          : Icon(
+              Icons.select_all,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+      );
   }
 
   _intelligentSelected() async {
@@ -163,6 +170,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
         }
       },
       icon: const Icon(Icons.tune),
+      color: Theme.of(context).colorScheme.primary, 
     );
   }
 
@@ -473,7 +481,8 @@ class AccessControlSearchDelegate extends SearchDelegate {
           }
           query = '';
         },
-        icon: const Icon(Icons.clear),
+        icon: const Icon(Icons.clear), 
+	color: Theme.of(context).colorScheme.primary,
       ),
       const SizedBox(
         width: 8,
@@ -487,7 +496,8 @@ class AccessControlSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: const Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back), 
+      color: Theme.of(context).colorScheme.primary,
     );
   }
 

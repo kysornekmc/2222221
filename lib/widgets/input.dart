@@ -298,18 +298,21 @@ class ListInputPage extends StatelessWidget {
                         subtitle: subtitleBuilder != null
                             ? subtitleBuilder!(e)
                             : null,
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline),
-                          onPressed: () {
-                            _handleDelete(e);
-                          },
-                        ),
-                      ),
-                      onPressed: () {
-                        _handleAddOrEdit(e);
-                      },
+    trailing: IconButton(
+      icon: Icon(
+        Icons.delete_outline,
+        color: Theme.of(context).colorScheme.primary, // 添加的颜色属性
+      ),
+      onPressed: () {
+        _handleDelete(e);
+      },
+    ),
+  ),
+  onPressed: () {
+    _handleAddOrEdit(e);
+  },
                     ),
-                  ),
+),
                 );
               },
               onReorder: (oldIndex, newIndex) {
@@ -451,7 +454,10 @@ class MapInputPage extends StatelessWidget {
                             ? subtitleBuilder!(e)
                             : null,
                         trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline),
+                          icon: Icon(
+        Icons.delete_outline,
+        color: Theme.of(context).colorScheme.primary, // 添加的颜色属性
+      ),			  
                           onPressed: () {
                             _handleDelete(e);
                           },

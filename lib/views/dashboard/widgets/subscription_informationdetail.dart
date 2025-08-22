@@ -52,6 +52,27 @@ class SubscriptionInformationdetail extends ConsumerWidget {
           label: appLocalizations.subscriptionInformation,
           iconData: Icons.content_paste_outlined,
         ),
+        // 添加右上角刷新图标（仅在subscriptionInfo不为null时显示）
+        actions: [
+          if (subscriptionInfo != null)
+          // 使用SizedBox固定按钮尺寸
+          SizedBox(
+            width: 22,  // 固定宽度
+            height: 22, // 固定高度
+            child: IconButton(
+              icon: const Icon(Icons.sync),
+              iconSize: 20, // 图标大小
+              padding: EdgeInsets.zero, // 清除内边距（关键：避免点击时扩展）
+              constraints: const BoxConstraints(), // 清除默认最小尺寸约束
+              color: Theme.of(context).colorScheme.primary,
+              onPressed: () {
+                if (currentProfile != null) {
+                  globalState.appController.updateProfile(currentProfile);
+                }
+              },
+            ),
+          ),
+        ],
         child: Column(
            crossAxisAlignment: CrossAxisAlignment.start, // 修改为左对齐
            children: [
@@ -95,7 +116,7 @@ class SubscriptionInformationdetail extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: spacingHeight-1), // 使用统一的间距
+                    const SizedBox(height: 11), // 使用统一的间距
                     // 显示 代理名称
                     Row(
 		    crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -128,7 +149,7 @@ class SubscriptionInformationdetail extends ConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: spacingHeight-2), //  使用统一的间距
+                          const SizedBox(height: 10), //  使用统一的间距
                           SubscriptionInfoViewdetail(
                             subscriptionInfo: subscriptionInfo,
                             profile: currentProfile, // 

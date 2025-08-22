@@ -154,12 +154,14 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
         title: Text(appLocalizations.networkSpeedtest), 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
+          color: Theme.of(context).colorScheme.primary, // 添加颜色属性 
           onPressed: () => Navigator.pop(context),
         ),
         // 右上角设置按钮
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
+            color: Theme.of(context).colorScheme.primary, // 添加颜色属性
             onPressed: _showSiteSelectionDialog,
           ),
         ],

@@ -32,8 +32,13 @@ class ToolsView extends ConsumerStatefulWidget {
 
 class _ToolboxViewState extends ConsumerState<ToolsView> {
   _buildNavigationMenuItem(NavigationItem navigationItem) {
+    // 获取主题主色
+    final primaryColor = Theme.of(context).colorScheme.primary;
     return ListItem.open(
-      leading: navigationItem.icon,
+      leading: Icon(
+        (navigationItem.icon as Icon).icon, // 获取原始图标
+        color: primaryColor, // 应用主题主色
+      ),
       title: Text(Intl.message(navigationItem.label.name)),
       subtitle: navigationItem.description != null
           ? Text(Intl.message(navigationItem.description!))
@@ -79,7 +84,10 @@ class _ToolboxViewState extends ConsumerState<ToolsView> {
       title: appLocalizations.settings,           //设置
       items: [
         ListItem.open(
-          leading: const Icon(Icons.build), //常规
+                leading: Icon(
+        Icons.build,
+        color: Theme.of(context).colorScheme.primary, // 常规
+      ),
           title: Text(appLocalizations.general),
           subtitle: Text(appLocalizations.generalDesc),
           delegate: OpenDelegate(
@@ -90,7 +98,10 @@ class _ToolboxViewState extends ConsumerState<ToolsView> {
           ),
         ),      
 	ListItem.open(
-          leading: const Icon(Icons.public), //网络设置
+                leading: Icon(
+        Icons.public,
+        color: Theme.of(context).colorScheme.primary, // 网络设置
+      ),
           title: Text(appLocalizations.network),
           subtitle: Text(appLocalizations.networkDesc),
           delegate: OpenDelegate(
@@ -99,7 +110,10 @@ class _ToolboxViewState extends ConsumerState<ToolsView> {
           ),
         ),
         ListItem.open(
-          leading: const Icon(Icons.dns), //DNS设置
+                leading: Icon(
+        Icons.dns,
+        color: Theme.of(context).colorScheme.primary, // DNS设置
+      ),
           title: const Text("DNS"),
           subtitle: Text(appLocalizations.dnsDesc),
           delegate: OpenDelegate(
@@ -166,7 +180,10 @@ class _LocaleItem extends ConsumerWidget {
     final subTitle = locale ?? appLocalizations.defaultText;
     final currentLocale = utils.getLocaleForString(locale);
     return ListItem<Locale?>.options(
-      leading: const Icon(Icons.language_outlined),
+            leading: Icon(
+        Icons.language_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.language),
       subtitle: Text(Intl.message(subTitle)),
       delegate: OptionsDelegate(
@@ -190,7 +207,10 @@ class _ThemeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.style),
+          leading: Icon(
+        Icons.style,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.theme),
       subtitle: Text(appLocalizations.themeDesc),
       delegate: OpenDelegate(
@@ -207,7 +227,10 @@ class _BackupItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.cloud_sync),
+           leading: Icon(
+        Icons.cloud_sync,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.backupAndRecovery),
       subtitle: Text(appLocalizations.backupAndRecoveryDesc),
       delegate: OpenDelegate(
@@ -224,7 +247,10 @@ class _HotkeyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.keyboard),
+            leading: Icon(
+        Icons.keyboard,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.hotkeyManagement),
       subtitle: Text(appLocalizations.hotkeyManagementDesc),
       delegate: OpenDelegate(
@@ -241,7 +267,10 @@ class _LoopbackItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem(
-      leading: const Icon(Icons.lock),
+            leading: Icon(
+        Icons.lock,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.loopback),
       subtitle: Text(appLocalizations.loopbackDesc),
       onTap: () {
@@ -260,7 +289,10 @@ class _AccessItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.view_list),
+           leading: Icon(
+        Icons.view_list,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.accessControl),
       subtitle: Text(appLocalizations.accessControlDesc),
       delegate: OpenDelegate(
@@ -277,7 +309,10 @@ class _ConfigItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.edit),
+          leading: Icon(
+        Icons.edit,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.basicConfig),
       subtitle: Text(appLocalizations.basicConfigDesc),
       delegate: OpenDelegate(
@@ -294,7 +329,10 @@ class _SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.settings),
+         leading: Icon(
+        Icons.settings,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.application),
       subtitle: Text(appLocalizations.applicationDesc),
       delegate: OpenDelegate(
@@ -311,7 +349,10 @@ class _DisclaimerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem(
-      leading: const Icon(Icons.gavel),
+        leading: Icon(
+        Icons.gavel,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.disclaimer),
       onTap: () async {
         final isDisclaimerAccepted =
@@ -330,7 +371,10 @@ class _InfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.info),
+         leading: Icon(
+        Icons.info,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.about),
       delegate: OpenDelegate(
         title: appLocalizations.about,
@@ -346,7 +390,10 @@ class _DeveloperItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
-      leading: const Icon(Icons.developer_board),
+        leading: Icon(
+        Icons.developer_board,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
       title: Text(appLocalizations.developerMode),
       delegate: OpenDelegate(
         title: appLocalizations.developerMode,
