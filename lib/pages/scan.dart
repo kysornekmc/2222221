@@ -15,29 +15,41 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
   MobileScannerController controller = MobileScannerController(
-    detectionSpeed: DetectionSpeed.noDuplicates,
+    detectionSpeed: DetectionSpeed.normal,
     formats: const [BarcodeFormat.qrCode],
+    returnImage: false,
   );
 
   StreamSubscription<Object?>? _subscription;
+  bool _isScanning = true;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _subscription = controller.barcodes.listen(_handleBarcode);
-    unawaited(controller.start());
+    _startScanner();
   }
 
-  _handleBarcode(BarcodeCapture barcodeCapture) {
-    final barcode = barcodeCapture.barcodes.first;
-    if (barcode.type == BarcodeType.url) {
-      Navigator.pop<String>(
-        context,
-        barcode.rawValue,
-      );
-    } else {
-      Navigator.pop(context);
+  Future<void> _startScanner() async {
+    _subscription = controller.barcodes.listen(_handleBarcode);
+    await controller.start();
+    setState(() => _isScanning = true);
+  }
+
+  Future<void> _stopScanner() async {
+    await _subscription?.cancel();
+    _subscription = null;
+    await controller.stop();
+    setState(() => _isScanning = false);
+  }
+
+  void _handleBarcode(BarcodeCapture barcodeCapture) {
+    if (!_isScanning) return;
+    
+    final barcode = barcodeCapture.barcodes.firstOrNull;
+    if (barcode?.type == BarcodeType.url && barcode?.rawValue != null) {
+      _stopScanner();
+      Navigator.pop<String>(context, barcode?.rawValue);
     }
   }
 
@@ -48,15 +60,12 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
       case AppLifecycleState.detached:
       case AppLifecycleState.hidden:
       case AppLifecycleState.paused:
+        _stopScanner();
         return;
       case AppLifecycleState.resumed:
-        _subscription = controller.barcodes.listen(_handleBarcode);
-
-        unawaited(controller.start());
+        _startScanner();
       case AppLifecycleState.inactive:
-        unawaited(_subscription?.cancel());
-        _subscription = null;
-        unawaited(controller.stop());
+        _stopScanner();
     }
   }
 
@@ -68,6 +77,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
       width: sideLength,
       height: sideLength,
     );
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -77,55 +87,62 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
               scanWindow: scanWindow,
             ),
           ),
+          // 传入主题颜色作为扫描框边框色
           CustomPaint(
-            painter: ScannerOverlay(scanWindow: scanWindow),
+            painter: ScannerOverlay(
+              scanWindow: scanWindow,
+              borderColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
           AppBar(
             backgroundColor: Colors.transparent,
             automaticallyImplyLeading: false,
             leading: IconButton(
-              style: const ButtonStyle(
-                iconSize: WidgetStatePropertyAll(32),
-                foregroundColor: WidgetStatePropertyAll(Colors.white),
+              style: ButtonStyle(
+                iconSize: const WidgetStatePropertyAll(32),
+                foregroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.primary,
+                ),
               ),
               onPressed: () {
+                _stopScanner();
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.close),
-              color: Theme.of(context).colorScheme.primary, // 添加颜色属性
             ),
             actions: [
               ValueListenableBuilder<MobileScannerState>(
                 valueListenable: controller,
                 builder: (context, state, _) {
-                  var icon = const Icon(Icons.flash_off);
-                  var backgroundColor = Colors.black12;
+                  late Widget icon;
+                  late Color backgroundColor;
+                  
                   switch (state.torchState) {
-                    case TorchState.off:
-                      icon = const Icon(Icons.flash_off);
-                      backgroundColor = Colors.black12;
                     case TorchState.on:
                       icon = const Icon(Icons.flash_on);
                       backgroundColor = Colors.orange;
-                    case TorchState.unavailable:
-                      icon = const Icon(Icons.flash_off);
-                      backgroundColor = Colors.transparent;
                     case TorchState.auto:
                       icon = const Icon(Icons.flash_auto);
                       backgroundColor = Colors.orange;
+                    case TorchState.off:
+                    case TorchState.unavailable:
+                      icon = const Icon(Icons.flash_off);
+                      backgroundColor = state.torchState == TorchState.unavailable
+                          ? Colors.transparent
+                          : Colors.black12;
                   }
+                  
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     child: ActivateBox(
                       active: state.torchState != TorchState.unavailable,
                       child: IconButton(
-                        color: Colors.white,
                         icon: icon,
                         style: ButtonStyle(
-                          foregroundColor:
-                              const WidgetStatePropertyAll(Colors.white),
-                          backgroundColor:
-                              WidgetStatePropertyAll(backgroundColor),
+                          foregroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.primary,
+                          ),
+                          backgroundColor: WidgetStatePropertyAll(backgroundColor),
                         ),
                         onPressed: () => controller.toggleTorch(),
                       ),
@@ -138,17 +155,29 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
           Container(
             margin: const EdgeInsets.only(bottom: 32),
             alignment: Alignment.bottomCenter,
-            child: IconButton(
-              color: Colors.white,
-              style: const ButtonStyle(
-                foregroundColor: WidgetStatePropertyAll(Colors.white),
-                backgroundColor: WidgetStatePropertyAll(Colors.grey),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                style: ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                  backgroundColor: const WidgetStatePropertyAll(Colors.grey),
+                  padding: const WidgetStatePropertyAll(EdgeInsets.all(16)),
+                  iconSize: const WidgetStatePropertyAll(32.0),
+                ),
+                onPressed: globalState.appController.addProfileFormQrCode,
+                icon: const Icon(Icons.photo_camera_back),
               ),
-              padding: const EdgeInsets.all(16),
-              iconSize: 32.0,
-              onPressed: globalState.appController.addProfileFormQrCode,
-              icon: const Icon(Icons.photo_camera_back),
-            ),
+              const SizedBox(height: 16),
+              if (!_isScanning)
+                ElevatedButton(
+                  onPressed: _startScanner,
+                  child: const Text('重新扫描'),
+                ),
+            ],
+	   ),
           ),
         ],
       ),
@@ -158,21 +187,23 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
   @override
   Future<void> dispose() async {
     WidgetsBinding.instance.removeObserver(this);
-    unawaited(_subscription?.cancel());
-    _subscription = null;
+    await _stopScanner();
     await controller.dispose();
     super.dispose();
   }
 }
 
 class ScannerOverlay extends CustomPainter {
+  // 新增borderColor参数，用于接收主题颜色
   const ScannerOverlay({
     required this.scanWindow,
     this.borderRadius = 12.0,
+    required this.borderColor,
   });
 
   final Rect scanWindow;
   final double borderRadius;
+  final Color borderColor; // 声明边框颜色变量
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -190,7 +221,7 @@ class ScannerOverlay extends CustomPainter {
       );
 
     final backgroundPaint = Paint()
-      ..color = Colors.black.opacity50
+      ..color = Colors.black.withOpacity(0.5)
       ..style = PaintingStyle.fill
       ..blendMode = BlendMode.dstOut;
 
@@ -200,8 +231,9 @@ class ScannerOverlay extends CustomPainter {
       cutoutPath,
     );
 
+    // 使用传入的borderColor作为边框颜色
     final borderPaint = Paint()
-      ..color = Colors.white
+      ..color = borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0;
 
@@ -220,6 +252,7 @@ class ScannerOverlay extends CustomPainter {
   @override
   bool shouldRepaint(ScannerOverlay oldDelegate) {
     return scanWindow != oldDelegate.scanWindow ||
-        borderRadius != oldDelegate.borderRadius;
+        borderRadius != oldDelegate.borderRadius ||
+        borderColor != oldDelegate.borderColor; // 新增颜色变化的重绘判断
   }
 }

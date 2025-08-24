@@ -219,7 +219,7 @@ _showProfileSelectionDialog() {
           _handleShowAddExtendPage();  //添加
         },
         icon: const Icon(Icons.add),
-	      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+	color: Theme.of(context).colorScheme.primary, // 添加颜色属性
       ),
       Consumer(
         builder: (context, ref, __) {
@@ -235,7 +235,7 @@ _showProfileSelectionDialog() {
                 },
                 icon: Icon(
                   Icons.more_vert,
-		              color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+		  color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                 ),
               );
             },

@@ -115,9 +115,8 @@ class _StartButtonState extends ConsumerState<StartButton>
                   width: 56,
                   alignment: Alignment.center,
                   child: AnimatedIcon(
-                    icon: AnimatedIcons.play_pause,//
-		   // color: Theme.of(context).colorScheme.primary,
-		  //  color: context.colorScheme.onPrimaryContainer,
+                    icon: AnimatedIcons.play_pause,
+		                // color: Theme.of(context).colorScheme.primary,
                     progress: _animation,
                   ),
                 ),
@@ -140,7 +139,7 @@ class _StartButtonState extends ConsumerState<StartButton>
               style:
                   Theme.of(context).textTheme.titleMedium?.toSoftBold.copyWith(
                         color: context.colorScheme.onPrimaryContainer,
-		//	color: Theme.of(context).colorScheme.primary,
+	                	//	color: Theme.of(context).colorScheme.primary,
                       ),
             );
           },
