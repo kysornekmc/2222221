@@ -297,7 +297,6 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                     icon: Icon(
                       Icons.delete,
                       color: Theme.of(context).colorScheme.primary,
-
                     ),
                   )
               ],

@@ -447,8 +447,8 @@ class _DelayTestButtonState extends State<DelayTestButton>
       child: FloatingActionButton(
         heroTag: null,
         onPressed: _healthcheck,
-        child: Icon(Icons.network_ping),
-       // child: Icon(Icons.network_ping,color: Theme.of(context).colorScheme.primary,),
+       // child: const Icon(Icons.network_ping),
+        child: Icon(Icons.network_ping,color: Theme.of(context).colorScheme.primary,),
       ),
     );
   }

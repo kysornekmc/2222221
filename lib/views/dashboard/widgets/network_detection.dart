@@ -96,9 +96,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                             )
                           : Icon(
                               Icons.network_check,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                       const SizedBox(
                         width: 8,
