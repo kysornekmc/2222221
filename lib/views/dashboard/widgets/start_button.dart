@@ -107,6 +107,8 @@ class _StartButtonState extends ConsumerState<StartButton>
             onPressed: () {
               handleSwitchStart();
             },
+          //    backgroundColor: Theme.of(context).colorScheme.secondaryContainer.opacity80, //也可以
+	        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -116,7 +118,7 @@ class _StartButtonState extends ConsumerState<StartButton>
                   alignment: Alignment.center,
                   child: AnimatedIcon(
                     icon: AnimatedIcons.play_pause,
-		                color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                     progress: _animation,
                   ),
                 ),
@@ -139,7 +141,7 @@ class _StartButtonState extends ConsumerState<StartButton>
               style:
                   Theme.of(context).textTheme.titleMedium?.toSoftBold.copyWith(
                      //   color: context.colorScheme.onPrimaryContainer,
-	                	  	color: Theme.of(context).colorScheme.primary,
+	          color: Theme.of(context).colorScheme.primary,
                       ),
             );
           },

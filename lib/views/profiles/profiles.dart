@@ -303,6 +303,7 @@ _showProfileSelectionDialog() {
   Widget? get floatingActionButton => FloatingActionButton(
         heroTag: null,
         onPressed: _updateProfiles,  //add
+	backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         child:  Icon(
          // Icons.sync,
           Icons.sync,color: Theme.of(context).colorScheme.primary,// 颜色同主题色

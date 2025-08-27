@@ -273,6 +273,7 @@ class ListInputPage extends StatelessWidget {
           onPressed: () async {
             _handleAddOrEdit();
           },
+	  backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           child:  Icon(Icons.add,color: Theme.of(context).colorScheme.primary,),
         ),
       ),
@@ -427,6 +428,7 @@ class MapInputPage extends StatelessWidget {
           onPressed: () async {
             _handleAddOrEdit();
           },
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           child: Icon(Icons.add,color: Theme.of(context).colorScheme.primary,),
         ),
       ),
