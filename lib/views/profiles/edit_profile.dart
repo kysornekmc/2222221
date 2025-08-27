@@ -366,7 +366,7 @@ class _EditProfileViewState extends State<EditProfileView> {
             heroTag: null,
             onPressed: _handleConfirm,
             label: Text(appLocalizations.save),
-            icon: const Icon(Icons.save),
+            icon: Icon(Icons.save,color: Theme.of(context).colorScheme.primary,),
           ),
         ),
         child: Form(

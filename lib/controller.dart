@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
+import 'package:path/path.dart' as p;
 
 import 'package:archive/archive.dart';
 import 'package:fl_clash/clash/clash.dart';
@@ -947,8 +948,18 @@ changeProxyDebounce(String groupName, String proxyName) {
     final configJson = globalState.config.toJson();
     return Isolate.run<List<int>>(() async {
       final archive = Archive();
-      archive.add("config.json", configJson);
-      await archive.addDirectoryToArchive(profilesPath, homeDirPath);
+    archive.add("config.json", configJson);
+    final profilesDir = Directory(profilesPath);
+    if (await profilesDir.exists()) {
+      final profileFiles = await profilesDir.list().toList();
+      for (final file in profileFiles) {
+        if (file is File) {
+      final relativePath = p.relative(file.path, from: homeDirPath);
+      final bytes = await file.readAsBytes();
+      archive.addFile(ArchiveFile(relativePath, bytes.length, bytes));
+        }
+      }
+    }
       final zipEncoder = ZipEncoder();
       return zipEncoder.encode(archive) ?? [];
     });

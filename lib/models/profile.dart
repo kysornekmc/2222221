@@ -148,6 +148,13 @@ extension ProfileExtension on Profile {
     }
   }
 
+Future<void> deleteLocalFile() async {
+  final file = await getFile(); // 利用已有的getFile()方法获取文件
+  if (await file.exists()) {
+    await file.delete(); // 执行删除
+  }
+}
+
   Future<bool> check() async {
     final profilePath = await appPath.getProfilePath(id);
     return await File(profilePath).exists();

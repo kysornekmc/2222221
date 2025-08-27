@@ -295,8 +295,8 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _handleToEditor(),
+	backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         child: Icon(Icons.add,color: Theme.of(context).colorScheme.primary,),
-       
       ),
       body: _buildContent(),
     );

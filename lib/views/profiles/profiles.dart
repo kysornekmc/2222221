@@ -303,6 +303,7 @@ _showProfileSelectionDialog() {
   Widget? get floatingActionButton => FloatingActionButton(
         heroTag: null,
         onPressed: _updateProfiles,  //add
+	backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         child:  Icon(
          // Icons.sync,
           Icons.sync,color: Theme.of(context).colorScheme.primary,// 颜色同主题色
@@ -418,6 +419,9 @@ class ProfileItem extends StatelessWidget {
     if (res != true) {
       return;
     }
+  // 先删除本地文件
+  await profile.deleteLocalFile();
+  // 再删除内存中的订阅数据
     await globalState.appController.deleteProfile(profile.id);
   }
 
