@@ -438,7 +438,13 @@ enum DashboardWidget {
       crossAxisCellCount: 4,               // 内存信息
       child: MemoryInfo(),
     ),
-  ),  
+  ),
+  runDuration(
+    GridItem(
+      crossAxisCellCount: 4,               // 内存信息
+      child: RunDuration(),
+    ),
+  ),    
   tunButton(
     GridItem(
       crossAxisCellCount: 4,               // VPN

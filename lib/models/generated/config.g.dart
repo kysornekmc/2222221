@@ -30,6 +30,7 @@ _$AppSettingPropsImpl _$$AppSettingPropsImplFromJson(
       isPollingQuery: json['isPollingQuery'] as bool? ?? true,
       autoRefreshEnabled: json['autoRefreshEnabled'] as bool? ?? true,
       showFormattedText: json['showFormattedText'] as bool? ?? true,
+      showorhideTimeText: json['showorhideTimeText'] as bool? ?? false,
       recoveryStrategy: $enumDecodeNullable(
               _$RecoveryStrategyEnumMap, json['recoveryStrategy']) ??
           RecoveryStrategy.override,
@@ -59,6 +60,7 @@ Map<String, dynamic> _$$AppSettingPropsImplToJson(
       'isPollingQuery': instance.isPollingQuery,
       'autoRefreshEnabled': instance.autoRefreshEnabled,
       'showFormattedText': instance.showFormattedText,
+      'showorhideTimeText': instance.showorhideTimeText,
       'recoveryStrategy': _$RecoveryStrategyEnumMap[instance.recoveryStrategy]!,
     };
 
@@ -67,10 +69,11 @@ const _$RecoveryStrategyEnumMap = {
   RecoveryStrategy.override: 'override',
 };
 
-const _$DashboardWidgetEnumMap = {  //这里序列化后实际上就是待选卡片的顺序
+const _$DashboardWidgetEnumMap = {
   DashboardWidget.networkSpeed: 'networkSpeed',
   DashboardWidget.networkSpeedMultiLine: 'networkSpeedMultiLine',
-  DashboardWidget.subscriptionInformationdetail: 'subscriptionInformationdetail',
+  DashboardWidget.subscriptionInformationdetail:
+      'subscriptionInformationdetail',
   DashboardWidget.subscriptionInformation: 'subscriptionInformation',
   DashboardWidget.outboundModeV2: 'outboundModeV2',
   DashboardWidget.outboundMode: 'outboundMode',
@@ -87,6 +90,7 @@ const _$DashboardWidgetEnumMap = {  //这里序列化后实际上就是待选卡
   DashboardWidget.networkSpeedTest: 'networkSpeedTest',
   DashboardWidget.trafficUsageSimple: 'trafficUsageSimple',
   DashboardWidget.memoryInfo: 'memoryInfo',
+  DashboardWidget.runDuration: 'runDuration',
   DashboardWidget.tunButton: 'tunButton',
   DashboardWidget.vpnButton: 'vpnButton',
   DashboardWidget.systemProxyButton: 'systemProxyButton',

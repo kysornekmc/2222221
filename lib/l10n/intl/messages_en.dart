@@ -718,7 +718,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "publicIP": MessageLookupByLibrary.simpleMessage("Public IP"),
     "ipCopied": MessageLookupByLibrary.simpleMessage("IP address copied"),    
     "Space": MessageLookupByLibrary.simpleMessage(""),
-    "outboundModeSelecte": MessageLookupByLibrary.simpleMessage("Outbound mode selecte"),
+    "outboundModeSelecte": MessageLookupByLibrary.simpleMessage("Select mode"), 
     "proxyInformation": MessageLookupByLibrary.simpleMessage("Proxy info"),
     "noProxySelected": MessageLookupByLibrary.simpleMessage("No proxy selected"),
     "subscriptionInformation": MessageLookupByLibrary.simpleMessage("Subscription info"), 
@@ -760,5 +760,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("Netspeed test"),
     "clickSpeedtest": MessageLookupByLibrary.simpleMessage("Click speed test"),      
     "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("Select speed test website"),
+    "runDuration": MessageLookupByLibrary.simpleMessage("Run duration"), 
+    "showhideRunningTime": MessageLookupByLibrary.simpleMessage("Run duration at the top of the dashboard"), 
+    "hide": MessageLookupByLibrary.simpleMessage("Hide"),     
   };
 }

@@ -56,86 +56,45 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
     );
   }
 
-  // 新增：运行时间文本组件
-  Widget _buildRuntimeText() {
-    return Consumer(
-      builder: (context, ref, _) {
-        final runTime = ref.watch(runTimeProvider);
-        // 未运行时隐藏文本
-        if (runTime == null) {
-          return const SizedBox.shrink();
-        }
-        final text = utils.getTimeText(runTime);
-        // 使用SizedBox和Center确保垂直居中，匹配图标按钮高度
-        return SizedBox(
-          height: 48, // 与图标按钮默认高度一致
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Text(
-                text,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   List<Widget> get actions => [
-    // 整体下移2.5像素
-    Transform.translate(
-      offset: const Offset(0, 2.5),//下移距离
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // 新增：将时间文本添加到actions最左侧
-          _buildRuntimeText(),
-          
-          _buildIsEdit((isEdit) {
-            return isEdit
-                ? ValueListenableBuilder(
-                    valueListenable: _addedWidgetsNotifier,
-                    builder: (_, addedChildren, child) {
-                      if (addedChildren.isEmpty) {
-                        return Container();
-                      }
-                      return child!;
+        _buildIsEdit((isEdit) {
+          return isEdit
+              ? ValueListenableBuilder(
+                  valueListenable: _addedWidgetsNotifier,
+                  builder: (_, addedChildren, child) {
+                    if (addedChildren.isEmpty) {
+                      return Container();
+                    }
+                    return child!;
+                  },
+                  child: IconButton(
+                    onPressed: () {
+                      _showAddWidgetsModal();
                     },
-                    child: IconButton(
-                      onPressed: () {
-                        _showAddWidgetsModal();
-                      },
-                      icon: Icon(
-                        Icons.add_circle,
-                        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
-                      ),
+                    icon: Icon(
+                      Icons.add_circle,
+		      color: Theme.of(context).colorScheme.primary, // 添加颜色属性
                     ),
+                  ),
+                )
+              : SizedBox();
+        }),
+        IconButton(
+          icon: _buildIsEdit((isEdit) {
+            return isEdit
+                ? Icon(
+                    Icons.save,
+                    color: Theme.of(context).colorScheme.primary, // 保存图标颜色
                   )
-                : SizedBox();
+                : Icon(
+                    Icons.edit,
+                    color: Theme.of(context).colorScheme.primary, // 编辑图标颜色
+                  );
           }),
-          IconButton(
-            icon: _buildIsEdit((isEdit) {
-              return isEdit
-                  ? Icon(
-                      Icons.save,
-                      color: Theme.of(context).colorScheme.primary, // 保存图标颜色
-                    )
-                  : Icon(
-                      Icons.edit,
-                      color: Theme.of(context).colorScheme.primary, // 编辑图标颜色
-                    );
-            }),
-            onPressed: _handleUpdateIsEdit,
-          ),
-        ],
-      ),
-    ),
-  ];
+          onPressed: _handleUpdateIsEdit,
+        ),
+      ];
 
   _showAddWidgetsModal() {
     showSheet(

@@ -404,6 +404,41 @@ class SubscriptionTimeFormatItem extends ConsumerWidget {
   }
 }
 
+class ShoworhideTimeTextItem extends ConsumerWidget {
+  const ShoworhideTimeTextItem({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final showorhideTimeText = ref.watch(
+      appSettingProvider.select((state) => state.showorhideTimeText),
+    );
+
+    // 根据开关状态动态生成subtitle文本
+    final subtitleText = showorhideTimeText
+          ? Text(appLocalizations.show) 
+          : Text(appLocalizations.hide);
+
+    return ListItem.switchItem(
+            leading: Icon(
+        Icons.timer_outlined,
+        color: Theme.of(context).colorScheme.primary, // 添加颜色属性
+      ),
+      title: Text(appLocalizations.showhideRunningTime),
+      subtitle: subtitleText,
+      delegate: SwitchDelegate(
+        value: showorhideTimeText,
+        onChanged: (bool value) {
+          ref.read(appSettingProvider.notifier).updateState(
+                (state) => state.copyWith(
+                  showorhideTimeText: value,
+                ),
+              );
+        },
+      ),
+    );
+  }
+}
+
 class ApplicationSettingFragment extends StatelessWidget {
   const ApplicationSettingFragment({super.key});
 
@@ -432,6 +467,7 @@ class ApplicationSettingFragment extends StatelessWidget {
       IpQueryModeSwitch(),
       AutoRefreshItem(), // 新增自动刷新开关项
       SubscriptionTimeFormatItem(), // 新增订阅时间格式开关项
+      ShoworhideTimeTextItem(),
     ];
     return ListView.separated(
       itemBuilder: (_, index) {

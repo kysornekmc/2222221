@@ -409,7 +409,7 @@
   "publicIP": "外网 IP",
   "Space": "",
   "ipCopied": "IP地址已复制",  
-  "outboundModeSelecte": "出站模式选择",
+  "outboundModeSelecte": "选择出站模式",
   "showhideProfiles": "显示/隐藏配置", 
   "clipboardcode": "剪贴板",
   "clipboardDesc": "从剪贴板导入订阅链接",    
@@ -449,4 +449,7 @@
   "networkSpeedtest": "网速测试",
   "clickSpeedtest": "点击测速",  
   "selectSpeedTestSite": "选择测速网站",
+  "runDuration": "运行时长",  
+  "showhideRunningTime": "仪表盘顶部运行时长",
+  "hide": "隐藏", 
 }

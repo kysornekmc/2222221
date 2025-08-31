@@ -489,7 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "publicIP": MessageLookupByLibrary.simpleMessage("外网 IP"), 
     "ipCopied": MessageLookupByLibrary.simpleMessage("IP地址已复制"), 
     "Space": MessageLookupByLibrary.simpleMessage(""),  
-    "outboundModeSelecte": MessageLookupByLibrary.simpleMessage("出站模式选择"),
+    "outboundModeSelecte": MessageLookupByLibrary.simpleMessage("选择出站模式"), 
     "proxyInformation": MessageLookupByLibrary.simpleMessage("代理信息"), 
     "noProxySelected": MessageLookupByLibrary.simpleMessage("未选择代理"),
     "subscriptionInformation": MessageLookupByLibrary.simpleMessage("订阅信息"), 
@@ -529,5 +529,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "networkSpeedtest": MessageLookupByLibrary.simpleMessage("网速测试"),
     "clickSpeedtest": MessageLookupByLibrary.simpleMessage("点击测速"),
     "selectSpeedTestSite": MessageLookupByLibrary.simpleMessage("选择测速网站"), 
+    "runDuration": MessageLookupByLibrary.simpleMessage("运行时长"), 
+    "showhideRunningTime": MessageLookupByLibrary.simpleMessage("仪表盘顶部运行时长"), 
+    "hide": MessageLookupByLibrary.simpleMessage("隐藏"),     
+        
   };
 }

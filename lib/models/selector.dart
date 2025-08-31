@@ -180,29 +180,27 @@ extension PackageListSelectorStateExt on PackageListSelectorState {
         .toList();
   }
 
+  // 修改排序逻辑：合并为单一排序，先处理选中状态，再应用指定排序规则
   List<Package> getSortList(List<String> selectedList) {
     final sort = accessControl.sort;
-    return list.sorted(
-      (a, b) {
-        return switch (sort) {
-          AccessSortType.none => 0,
-          AccessSortType.name => utils.sortByChar(
-              utils.getPinyin(a.label),
-              utils.getPinyin(b.label),
-            ),
-          AccessSortType.time => b.lastUpdateTime.compareTo(a.lastUpdateTime),
-        };
-      },
-    ).sorted(
-      (a, b) {
-        final isSelectA = selectedList.contains(a.packageName);
-        final isSelectB = selectedList.contains(b.packageName);
-        if (isSelectA && isSelectB) return 0;
-        if (isSelectA) return -1;
-        if (isSelectB) return 1;
-        return 0;
-      },
-    );
+    return list.sorted((a, b) {
+      // 第一优先级：选中状态（选中的排在前面）
+      final isSelectA = selectedList.contains(a.packageName);
+      final isSelectB = selectedList.contains(b.packageName);
+      if (isSelectA != isSelectB) {
+        return isSelectA ? -1 : 1;
+      }
+
+      // 第二优先级：按指定规则排序（名称/时间）
+      return switch (sort) {
+        AccessSortType.none => 0,
+        AccessSortType.name => utils.sortByChar(
+            utils.getPinyin(a.label),
+            utils.getPinyin(b.label),
+          ),
+        AccessSortType.time => b.lastUpdateTime.compareTo(a.lastUpdateTime),
+      };
+    });
   }
 }
 

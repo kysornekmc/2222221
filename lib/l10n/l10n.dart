@@ -3519,6 +3519,22 @@ class AppLocalizations {
     desc: '', 
     args: []);
 }
+  /// `Proxy Run Duration`
+  String get runDuration {
+    return Intl.message(
+    'Proxy Run Duration', 
+    name: 'runDuration', 
+    desc: '', 
+    args: []);
+}
+  /// `Show Hide Running Time`
+  String get showhideRunningTime {
+    return Intl.message('Show Hide Running Time', name: 'showhideRunningTime', desc: '', args: []);
+  }
+  /// `Hide`
+  String get hide {
+    return Intl.message('Hide', name: 'hide', desc: '', args: []);
+  }  
     
 }
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
