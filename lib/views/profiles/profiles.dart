@@ -126,10 +126,46 @@ _showProfileSelectionDialog() {
 
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
+          // 检查是否所有配置文件都被选中（未隐藏）
+          bool isAllSelected = profiles.every((profile) => 
+            !hiddenProfileIds.contains(profile.id)
+          );
+          // 检查是否存在至少一个选中项
+          bool hasSelected = profiles.any((profile) => 
+            !hiddenProfileIds.contains(profile.id)
+          );
+
+          // 全选/取消全选切换
+          void toggleSelectAll() {
+            setState(() {
+              if (isAllSelected) {
+                // 取消全选 - 隐藏所有
+                hiddenProfileIds = Set.from(profiles.map((p) => p.id));
+              } else {
+                // 全选 - 显示所有
+                hiddenProfileIds.clear();
+              }
+            });
+            _saveHiddenProfileIds();
+            if (mounted) this.setState(() {});
+          }
+
           return AdaptiveSheetScaffold(
             type: type,
-            // 移除关闭按钮相关的actions配置
-            actions: [], // 清空actions数组
+            actions: [
+              // 添加全选/取消全选按钮
+            IconButton(
+              icon: Transform.translate(
+                offset: const Offset(-11.8, 0), // 向左移动5像素
+                child: Icon(
+                  isAllSelected ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              onPressed: toggleSelectAll,
+              tooltip: isAllSelected ? appLocalizations.cancelSelectAll : appLocalizations.selectAll,
+            ),
+            ],
             body: Container(
               // 添加底部 padding 以避免被虚拟导航栏遮挡
               padding: EdgeInsets.only(bottom: bottomPadding),
@@ -713,7 +749,7 @@ class ReorderableProfilesSheet extends StatefulWidget {
   @override
   State<ReorderableProfilesSheet> createState() =>
       _ReorderableProfilesSheetState();
-}
+} 
 
 class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
   late List<Profile> profiles;
@@ -763,15 +799,18 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
       type: widget.type,
       actions: [
         IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            globalState.appController.setProfiles(profiles);
-          },
-          icon: Icon(
-            Icons.save,
-	    color: Theme.of(context).colorScheme.primary, // 添加颜色属性
-          ),
-        )
+  onPressed: () {
+    Navigator.of(context).pop();
+    globalState.appController.setProfiles(profiles);
+  },
+  icon: Transform.translate(
+    offset: const Offset(-18, 0), // 向左移动11.8像素
+    child: Icon(
+      Icons.save,
+      color: Theme.of(context).colorScheme.primary, // 保留颜色属性
+    ),
+  ),
+)
       ],
       body: Padding(
      //   padding: EdgeInsets.only(bottom: 16),
