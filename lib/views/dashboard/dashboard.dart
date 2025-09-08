@@ -56,13 +56,18 @@ class _DashboardViewState extends ConsumerState<DashboardView> with PageMixin {
     );
   }
 
-  // 新增：运行时间文本组件
+  // 运行时间文本组件（受开关控制）
   Widget _buildRuntimeText() {
     return Consumer(
       builder: (context, ref, _) {
+        // 获取开关状态
+        final showTimeText = ref.watch(
+          appSettingProvider.select((state) => state.showorhideTimeText),
+        );
         final runTime = ref.watch(runTimeProvider);
-        // 未运行时隐藏文本
-        if (runTime == null) {
+        
+        // 开关关闭或未运行时都隐藏文本
+        if (!showTimeText || runTime == null) {
           return const SizedBox.shrink();
         }
         final text = utils.getTimeText(runTime);
