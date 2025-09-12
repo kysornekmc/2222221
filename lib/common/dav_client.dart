@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:intl/intl.dart';
 import 'package:webdav_client/webdav_client.dart';
 
 class DAVClient {
@@ -40,7 +41,22 @@ class DAVClient {
 
   get root => "/$appName";
 
-  get backupFile => "$root/$fileName";
+  get backupFile {
+    // 生成当前时间的格式化字符串（例如：20240520_153045）
+    final timeSuffix = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    // 分离文件名和扩展名
+    final fileNameParts = fileName.split('.');
+    String baseName;
+    String extension;
+    if (fileNameParts.length > 1) {
+      extension = fileNameParts.last;
+      baseName = fileNameParts.sublist(0, fileNameParts.length - 1).join('.');
+      return "$root/${baseName}_$timeSuffix.$extension";
+    } else {
+      // 没有扩展名的情况
+      return "$root/${fileName}_$timeSuffix";
+    }
+  }
 
   backup(Uint8List data) async {
     await client.mkdir("$root");
